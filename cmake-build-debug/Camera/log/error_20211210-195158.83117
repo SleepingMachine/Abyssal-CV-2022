@@ -1,0 +1,4 @@
+Log file created at: 2021/12/10 19:51:58
+Running on machine: Abyssal-NUC8-0
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E1210 19:51:58.338990 83117 MVCAMAPI.cpp:352] CameraInit Failed, err:32774,Version:2.1.0.27,FriendlyName:MV-GE134GC-IT#0,SN:059022810144
