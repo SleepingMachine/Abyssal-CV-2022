@@ -1,0 +1,5 @@
+Log file created at: 2022/03/13 16:16:22
+Running on machine: abyssal-NUC8i5BEH-1
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0313 16:16:22.852982  9032 CameraGigeBase.cpp:3348] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.10.181-1000-1400 nic:eno1-192.168.10.24-1000M-1500)ReConnected, TolCount:1, Flag:1
+W0313 16:17:02.530310  9032 CameraGigeBase.cpp:3348] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.10.181-1000-1400 nic:eno1-192.168.10.24-1000M-1500)ReConnected, TolCount:2, Flag:1

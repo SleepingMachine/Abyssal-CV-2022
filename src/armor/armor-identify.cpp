@@ -7,6 +7,9 @@
 extern std::mutex mutex1;
 extern std::mutex mutex2;
 extern std::atomic_bool CameraisOpen;
+
+int IdentifyArmor::getFrameErrorCounter = 0;
+
 //默认hsv颜色阈值
 int IdentifyArmor::hmin = 63;
 int IdentifyArmor::hmax = 255;
@@ -21,7 +24,7 @@ int IdentifyArmor::cclose = 18;
 int IdentifyArmor::erode = 3;
 int IdentifyArmor::dilate = 12;
 
-int IdentifyArmor::TargetArmorIdex = 0;
+int IdentifyArmor::targetArmorIdex = 0;
 
 std::vector<std::vector<cv::Point2i>> IdentifyArmor::allContours;
 std::vector<cv::Vec4i> IdentifyArmor::hierarchy;
@@ -52,28 +55,42 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         //cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
         if (src.empty()) {
             std::cout << "Get Frame Fail" << std::endl;
-            break;
+            if (getFrameErrorCounter < 3)
+            {
+                continue;
+            }
+            else{
+                exit(0);
+            }
         }
+//        std::cout << 1111 << std::endl;
 
-        ArmorKCF::trackerInit(src, armorPara.enemyColor);
+        ArmorKCF::trackerUpdate(src);
 
         ImagePreprocess(src);
         FindLightbar(dstHSV);
         LightBarsPairing();
         FilterErrorArmor();
         TargetSelection();
+
+        if (ArmorKCF::trackerIsReady){
+            //std::cout << armorStructs[targetArmorIdex].armorRect.size << std::endl;
+            ArmorKCF::trackingStart(armorStructs[targetArmorIdex].armorRect,armorStructs[targetArmorIdex].partLightBars[0],armorStructs[targetArmorIdex].partLightBars[1]);
+        }
+
+
         for(int i = 0; i < armorStructs.size(); i++){
             ArmorTool::drawRotatedRect(src, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
             cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
         }//绘制矩形
-
-        if(!armorStructs.empty()) {
-            ArmorKCF::trackerStart(armorStructs[TargetArmorIdex].armorRect,armorStructs[TargetArmorIdex].partLightBars[0],armorStructs[TargetArmorIdex].partLightBars[1]);
-        }
+        /*
+        if(ArmorKCF::findReulst) {
+            ArmorKCF::trackerStart(armorStructs[targetArmorIdex].armorRect,armorStructs[targetArmorIdex].partLightBars[0],armorStructs[targetArmorIdex].partLightBars[1]);
+        }*/
         //TestDemo
         if(armorStructs.size() > 0){
-            int hitPointx = armorStructs[TargetArmorIdex].hitPoint.x;
-            int hitPointy = armorStructs[TargetArmorIdex].hitPoint.y;
+            int hitPointx = armorStructs[targetArmorIdex].hitPoint.x;
+            int hitPointy = armorStructs[targetArmorIdex].hitPoint.y;
             int hitPointData = hitPointx * 1000 + hitPointy;
 
             if (mutex2.try_lock()) {
@@ -205,7 +222,7 @@ void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {
 
 void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
 
-    ArmorKCF::trackerCallBack(src);
+    //ArmorKCF::trackerCallBack(src);
 
     cv::cvtColor(src, srcHSV, CV_BGR2HSV, 0);
     cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin, IdentifyArmor::smin, IdentifyArmor::vmin), cv::Scalar(IdentifyArmor::hmax, IdentifyArmor::smax, IdentifyArmor::vmax), maskHSV);
@@ -415,6 +432,7 @@ void IdentifyArmor::ClassificationArmor(ArmorStruct& armorStructs) {
 
 void IdentifyArmor::TargetSelection() {
     if (armorStructs.empty()) {
+        ArmorKCF::trackerIsReady = false;
         return;
     }
     else{
@@ -422,11 +440,12 @@ void IdentifyArmor::TargetSelection() {
         for (int i = 0; i < armorStructs.size(); ++i) {
             if (armorStructs[i].armorRect.size.width * armorStructs[i].armorRect.size.height > maxArmor){
                 maxArmor = armorStructs[i].armorRect.size.width * armorStructs[i].armorRect.size.height;
-                TargetArmorIdex = i;
+                targetArmorIdex = i;
             }
         }
-        ArmorKCF::findReulst = true;
-        ArmorKCF::trackingInProgress = true;
+        //ArmorKCF::findReulst = true;
+        //ArmorKCF::trackingInProgress = true;
+        ArmorKCF::trackerIsReady = true;
     }
 }
 

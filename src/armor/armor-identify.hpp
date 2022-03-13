@@ -31,10 +31,10 @@ public:
         int carId = 0;
         cv::Point2f hitPoint;
     };
+    friend class ArmorKCF;
+
 private:
-
-
-
+    static int getFrameErrorCounter;
     static cv::Mat src;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
@@ -51,7 +51,7 @@ private:
     static int erode;
     static int dilate;
 
-    static int TargetArmorIdex;
+    static int targetArmorIdex;
 
     static std::vector<std::vector<cv::Point2i>> allContours;
     static std::vector<cv::Vec4i> hierarchy;

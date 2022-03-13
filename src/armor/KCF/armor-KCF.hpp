@@ -17,8 +17,6 @@ private:
     static cv::Ptr<cv::TrackerKCF> trackerKCF;
     static cv::TrackerKCF::Params _params;
     static bool trackerFindTarget;
-    //static int lostTrackTarget = 0;
-    static bool trackerSuccess;
     static bool firstLoad;
     //static bool _isTrackerStart = false;
     static int srcWidth;
@@ -28,21 +26,26 @@ private:
     static cv::RotatedRect resLast;
     static cv::Rect restoreRect;
     static cv::Point2f vertices[4];
+    static cv::Rect trackingRect;
+    static cv::Rect searchingRect;
+    static bool trackerInit;
 
 public:
-    static void trackerInit(const cv::Mat &src, EnemyColor enemyColor);
-    static void trackerStart(cv::RotatedRect, cv::RotatedRect, cv::RotatedRect);
-    static void trackerCallBack(cv::Mat);
+    //static void trackerInit(const cv::Mat &src, EnemyColor enemyColor);
+    //static void trackerStart(cv::RotatedRect, cv::RotatedRect, cv::RotatedRect);
 
+    static void trackerUpdate(const cv::Mat &src);
+    static void trackingStart(cv::RotatedRect targetArmor, cv::RotatedRect targetArmorLightBar_L, cv::RotatedRect targetArmorLightBar_R);
+    static void trackerCallBack(cv::Mat);
     static bool trackingInProgress;
     static bool findReulst;
     cv::RotatedRect _resLast;
-    static cv::Rect trackerRect;
-    static cv::Rect searchRect;
-    static cv::Mat trackingSrc;
+    static cv::Mat searchingSrc;
     ArmorKCF();
     ~ArmorKCF() {}
 
-
+    static bool trackerIsReady;
+//static int lostTrackTarget = 0;
+static bool trackerSuccess;
 };
 #endif //ABYSSAL_CV_2022_ARMOR_KCF_HPP
