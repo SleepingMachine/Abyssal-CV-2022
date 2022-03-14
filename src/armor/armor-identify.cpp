@@ -33,10 +33,19 @@ std::vector<IdentifyArmor::ArmorStruct> IdentifyArmor::armorStructs;
 
 static ArmorPara armorPara = ArmorParaFactory::getArmorPara();
 
-cv::Mat IdentifyArmor::src(480, 640, CV_8UC3);
-cv::Mat IdentifyArmor::srcHSV(480, 640, CV_8UC3);
-cv::Mat IdentifyArmor::maskHSV(480, 640, CV_8UC3);
-cv::Mat IdentifyArmor::dstHSV(480, 640, CV_8UC3);
+cv::Rect IdentifyArmor::lastArmorTarget;
+cv::Rect2d IdentifyArmor::restoreRect;
+
+bool ArmorKCF::_targetArmorFind= false;
+bool IdentifyArmor::_cropRoi = false;
+
+cv::Mat IdentifyArmor::src(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::srcHSV(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::maskHSV(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::dstHSV(640, 1280, CV_8UC3);
+
+cv::Mat IdentifyArmor::searchSrc(640, 1280, CV_8UC3);
+cv::Point IdentifyArmor::cropOriginPoint = cv::Point(0,0);
 
 IdentifyArmor::IdentifyArmor() {}
 
@@ -64,24 +73,17 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
             }
         }
 //        std::cout << 1111 << std::endl;
-
-        ArmorKCF::trackerUpdate(src);
-
+        //CropRoi(src);
         ImagePreprocess(src);
         FindLightbar(dstHSV);
         LightBarsPairing();
         FilterErrorArmor();
         TargetSelection();
 
-        if (ArmorKCF::trackerIsReady){
-            //std::cout << armorStructs[targetArmorIdex].armorRect.size << std::endl;
-            ArmorKCF::trackingStart(armorStructs[targetArmorIdex].armorRect,armorStructs[targetArmorIdex].partLightBars[0],armorStructs[targetArmorIdex].partLightBars[1]);
-        }
-
-
         for(int i = 0; i < armorStructs.size(); i++){
             ArmorTool::drawRotatedRect(src, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
             cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+            //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
         }//绘制矩形
         /*
         if(ArmorKCF::findReulst) {
@@ -221,9 +223,34 @@ void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {
 }
 
 void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
+    /*
+    const cv::Point& lastArmorTargetCenter = lastArmorTarget.center;
+    if (lastArmorTarget.size.empty()){
 
-    //ArmorKCF::trackerCallBack(src);
+        restoreRect = cv::Rect(0, 0, src.cols, src.rows);
+        IdentifyArmor::src(restoreRect).copyTo(searchSrc);
+        //searchSrc = src;                                                        //继承原图片地址
+        _cropRoi = false;
+    }
+    else if (!lastArmorTarget.size.empty()){
+        cv::Rect rect = lastArmorTarget.boundingRect();                            //返回包含旋转矩形的最小右上整数矩形。
+        static float ratioToWidth = 2.0f;
+        static float ratioToHeight = 3.0f;
+        int x1 = MAX(int(lastArmorTargetCenter.x - (rect.width * ratioToWidth)), 0);
+        int y1 = MAX(int(lastArmorTargetCenter.y - (rect.height * ratioToHeight)), 0);
+        cv::Point lu = cv::Point(x1, y1);                                                           //得到点lu，ROI左上角的起点
+        cropOriginPoint = lu;
+        int x2 = MIN(int(lastArmorTargetCenter.x + (rect.width * ratioToWidth)), src.cols);                //计算结果不大于图片长宽
+        int y2 = MIN(int(lastArmorTargetCenter.y + (rect.height * ratioToHeight)), src.rows);
+        cv::Point rd = cv::Point(x2, y2);                                                           //得到点rd，ROI右下角的终点
+        restoreRect = cv::Rect(lu, rd);
+        rectangle(src,restoreRect, cv::Scalar(0, 255, 255));
 
+        src(restoreRect).copyTo(searchSrc);
+        _cropRoi = true;
+        cv::imshow("12", searchSrc);
+    }
+     */
     cv::cvtColor(src, srcHSV, CV_BGR2HSV, 0);
     cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin, IdentifyArmor::smin, IdentifyArmor::vmin), cv::Scalar(IdentifyArmor::hmax, IdentifyArmor::smax, IdentifyArmor::vmax), maskHSV);
     //cv::inRange(srcHSV, cv::Scalar(40,120,230), cv::Scalar(80, 120, 255), maskHSV);
@@ -432,7 +459,7 @@ void IdentifyArmor::ClassificationArmor(ArmorStruct& armorStructs) {
 
 void IdentifyArmor::TargetSelection() {
     if (armorStructs.empty()) {
-        ArmorKCF::trackerIsReady = false;
+        lastArmorTarget = cv::Rect(0, 0, 0, 0);
         return;
     }
     else{
@@ -443,12 +470,49 @@ void IdentifyArmor::TargetSelection() {
                 targetArmorIdex = i;
             }
         }
-        //ArmorKCF::findReulst = true;
-        //ArmorKCF::trackingInProgress = true;
-        ArmorKCF::trackerIsReady = true;
+
+        if(_cropRoi){
+            armorStructs[targetArmorIdex].hitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
+            armorStructs[targetArmorIdex].hitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
+        }
+
+        lastArmorTarget = armorStructs[targetArmorIdex].armorRect.boundingRect();;
+        ArmorKCF::_targetArmorFind= true;
     }
 }
 
+/*
+void IdentifyArmor::CropRoi(const cv::Mat &src) {
+
+    const cv::Point& lastArmorTargetCenter = cv::Point (lastArmorTarget.x + 1/2*lastArmorTarget.width, lastArmorTarget.y + 1/2*lastArmorTarget.height);
+
+    if (lastArmorTarget.width * lastArmorTarget.height){
+        //返回包含旋转矩形的最小右上整数矩形。
+        static float ratioToWidth = 2.0f;
+        static float ratioToHeight = 3.0f;
+
+        int x1 = MAX(int(lastArmorTargetCenter.x - (lastArmorTarget.width * ratioToWidth)), 0);
+        int y1 = MAX(int(lastArmorTargetCenter.y - (lastArmorTarget.height * ratioToHeight)), 0);
+        cv::Point lu = cv::Point(x1, y1);                                                           //得到点lu，ROI左上角的起点
+        cropOriginPoint = lu;
+        int x2 = MIN(int(lastArmorTargetCenter.x + (lastArmorTarget.width * ratioToWidth)), src.cols);                //计算结果不大于图片长宽
+        int y2 = MIN(int(lastArmorTargetCenter.y + (lastArmorTarget.height * ratioToHeight)), src.rows);
+        cv::Point rd = cv::Point(x2, y2);                                                           //得到点rd，ROI右下角的终点
+        restoreRect = cv::Rect(lu, rd);
+
+        rectangle(src,restoreRect, cv::Scalar(0, 255, 255));
+
+        src(restoreRect).copyTo(searchSrc);
+
+        cv::imshow("12", searchSrc);
+        cv::waitKey(100);
+    }
+    else{
+        searchSrc = src;                                                        //继承原图片地址
+        //restoreRect = cv::Rect(0, 0, src.cols, src.rows);
+    }
+    //cv::waitKey(10);
+}*/
 
 
 

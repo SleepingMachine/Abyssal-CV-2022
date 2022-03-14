@@ -36,6 +36,7 @@ public:
 private:
     static int getFrameErrorCounter;
     static cv::Mat src;
+    static cv::Mat searchSrc;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat dstHSV;
@@ -50,6 +51,7 @@ private:
     static int cclose;
     static int erode;
     static int dilate;
+    static bool _cropRoi;
 
     static int targetArmorIdex;
 
@@ -57,9 +59,14 @@ private:
     static std::vector<cv::Vec4i> hierarchy;
     static std::vector<cv::RotatedRect> filteredLightBars;
     static std::vector<ArmorStruct> armorStructs;
+    static cv::Rect lastArmorTarget;
+    static cv::Rect2d restoreRect;
+
+    static cv::Point cropOriginPoint;
 
     //void ImagePreprocess(const cv::Mat &src, EnemyColor enemyColor);
 
+    //static void CropRoi(const cv::Mat &src);
     static void ImagePreprocess(const cv::Mat &src);
     static void CreatTrackbars();
     static void FindLightbar(cv::Mat &preprocessed);
