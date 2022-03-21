@@ -11,11 +11,11 @@ extern std::atomic_bool CameraisOpen;
 int IdentifyArmor::getFrameErrorCounter = 0;
 
 //默认hsv颜色阈值
-int IdentifyArmor::hmin = 63;
-int IdentifyArmor::hmax = 255;
-int IdentifyArmor::smin = 0;
+int IdentifyArmor::hmin = 51;
+int IdentifyArmor::hmax = 148;
+int IdentifyArmor::smin = 123;
 int IdentifyArmor::smax = 255;
-int IdentifyArmor::vmin = 235;
+int IdentifyArmor::vmin = 98;
 int IdentifyArmor::vmax = 255;
 
 //默认二值化操作阈值
@@ -479,6 +479,10 @@ void IdentifyArmor::TargetSelection() {
         lastArmorTarget = armorStructs[targetArmorIdex].armorRect.boundingRect();;
         ArmorKCF::_targetArmorFind= true;
     }
+}
+
+void IdentifyArmor::DynamicResolutionResize() {
+
 }
 
 /*

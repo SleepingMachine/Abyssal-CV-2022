@@ -74,6 +74,7 @@ private:
     static void ClassificationArmor(ArmorStruct& armorStructs);
     static void FilterErrorArmor();
     static void TargetSelection();
+    static void DynamicResolutionResize();
 
 public:
     IdentifyArmor();
