@@ -74,6 +74,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         }
 //        std::cout << 1111 << std::endl;
         //CropRoi(src);
+        //DynamicResolutionResize();
         ImagePreprocess(src);
         FindLightbar(dstHSV);
         LightBarsPairing();
@@ -482,7 +483,15 @@ void IdentifyArmor::TargetSelection() {
 }
 
 void IdentifyArmor::DynamicResolutionResize() {
+    if (ArmorKCF::_targetArmorFind != true){
+        src.copyTo(searchSrc);
+        return;
+    }
+    else{
 
+        //src(cv::Rect(0, 0, 100, 100)).copyTo(searchSrc);
+    }
+    ArmorKCF::_targetArmorFind = false;
 }
 
 /*
