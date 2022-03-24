@@ -48,10 +48,16 @@ private:
     static int vmin;
     static int vmax;
     static int open;
-    static int cclose;
+    static int close;
     static int erode;
     static int dilate;
+
+    static double roiScalingRatio_x;
+    static double roiScalingRatio_y;
+
     static bool _cropRoi;
+    static bool _enableRoiScaling;
+    static bool _roiScaling;
 
     static int targetArmorIdex;
 
@@ -75,6 +81,7 @@ private:
     static void FilterErrorArmor();
     static void TargetSelection();
     static void DynamicResolutionResize();
+    static void DrawReferenceGraphics();
 
 public:
     IdentifyArmor();

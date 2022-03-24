@@ -20,11 +20,14 @@ int IdentifyArmor::vmax = 255;
 
 //默认二值化操作阈值
 int IdentifyArmor::open = 1;
-int IdentifyArmor::cclose = 18;
+int IdentifyArmor::close = 18;
 int IdentifyArmor::erode = 3;
 int IdentifyArmor::dilate = 6;
 
 int IdentifyArmor::targetArmorIdex = 0;
+
+double IdentifyArmor::roiScalingRatio_x = 1;
+double IdentifyArmor::roiScalingRatio_y = 1;
 
 std::vector<std::vector<cv::Point2i>> IdentifyArmor::allContours;
 std::vector<cv::Vec4i> IdentifyArmor::hierarchy;
@@ -38,6 +41,9 @@ cv::Rect2d IdentifyArmor::restoreRect;
 
 bool ArmorKCF::_targetArmorFind= false;
 bool IdentifyArmor::_cropRoi = false;
+bool IdentifyArmor::_enableRoiScaling = true;
+bool IdentifyArmor::_roiScaling = false;
+
 
 cv::Mat IdentifyArmor::src(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::srcHSV(640, 1280, CV_8UC3);
@@ -80,13 +86,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         LightBarsPairing();
         FilterErrorArmor();
         TargetSelection();
-
-        for(int i = 0; i < armorStructs.size(); i++){
-            ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
-            cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
-            cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(254, 48, 255), 4);
-            //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
-        }//绘制矩形
+        DrawReferenceGraphics();
         /*
         if(ArmorKCF::findReulst) {
             ArmorKCF::trackerStart(armorStructs[targetArmorIdex].armorRect,armorStructs[targetArmorIdex].partLightBars[0],armorStructs[targetArmorIdex].partLightBars[1]);
@@ -126,7 +126,7 @@ void IdentifyArmor::CreatTrackbars() {
     cv::createTrackbar("vmin", "阈值调整",&IdentifyArmor::vmin, 255,NULL);
     cv::createTrackbar("vmax", "阈值调整",&IdentifyArmor::vmax, 255,NULL);
     cv::createTrackbar("open", "阈值调整",&IdentifyArmor::open, 10,NULL);
-    cv::createTrackbar("close", "阈值调整",&IdentifyArmor::cclose, 30,NULL);
+    cv::createTrackbar("close", "阈值调整",&IdentifyArmor::close, 30,NULL);
     cv::createTrackbar("erode", "阈值调整",&IdentifyArmor::erode, 10,NULL);
     cv::createTrackbar("dilate", "阈值调整",&IdentifyArmor::dilate, 20,NULL);
 }
@@ -220,9 +220,7 @@ void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {
     }
 
     // std::cout << filteredLightBars.size() << std::endl;
-    for (int i = 0; i < filteredLightBars.size(); ++i) {
-        ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
-    }
+
 }
 
 void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
@@ -258,7 +256,7 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
     cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin, IdentifyArmor::smin, IdentifyArmor::vmin), cv::Scalar(IdentifyArmor::hmax, IdentifyArmor::smax, IdentifyArmor::vmax), maskHSV);
     //cv::inRange(srcHSV, cv::Scalar(40,120,230), cv::Scalar(80, 120, 255), maskHSV);
     morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::open,IdentifyArmor::open)));
-    morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::cclose,IdentifyArmor::cclose)));
+    morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::close,IdentifyArmor::close)));
     morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::erode,IdentifyArmor::erode)));
     morphologyEx(dstHSV, dstHSV, 1, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::dilate,IdentifyArmor::dilate)));
 }
@@ -475,6 +473,12 @@ void IdentifyArmor::TargetSelection() {
             }
         }
 
+        if(_enableRoiScaling && _roiScaling)
+        {
+            armorStructs[targetArmorIdex].hitPoint.x /= roiScalingRatio_x;
+            armorStructs[targetArmorIdex].hitPoint.y /= roiScalingRatio_y;
+        }
+
         if(_cropRoi){
             armorStructs[targetArmorIdex].hitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
             armorStructs[targetArmorIdex].hitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
@@ -549,12 +553,36 @@ void IdentifyArmor::DynamicResolutionResize() {
         _cropRoi = true;
         cropOriginPoint = roi_UL;
         searchSrc = roi.clone();
-        //std::cout << roi_LR.x - roi_UL.x << " " << roi_LR.y - roi_UL.y <<std::endl;
-        std::cout << roi_UL.x <<std::endl;
+
+        if (_enableRoiScaling && searchSrc.rows * searchSrc.cols <= 300 * 400 && searchSrc.rows * searchSrc.cols >= 100 * 100){
+            roiScalingRatio_x = 400.00/searchSrc.cols;
+            roiScalingRatio_y = 300.00/searchSrc.rows;
+            std::cout << roiScalingRatio_x << " " << roiScalingRatio_y <<std::endl;
+            cv::resize(searchSrc, searchSrc, cv::Point(0,0),roiScalingRatio_x, roiScalingRatio_y);
+            _roiScaling = true;
+        }
+        else{
+            roiScalingRatio_x = 1;
+            roiScalingRatio_y = 1;
+            _roiScaling = false;
+        }
+        //std::cout << roi_UL.x <<std::endl;
         cv::rectangle(src, roi_LR, roi_UL,cv::Scalar(0, 255, 255), 2);
         //src(cv::Rect(0, 0, 100, 100)).copyTo(searchSrc);
     }
 
+}
+
+void IdentifyArmor::DrawReferenceGraphics() {
+    for(int i = 0; i < armorStructs.size(); i++){
+        ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
+        //cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+        cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(113,179,60), 5);
+        //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+    }//绘制矩形
+    for (int i = 0; i < filteredLightBars.size(); ++i) {
+        ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
+    }
 }
 
 /*

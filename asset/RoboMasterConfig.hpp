@@ -25,7 +25,6 @@ enum EXTREMUM {
     LONG_SIDE
 };
 
-
 //装甲板参数
 struct ArmorPara {
     EnemyColor enemyColor;
