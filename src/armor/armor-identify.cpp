@@ -11,9 +11,9 @@ extern std::atomic_bool CameraisOpen;
 int IdentifyArmor::getFrameErrorCounter = 0;
 
 //默认hsv颜色阈值
-int IdentifyArmor::hmin = 51;
+int IdentifyArmor::hmin = 53;
 int IdentifyArmor::hmax = 148;
-int IdentifyArmor::smin = 123;
+int IdentifyArmor::smin = 128;
 int IdentifyArmor::smax = 255;
 int IdentifyArmor::vmin = 98;
 int IdentifyArmor::vmax = 255;
@@ -22,7 +22,7 @@ int IdentifyArmor::vmax = 255;
 int IdentifyArmor::open = 1;
 int IdentifyArmor::cclose = 18;
 int IdentifyArmor::erode = 3;
-int IdentifyArmor::dilate = 12;
+int IdentifyArmor::dilate = 6;
 
 int IdentifyArmor::targetArmorIdex = 0;
 
@@ -74,16 +74,17 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         }
 //        std::cout << 1111 << std::endl;
         //CropRoi(src);
-        //DynamicResolutionResize();
-        ImagePreprocess(src);
+        DynamicResolutionResize();
+        ImagePreprocess(searchSrc);
         FindLightbar(dstHSV);
         LightBarsPairing();
         FilterErrorArmor();
         TargetSelection();
 
         for(int i = 0; i < armorStructs.size(); i++){
-            ArmorTool::drawRotatedRect(src, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
-            cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+            ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
+            cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+            cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(254, 48, 255), 4);
             //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
         }//绘制矩形
         /*
@@ -111,6 +112,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         //cv::imshow("mask", maskHSV);
         cv::imshow("Preprocessed Dst", dstHSV);
         cv::imshow("Src", src);
+        cv::imshow("SeaechSrc", searchSrc);
         cv::waitKey(5);
     }
 }
@@ -219,7 +221,7 @@ void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {
 
     // std::cout << filteredLightBars.size() << std::endl;
     for (int i = 0; i < filteredLightBars.size(); ++i) {
-        ArmorTool::drawRotatedRect(src, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
+        ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
     }
 }
 
@@ -461,6 +463,7 @@ void IdentifyArmor::ClassificationArmor(ArmorStruct& armorStructs) {
 void IdentifyArmor::TargetSelection() {
     if (armorStructs.empty()) {
         lastArmorTarget = cv::Rect(0, 0, 0, 0);
+        ArmorKCF::_targetArmorFind = false;
         return;
     }
     else{
@@ -475,6 +478,7 @@ void IdentifyArmor::TargetSelection() {
         if(_cropRoi){
             armorStructs[targetArmorIdex].hitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
             armorStructs[targetArmorIdex].hitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
+            //std::cout << armorStructs[targetArmorIdex].hitPoint.x << " " << armorStructs[targetArmorIdex].hitPoint.y << std::endl;
         }
 
         lastArmorTarget = armorStructs[targetArmorIdex].armorRect.boundingRect();;
@@ -485,13 +489,72 @@ void IdentifyArmor::TargetSelection() {
 void IdentifyArmor::DynamicResolutionResize() {
     if (ArmorKCF::_targetArmorFind != true){
         src.copyTo(searchSrc);
+        cropOriginPoint = cv::Point(0,0);
+        _cropRoi = false;
         return;
     }
     else{
+        cv::Point roi_UL,roi_LR;
+        /*
+        if(lastArmorTarget.width * 2 <= src.cols * 0.75 && lastArmorTarget.height * 2 <= src.rows * 0.75){
+            if ((lastArmorTarget.x - lastArmorTarget.width * 2) <= 0 && (lastArmorTarget.y - lastArmorTarget.height * 2) <= 0)
+            {
+                roi_UL = cv::Point(0,0);
+                roi_LR = cv::Point(lastArmorTarget.x + lastArmorTarget.width * 2, lastArmorTarget.y + lastArmorTarget.height * 2);
+            }
+            else if ((lastArmorTarget.x - lastArmorTarget.width * 2) <= 0 && (lastArmorTarget.y - lastArmorTarget.height * 2) > 0)
+            {
+                roi_UL = cv::Point(0, lastArmorTarget.y - lastArmorTarget.height * 2);
+                roi_LR = cv::Point(lastArmorTarget.x + lastArmorTarget.width * 2, lastArmorTarget.y + lastArmorTarget.height * 2);
+            }
+            else if ((lastArmorTarget.x - lastArmorTarget.width * 2) > 0 && (lastArmorTarget.y - lastArmorTarget.height * 2) <= 0)
+            {
+                roi_UL = cv::Point(lastArmorTarget.x - lastArmorTarget.width * 2, 0);
+                roi_LR = cv::Point(lastArmorTarget.x + lastArmorTarget.width * 2, lastArmorTarget.y + lastArmorTarget.height * 2);
+            }
+            else if (lastArmorTarget.x + lastArmorTarget.width * 2 >= src.cols && lastArmorTarget.y + lastArmorTarget.height * 2 >= src.rows)
+            {
+                roi_UL = cv::Point(lastArmorTarget.x - lastArmorTarget.width * 2, lastArmorTarget.y - lastArmorTarget.height * 2);
+                roi_LR = cv::Point(0, 0);
+            }
+        }
+*/
 
+        if (!_cropRoi){
+            roi_UL.x = (lastArmorTarget.x - lastArmorTarget.width * 1) <= 0 ? 0 : (lastArmorTarget.x - lastArmorTarget.width * 1);
+            roi_UL.y = (lastArmorTarget.y - lastArmorTarget.height* 1.2) <= 0 ? 0 : (lastArmorTarget.y - lastArmorTarget.height* 1.2);
+            roi_LR.x = (lastArmorTarget.x + lastArmorTarget.width * 2) >= src.cols ? src.cols : lastArmorTarget.x + lastArmorTarget.width * 2;
+            roi_LR.y = (lastArmorTarget.y + lastArmorTarget.height * 2.4) >= src.rows ? src.rows : lastArmorTarget.y + lastArmorTarget.height * 2.4;
+        }
+        else{
+
+            roi_UL.x = (lastArmorTarget.x - lastArmorTarget.width * 1 + cropOriginPoint.x) <= 0 ? 0 : (lastArmorTarget.x - lastArmorTarget.width * 1 + cropOriginPoint.x);
+            roi_UL.y = (lastArmorTarget.y - lastArmorTarget.height* 1.2 + cropOriginPoint.y) <= 0 ? 0 : (lastArmorTarget.y - lastArmorTarget.height* 1.2 + cropOriginPoint.y);
+            roi_LR.x = (lastArmorTarget.x + lastArmorTarget.width * 2 + cropOriginPoint.x) >= src.cols ? src.cols : (lastArmorTarget.x + lastArmorTarget.width * 2 + cropOriginPoint.x);
+            roi_LR.y = (lastArmorTarget.y + lastArmorTarget.height * 2.4 + cropOriginPoint.y) >= src.rows ? src.rows : (lastArmorTarget.y + lastArmorTarget.height * 2.4 + cropOriginPoint.y);
+            /*
+            roi_UL.x += cropOriginPoint.x;
+            roi_UL.y += cropOriginPoint.y;
+            roi_LR.x += cropOriginPoint.x;
+            roi_LR.y += cropOriginPoint.y;
+            */
+            //roi_UL.x = 0;
+            //roi_UL.y += 0;
+            //roi_LR.x += 640;
+            //roi_LR.y += 480;
+        }
+
+        cv::Mat roi = src(cv::Rect(roi_LR,roi_UL));
+        cropOriginPoint = cv::Point(lastArmorTarget.x - 50,lastArmorTarget.y - 50);
+        _cropRoi = true;
+        cropOriginPoint = roi_UL;
+        searchSrc = roi.clone();
+        //std::cout << roi_LR.x - roi_UL.x << " " << roi_LR.y - roi_UL.y <<std::endl;
+        std::cout << roi_UL.x <<std::endl;
+        cv::rectangle(src, roi_LR, roi_UL,cv::Scalar(0, 255, 255), 2);
         //src(cv::Rect(0, 0, 100, 100)).copyTo(searchSrc);
     }
-    ArmorKCF::_targetArmorFind = false;
+
 }
 
 /*

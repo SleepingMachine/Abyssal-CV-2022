@@ -35,7 +35,7 @@ struct ArmorPara {
     int minLightBarWidth = 2;
     int maxLightBarLength = 2000;
     int maxLightBarWidth = 50;
-    float minLightBarAspectRatio = 2.0f; //最小长宽比
+    float minLightBarAspectRatio = 1.5f; //最小长宽比
     float maxLightBarAspectRatio = 10.0f; //最大长宽比
     float maxTwoLightBarsLengthRatio = 1.8f;
     float maxArmorAspectRatio = 4.5f;
