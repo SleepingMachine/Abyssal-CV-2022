@@ -69,6 +69,7 @@ private:
     static cv::Rect2d restoreRect;
 
     static cv::Point cropOriginPoint;
+    static cv::Point lastArmorTargetHitPoint;
 
     //void ImagePreprocess(const cv::Mat &src, EnemyColor enemyColor);
 

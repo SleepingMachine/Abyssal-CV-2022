@@ -36,16 +36,17 @@ std::vector<IdentifyArmor::ArmorStruct> IdentifyArmor::armorStructs;
 
 static ArmorPara armorPara = ArmorParaFactory::getArmorPara();
 
+cv::Point IdentifyArmor::lastArmorTargetHitPoint = cv::Point(0,0);
 cv::Rect IdentifyArmor::lastArmorTarget;
 cv::Rect2d IdentifyArmor::restoreRect;
 
 bool ArmorKCF::_targetArmorFind= false;
 bool IdentifyArmor::_cropRoi = false;
-bool IdentifyArmor::_enableRoiScaling = true;
+bool IdentifyArmor::_enableRoiScaling = false;
 bool IdentifyArmor::_roiScaling = false;
 
 
-cv::Mat IdentifyArmor::src(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::src(480, 960, CV_8UC3);
 cv::Mat IdentifyArmor::srcHSV(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::maskHSV(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::dstHSV(640, 1280, CV_8UC3);
@@ -461,7 +462,9 @@ void IdentifyArmor::ClassificationArmor(ArmorStruct& armorStructs) {
 void IdentifyArmor::TargetSelection() {
     if (armorStructs.empty()) {
         lastArmorTarget = cv::Rect(0, 0, 0, 0);
+        lastArmorTargetHitPoint = cv::Point(0,0);
         ArmorKCF::_targetArmorFind = false;
+        std::cout << "LOSS" << std::endl;
         return;
     }
     else{
@@ -480,12 +483,19 @@ void IdentifyArmor::TargetSelection() {
         }
 
         if(_cropRoi){
-            armorStructs[targetArmorIdex].hitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
-            armorStructs[targetArmorIdex].hitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
+            //armorStructs[targetArmorIdex].hitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
+            //armorStructs[targetArmorIdex].hitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
+
             //std::cout << armorStructs[targetArmorIdex].hitPoint.x << " " << armorStructs[targetArmorIdex].hitPoint.y << std::endl;
+            //lastArmorTargetHitPoint.x = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
+            //lastArmorTargetHitPoint.y = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
         }
 
-        lastArmorTarget = armorStructs[targetArmorIdex].armorRect.boundingRect();;
+        lastArmorTarget = armorStructs[targetArmorIdex].armorRect.boundingRect();
+        lastArmorTargetHitPoint.x = armorStructs[targetArmorIdex].hitPoint.x;
+        lastArmorTargetHitPoint.y = armorStructs[targetArmorIdex].hitPoint.y;
+
+        //cv::rectangle(src, cv::Point((lastArmorTarget.x + cropOriginPoint.x),(lastArmorTarget.y + cropOriginPoint.y)),cv::Point((lastArmorTarget.x + cropOriginPoint.x + lastArmorTarget.width),(lastArmorTarget.x + cropOriginPoint.y + lastArmorTarget.height)) ,cv::Scalar(0, 255, 255), 2);
         ArmorKCF::_targetArmorFind= true;
     }
 }
@@ -523,32 +533,35 @@ void IdentifyArmor::DynamicResolutionResize() {
             }
         }
 */
-
         if (!_cropRoi){
-            roi_UL.x = (lastArmorTarget.x - lastArmorTarget.width * 1) <= 0 ? 0 : (lastArmorTarget.x - lastArmorTarget.width * 1);
-            roi_UL.y = (lastArmorTarget.y - lastArmorTarget.height* 1.2) <= 0 ? 0 : (lastArmorTarget.y - lastArmorTarget.height* 1.2);
-            roi_LR.x = (lastArmorTarget.x + lastArmorTarget.width * 2) >= src.cols ? src.cols : lastArmorTarget.x + lastArmorTarget.width * 2;
-            roi_LR.y = (lastArmorTarget.y + lastArmorTarget.height * 2.4) >= src.rows ? src.rows : lastArmorTarget.y + lastArmorTarget.height * 2.4;
+            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * 1) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * 1);
+            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* 1) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* 1);
+
+            roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
+            roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
+
+            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * 1) >= src.cols ? src.cols : lastArmorTargetHitPoint.x + lastArmorTarget.width * 1;
+            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * 1) >= src.rows ? src.rows : lastArmorTargetHitPoint.y + lastArmorTarget.height * 1;
+
+            roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
+            roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
         }
         else{
+            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * 1 + cropOriginPoint.x) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * 1 + cropOriginPoint.x);
+            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* 1 + cropOriginPoint.y) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* 1 + cropOriginPoint.y);
 
-            roi_UL.x = (lastArmorTarget.x - lastArmorTarget.width * 1 + cropOriginPoint.x) <= 0 ? 0 : (lastArmorTarget.x - lastArmorTarget.width * 1 + cropOriginPoint.x);
-            roi_UL.y = (lastArmorTarget.y - lastArmorTarget.height* 1.2 + cropOriginPoint.y) <= 0 ? 0 : (lastArmorTarget.y - lastArmorTarget.height* 1.2 + cropOriginPoint.y);
-            roi_LR.x = (lastArmorTarget.x + lastArmorTarget.width * 2 + cropOriginPoint.x) >= src.cols ? src.cols : (lastArmorTarget.x + lastArmorTarget.width * 2 + cropOriginPoint.x);
-            roi_LR.y = (lastArmorTarget.y + lastArmorTarget.height * 2.4 + cropOriginPoint.y) >= src.rows ? src.rows : (lastArmorTarget.y + lastArmorTarget.height * 2.4 + cropOriginPoint.y);
-            /*
-            roi_UL.x += cropOriginPoint.x;
-            roi_UL.y += cropOriginPoint.y;
-            roi_LR.x += cropOriginPoint.x;
-            roi_LR.y += cropOriginPoint.y;
-            */
-            //roi_UL.x = 0;
-            //roi_UL.y += 0;
-            //roi_LR.x += 640;
-            //roi_LR.y += 480;
+            roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
+            roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
+
+            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * 1 + cropOriginPoint.x) >= src.cols ? src.cols : (lastArmorTargetHitPoint.x + lastArmorTarget.width * 1 + cropOriginPoint.x);
+            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * 1 + cropOriginPoint.y) >= src.rows ? src.rows : (lastArmorTargetHitPoint.y + lastArmorTarget.height * 1 + cropOriginPoint.y);
+
+            roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
+            roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
         }
-
-        cv::Mat roi = src(cv::Rect(roi_LR,roi_UL));
+        std::cout  << lastArmorTargetHitPoint.x <<" "<< lastArmorTargetHitPoint.y<< std::endl;
+        std::cout << roi_UL.x << " " << roi_UL.y << " "<< roi_LR.x <<" "<< roi_LR.y << std::endl;
+        cv::Mat roi = src(cv::Rect(roi_UL,roi_LR));
         cropOriginPoint = cv::Point(lastArmorTarget.x - 50,lastArmorTarget.y - 50);
         _cropRoi = true;
         cropOriginPoint = roi_UL;
@@ -567,7 +580,9 @@ void IdentifyArmor::DynamicResolutionResize() {
             _roiScaling = false;
         }
         //std::cout << roi_UL.x <<std::endl;
+
         cv::rectangle(src, roi_LR, roi_UL,cv::Scalar(0, 255, 255), 2);
+        //cv::rectangle(src, cv::Point((lastArmorTarget.x + cropOriginPoint.x),(lastArmorTarget.y + cropOriginPoint.y)),cv::Point((lastArmorTarget.x + cropOriginPoint.x + lastArmorTarget.width),(lastArmorTarget.x + cropOriginPoint.y + lastArmorTarget.height)) ,cv::Scalar(0, 255, 255), 2);
         //src(cv::Rect(0, 0, 100, 100)).copyTo(searchSrc);
     }
 
@@ -577,7 +592,7 @@ void IdentifyArmor::DrawReferenceGraphics() {
     for(int i = 0; i < armorStructs.size(); i++){
         ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
         //cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
-        cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(113,179,60), 5);
+        cv::circle(src, armorStructs[i].hitPoint, 1, cv::Scalar(113,179,60 ), 5);
         //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
     }//绘制矩形
     for (int i = 0; i < filteredLightBars.size(); ++i) {
