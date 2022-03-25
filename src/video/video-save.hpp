@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#include "../asset/RoboMasterConfig.hpp"
+
 class VideoSave{
 public:
     static void SaveRunningVideo(cv::Mat* pFrame);

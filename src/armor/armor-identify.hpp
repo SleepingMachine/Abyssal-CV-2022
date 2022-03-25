@@ -52,11 +52,13 @@ private:
     static int erode;
     static int dilate;
 
+    static double roiRatio_x;
+    static double roiRatio_y;
     static double roiScalingRatio_x;
     static double roiScalingRatio_y;
 
     static bool _cropRoi;
-    static bool _enableRoiScaling;
+    //static bool _enableRoiScaling;
     static bool _roiScaling;
 
     static int targetArmorIdex;

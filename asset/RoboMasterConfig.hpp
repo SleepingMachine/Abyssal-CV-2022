@@ -7,6 +7,32 @@
 
 #include <string>
 
+struct FunctionConfig
+{
+    bool _enableEnergyBuffMode      = false;
+    bool _enableSaveVideo           = false;
+    bool _enableLocalVideoStreaming = false;
+    bool _enableRoiScaling          = true;
+};
+
+class FunctionConfigFactory{
+private:
+    static FunctionConfigFactory &instance() {
+        static FunctionConfigFactory serialConfigFactory;
+        return serialConfigFactory;
+    }
+
+public:
+    FunctionConfig functionConfig;
+    static FunctionConfig getFunctionConfig() {
+        return instance().functionConfig;
+    }
+
+    static void resetAllConfig() {
+        instance().functionConfig = FunctionConfig();
+    }
+};
+
 //敌方颜色
 typedef enum {
     ENEMY_RED = 0,

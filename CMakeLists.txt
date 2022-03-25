@@ -40,7 +40,7 @@ add_executable(Abyssal_CV_2022
         src/video/video-save.cpp
 
         src/serial/serial-port.hpp
-        src/serial/serial-port.cpp src/armor/KCF/armor-KCF.hpp src/armor/KCF/armor-KCF.cpp)
+        src/serial/serial-port.cpp src/armor/KCF/armor-KCF.hpp src/armor/KCF/armor-KCF.cpp src/energy/energy-buff.hpp src/energy/energy-buff.cpp src/control/control-switch.cpp src/control/control-switch.hpp src/control/control-synchronize.cpp src/control/control-synchronize.hpp)
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/lib/libMVSDK.so")

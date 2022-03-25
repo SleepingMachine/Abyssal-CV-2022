@@ -6,13 +6,15 @@
 extern std::mutex mutex1;
 extern std::atomic_bool CameraisOpen;
 
+static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
+
 cv::Mat VideoSave::src(480, 960, CV_8UC3);
 cv::Mat VideoSave::temp(480, 960, CV_8UC3);
 
-bool Temp_AutoSaveVideo = true; //TODO:修改一个更加安全的控件
+//bool Temp_AutoSaveVideo = true; //TODO:修改一个更加安全的控件
 
 void VideoSave::SaveRunningVideo(cv::Mat *pFrame) {
-    if (Temp_AutoSaveVideo){
+    if (functionConfig._enableSaveVideo){
         time_t timep;
         char name[256] = {0};
 
@@ -40,7 +42,7 @@ void VideoSave::SaveRunningVideo(cv::Mat *pFrame) {
             //output = roi.clone();
             cv::resize(src,output,cv::Size(640,480));
             outputVideo << output;
-            cv::imshow("Output", output);
+            //cv::imshow("Output", output);
             cv::waitKey(1);
         }
     }

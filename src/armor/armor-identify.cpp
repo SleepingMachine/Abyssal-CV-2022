@@ -26,6 +26,8 @@ int IdentifyArmor::dilate = 6;
 
 int IdentifyArmor::targetArmorIdex = 0;
 
+double IdentifyArmor::roiRatio_x = 1;
+double IdentifyArmor::roiRatio_y = 1;
 double IdentifyArmor::roiScalingRatio_x = 1;
 double IdentifyArmor::roiScalingRatio_y = 1;
 
@@ -35,12 +37,13 @@ std::vector<cv::RotatedRect> IdentifyArmor::filteredLightBars;
 std::vector<IdentifyArmor::ArmorStruct> IdentifyArmor::armorStructs;
 
 static ArmorPara armorPara = ArmorParaFactory::getArmorPara();
+static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
 
 cv::Point IdentifyArmor::lastArmorTargetHitPoint = cv::Point(0,0);
 cv::Rect IdentifyArmor::lastArmorTarget;
 cv::Rect2d IdentifyArmor::restoreRect;
 
-bool IdentifyArmor::_enableRoiScaling = true;
+//bool IdentifyArmor::_enableRoiScaling = true;
 
 bool ArmorKCF::_targetArmorFind= false;
 bool IdentifyArmor::_cropRoi = false;
@@ -476,7 +479,7 @@ void IdentifyArmor::TargetSelection() {
             }
         }
 
-        if(_enableRoiScaling && _roiScaling)
+        if(functionConfig._enableRoiScaling && _roiScaling)
         {
             armorStructs[targetArmorIdex].hitPoint.x /= roiScalingRatio_x;
             armorStructs[targetArmorIdex].hitPoint.y /= roiScalingRatio_y;
@@ -501,14 +504,27 @@ void IdentifyArmor::TargetSelection() {
 }
 
 void IdentifyArmor::DynamicResolutionResize() {
-    if (ArmorKCF::_targetArmorFind != true ){
+    if (!ArmorKCF::_targetArmorFind && (searchSrc.cols == 960 || searchSrc.rows == 480)){
         src.copyTo(searchSrc);
         cropOriginPoint = cv::Point(0,0);
         lastArmorTarget = cv::Rect(0, 0, 0, 0);
         lastArmorTargetHitPoint = cv::Point(0,0);
+        roiRatio_x = 2;
+        roiRatio_y = 2;
         _cropRoi = false;
         _roiScaling = false;
         return;
+    }
+    else if (!ArmorKCF::_targetArmorFind && (searchSrc.cols != 960 || searchSrc.rows != 480)){
+        src.copyTo(searchSrc);
+        src.copyTo(searchSrc);
+        cropOriginPoint = cv::Point(0,0);
+        lastArmorTarget = cv::Rect(0, 0, 0, 0);
+        lastArmorTargetHitPoint = cv::Point(0,0);
+        roiRatio_x *= 1.5;
+        roiRatio_y *= 1.5;
+        _cropRoi = false;
+        _roiScaling = false;
     }
     else{
         cv::Point roi_UL = cv::Point(0,0),roi_LR = cv::Point(0,0);
@@ -537,27 +553,27 @@ void IdentifyArmor::DynamicResolutionResize() {
         }
 */
         if (!_cropRoi){
-            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * 2) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * 2);
-            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* 2) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* 2);
+            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * roiRatio_x) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * roiRatio_x);
+            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* roiRatio_y) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* roiRatio_y);
 
             roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
             roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
 
-            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * 2) >= src.cols ? src.cols : lastArmorTargetHitPoint.x + lastArmorTarget.width * 2;
-            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * 2) >= src.rows ? src.rows : lastArmorTargetHitPoint.y + lastArmorTarget.height * 2;
+            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * roiRatio_x) >= src.cols ? src.cols : lastArmorTargetHitPoint.x + lastArmorTarget.width * roiRatio_x;
+            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * roiRatio_y) >= src.rows ? src.rows : lastArmorTargetHitPoint.y + lastArmorTarget.height * roiRatio_y;
 
             roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
             roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
         }
         else{
-            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * 2 + cropOriginPoint.x) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * 2 + cropOriginPoint.x);
-            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* 2 + cropOriginPoint.y) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* 2 + cropOriginPoint.y);
+            roi_UL.x = (lastArmorTargetHitPoint.x - lastArmorTarget.width * roiRatio_x + cropOriginPoint.x) <= 0 ? 0 : (lastArmorTargetHitPoint.x - lastArmorTarget.width * roiRatio_x + cropOriginPoint.x);
+            roi_UL.y = (lastArmorTargetHitPoint.y - lastArmorTarget.height* roiRatio_y + cropOriginPoint.y) <= 0 ? 0 : (lastArmorTargetHitPoint.y - lastArmorTarget.height* roiRatio_y + cropOriginPoint.y);
 
             roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
             roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
 
-            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * 2 + cropOriginPoint.x) >= src.cols ? src.cols : (lastArmorTargetHitPoint.x + lastArmorTarget.width * 2 + cropOriginPoint.x);
-            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * 2 + cropOriginPoint.y) >= src.rows ? src.rows : (lastArmorTargetHitPoint.y + lastArmorTarget.height * 2 + cropOriginPoint.y);
+            roi_LR.x = (lastArmorTargetHitPoint.x + lastArmorTarget.width * roiRatio_x + cropOriginPoint.x) >= src.cols ? src.cols : (lastArmorTargetHitPoint.x + lastArmorTarget.width * roiRatio_x + cropOriginPoint.x);
+            roi_LR.y = (lastArmorTargetHitPoint.y + lastArmorTarget.height * roiRatio_y + cropOriginPoint.y) >= src.rows ? src.rows : (lastArmorTargetHitPoint.y + lastArmorTarget.height * roiRatio_y + cropOriginPoint.y);
 
             roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
             roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
@@ -571,10 +587,10 @@ void IdentifyArmor::DynamicResolutionResize() {
         cropOriginPoint = roi_UL;
         searchSrc = roi.clone();
 
-        if (_enableRoiScaling && searchSrc.rows * searchSrc.cols <= 270 * 170 && searchSrc.rows * searchSrc.cols >= 80 * 50){
+        if (functionConfig._enableRoiScaling && searchSrc.rows * searchSrc.cols <= 270 * 170 && searchSrc.rows * searchSrc.cols >= 80 * 50){
             roiScalingRatio_x = 270.00/searchSrc.cols;
             roiScalingRatio_y = 170.00/searchSrc.rows;
-            std::cout << roiScalingRatio_x << " " << roiScalingRatio_y <<std::endl;
+            //std::cout << roiScalingRatio_x << " " << roiScalingRatio_y <<std::endl;
             cv::resize(searchSrc, searchSrc, cv::Point(0,0),roiScalingRatio_x, roiScalingRatio_y);
             _roiScaling = true;
         }
