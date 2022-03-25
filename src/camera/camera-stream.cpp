@@ -62,8 +62,7 @@ int CameraStream::InitCamera() {
     CameraSetTriggerMode(hCamera, 0);
     CameraSetAeState(hCamera, false);
     CameraSetExposureTime(hCamera, 10 * 1000);
-    SetCameraResolution(hCamera, 0, 0, 960, 480);
-
+    SetCameraResolution(hCamera, 0, 0, 960, 640);
 
     /*其他的相机参数设置
     例如 CameraSetExposureTime   CameraGetExposureTime  设置/读取曝光时间

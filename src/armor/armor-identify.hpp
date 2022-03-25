@@ -33,6 +33,8 @@ public:
     };
     friend class ArmorKCF;
 
+    static void CreatTrackbars();
+
 private:
     static int getFrameErrorCounter;
     static cv::Mat src;
@@ -77,7 +79,7 @@ private:
 
     //static void CropRoi(const cv::Mat &src);
     static void ImagePreprocess(const cv::Mat &src);
-    static void CreatTrackbars();
+
     static void FindLightbar(cv::Mat &preprocessed);
     static void LightBarsPairing();
     static void ClassificationArmor(ArmorStruct& armorStructs);
@@ -88,9 +90,9 @@ private:
 
 public:
     IdentifyArmor();
-    ~IdentifyArmor() {}
+    ~IdentifyArmor() {};
 
-    static void IdentifyStream(cv::Mat* pFrame, int* sentData);
+    static void ArmorIdentifyStream(cv::Mat importSrc, int* sentData);
 };
 
 #endif //ABYSSAL_CV_2022_ARMOR_IDENTIFY_HPP

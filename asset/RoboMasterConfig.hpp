@@ -51,6 +51,12 @@ enum EXTREMUM {
     LONG_SIDE
 };
 
+typedef enum {
+    InitMode = 0,
+    ArmorMode,
+    EnergyBuffMode
+} NowMode;
+
 //装甲板参数
 struct ArmorPara {
     EnemyColor enemyColor;

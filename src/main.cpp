@@ -1,6 +1,7 @@
 #include "camera/camera-stream.hpp"
 #include "armor/armor-identify.hpp"
 #include "video/video-save.hpp"
+#include "control/control-switch.hpp"
 
 #include <thread>
 #include <mutex>
@@ -17,14 +18,15 @@ int main(int argc, char* argv[]) {
     CameraisOpen = true;
     SerialPortStart = true;
     cv::Mat frame(1280, 720, CV_8UC3), gray;
-    int sendData;
     CameraStream::InitCamera();
 
     //std::thread serial_thread(SerialPort::SendData, &sendData);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
-    std::thread armor_thread(IdentifyArmor::IdentifyStream, &frame, &sendData);
+    //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);
+    std::thread control_thread(ControlSwitch::SwitchMode, &frame);
     std::thread video_thread(VideoSave::SaveRunningVideo, &frame);
+
     //TODO：监控线程、通信线程/
     /*
     while(CameraisOpen) {
@@ -41,7 +43,8 @@ int main(int argc, char* argv[]) {
     */
     //serial_thread.join();
     camera_thread.join();
-    armor_thread.join();
+    //armor_thread.join();
+    control_thread.join();
     video_thread.join();
     CameraStream::UnInitCamera();
 

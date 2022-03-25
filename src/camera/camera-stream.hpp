@@ -5,6 +5,8 @@
 #define ABYSSAL_2022_CAMERA_STREAM_H
 
 #include "camera/CameraApi.h" //相机SDK的API头文件
+#include "../asset/RoboMasterConfig.hpp"
+#include "../src/control/control-switch.hpp"
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"

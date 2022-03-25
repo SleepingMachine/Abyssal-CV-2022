@@ -60,10 +60,12 @@ cv::Point IdentifyArmor::cropOriginPoint = cv::Point(0,0);
 
 IdentifyArmor::IdentifyArmor() {}
 
-void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
+void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
+    src = importSrc;
 //#if DEBUG
-    CreatTrackbars();
+    //CreatTrackbars();
 //#endif
+/*
     cv::Mat temp;
 
     while(CameraisOpen) {
@@ -83,7 +85,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
                 exit(0);
             }
         }
-
+*/
         //CropRoi(src);
         DynamicResolutionResize();
         ImagePreprocess(searchSrc);
@@ -119,7 +121,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         cv::imshow("Src", src);
         cv::imshow("SeaechSrc", searchSrc);
         cv::waitKey(5);
-    }
+    //}
 }
 
 void IdentifyArmor::CreatTrackbars() {
