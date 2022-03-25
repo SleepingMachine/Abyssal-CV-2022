@@ -6,10 +6,10 @@
 extern std::mutex mutex1;
 extern std::atomic_bool CameraisOpen;
 
-cv::Mat VideoSave::src(480, 640, CV_8UC3);
-cv::Mat VideoSave::temp(480, 640, CV_8UC3);
+cv::Mat VideoSave::src(480, 960, CV_8UC3);
+cv::Mat VideoSave::temp(480, 960, CV_8UC3);
 
-bool Temp_AutoSaveVideo = 0; //TODO:改一个安全的控件
+bool Temp_AutoSaveVideo = true; //TODO:修改一个更加安全的控件
 
 void VideoSave::SaveRunningVideo(cv::Mat *pFrame) {
     if (Temp_AutoSaveVideo){
@@ -33,9 +33,15 @@ void VideoSave::SaveRunningVideo(cv::Mat *pFrame) {
                 std::cout << "Get Save Video Frame Fail" << std::endl;
                 break;
             }
-            outputVideo << src;
 
-            cv::waitKey(5);
+            cv::Mat output;
+            //cv::Mat roi;
+            //roi = src(cv::Rect(cv::Point(160,0),cv::Point(800,480)));
+            //output = roi.clone();
+            cv::resize(src,output,cv::Size(640,480));
+            outputVideo << output;
+            cv::imshow("Output", output);
+            cv::waitKey(1);
         }
     }
 

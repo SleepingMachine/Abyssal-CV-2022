@@ -1,3 +1,0 @@
-/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-release/CMakeFiles/edit_cache.dir
-/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-release/CMakeFiles/Abyssal_CV_2022.dir

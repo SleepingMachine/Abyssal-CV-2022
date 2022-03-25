@@ -80,7 +80,7 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
                 exit(0);
             }
         }
-//        std::cout << 1111 << std::endl;
+
         //CropRoi(src);
         DynamicResolutionResize();
         ImagePreprocess(searchSrc);
@@ -95,8 +95,8 @@ void IdentifyArmor::IdentifyStream(cv::Mat *pFrame, int* sentData) {
         }*/
         //TestDemo
         if(armorStructs.size() > 0){
-            int hitPointx = armorStructs[targetArmorIdex].hitPoint.x;
-            int hitPointy = armorStructs[targetArmorIdex].hitPoint.y;
+            int hitPointx = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
+            int hitPointy = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
             int hitPointData = hitPointx * 1000 + hitPointy;
 
             if (mutex2.try_lock()) {
@@ -142,12 +142,13 @@ void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {
             cv::Point2f vertices[4];
             scanRect.points(vertices);
             //std::cout << ArmorTool::getRectLengthWidthRatio(scanRect) << std::endl;
+            /*
             cv::circle(src, cv::Point(vertices[0].x,vertices[0].y), 1, cv::Scalar(255, 255, 0), 2);  // 画半径为1的圆(画点）
             cv::circle(src, cv::Point(vertices[1].x,vertices[1].y), 1, cv::Scalar(255, 0, 255), 2);  // 画半径为1的圆(画点）
             cv::circle(src, cv::Point(vertices[2].x,vertices[2].y), 1, cv::Scalar(20, 243, 32), 2);  // 画半径为1的圆(画点）
             cv::circle(src, cv::Point(vertices[3].x,vertices[3].y), 1, cv::Scalar(255, 0, 0), 2);  // 画半径为1的圆(画点）
             cv::circle(src, cv::Point(vertices[4].x,vertices[4].y), 1, cv::Scalar(	0, 255, 255), 2);  // 画半径为1的圆(画点）
-
+            */
 
             //std::cout << "sfhdiwuda" << fabs(vertices[0].y - vertices[2].y) / fabs(vertices[0].x - vertices[2].x) << std::endl;
 

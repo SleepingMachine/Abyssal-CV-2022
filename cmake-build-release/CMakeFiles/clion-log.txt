@@ -1,4 +1,0 @@
-/home/sleepingmachine/RoboMaster-Data/clion-2021.3.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/home/sleepingmachine/RoboMaster-Data/clion-2021.3.3/bin/ninja/linux/ninja -G Ninja /home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022
--- Configuring done
--- Generating done
--- Build files have been written to: /home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-release
