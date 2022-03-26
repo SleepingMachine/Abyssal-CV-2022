@@ -12,6 +12,7 @@
 #include <time.h>
 
 #include "../asset/RoboMasterConfig.hpp"
+#include "../src/control/control-switch.hpp"
 
 class VideoSave{
 public:

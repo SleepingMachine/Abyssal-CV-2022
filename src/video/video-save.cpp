@@ -6,7 +6,7 @@
 extern std::mutex mutex1;
 extern std::atomic_bool CameraisOpen;
 
-static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
+//static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
 
 cv::Mat VideoSave::src(480, 960, CV_8UC3);
 cv::Mat VideoSave::temp(480, 960, CV_8UC3);
@@ -14,7 +14,7 @@ cv::Mat VideoSave::temp(480, 960, CV_8UC3);
 //bool Temp_AutoSaveVideo = true; //TODO:修改一个更加安全的控件
 
 void VideoSave::SaveRunningVideo(cv::Mat *pFrame) {
-    if (functionConfig._enableSaveVideo){
+    if (ControlSwitch::functionConfig._enableSaveVideo){
         time_t timep;
         char name[256] = {0};
 

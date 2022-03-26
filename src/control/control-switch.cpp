@@ -29,20 +29,22 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
         }
         temp.copyTo(src);
         //cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
+        //if (src.empty() || (src.cols != 960 || src.rows != 640)) {
         if (src.empty()) {
             std::cout << "Get Frame Fail" << std::endl;
-            if (getFrameErrorCounter < 3)
+            if (getFrameErrorCounter < 10)
             {
+                getFrameErrorCounter++;
                 continue;
             }
             else{
                 exit(0);
             }
         }
-        if (!functionConfig._enableEnergyBuffMode){
+        if (!functionConfig._enableEnergyBuffMode && src.cols == 960 && src.rows == 640){
+
             src = src(cv::Rect(0,80,960,480));
         }
-
         /*
         if ((!functionConfig._enableEnergyBuffMode && lastMode == NowMode::InitMode) || (!functionConfig._enableEnergyBuffMode && lastMode == NowMode::ArmorMode)){
             lastMode = NowMode::ArmorMode;

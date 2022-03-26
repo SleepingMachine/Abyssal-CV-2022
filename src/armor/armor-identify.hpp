@@ -6,6 +6,7 @@
 
 #include "../asset/RoboMasterConfig.hpp"
 #include "../src/serial/serial-port.hpp"
+#include "../src/control/control-switch.hpp"
 #include "armor-tool.hpp"
 #include "KCF/armor-KCF.hpp"
 

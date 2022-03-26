@@ -89,29 +89,63 @@ void CameraStream::UnInitCamera() {
 
 
 void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
-    //显示图像
-    while (CameraisOpen) {
-        if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {
-            CameraImageProcess(hCamera, pbyBuffer, g_pRgbBuffer, &sFrameInfo);
+    if(!ControlSwitch::functionConfig._enableLocalVideoStreaming) {
+        //显示图像
+        while (CameraisOpen) {
+            if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {
+                CameraImageProcess(hCamera, pbyBuffer, g_pRgbBuffer, &sFrameInfo);
 
-            cv::Mat matImage(
-                    cvSize(sFrameInfo.iWidth, sFrameInfo.iHeight),
-                    sFrameInfo.uiMediaType == CAMERA_MEDIA_TYPE_MONO8 ? CV_8UC1 : CV_8UC3,
-                    g_pRgbBuffer
-            );
-            //imshow("Opencv Demo", matImage);
+                cv::Mat matImage(
+                        cvSize(sFrameInfo.iWidth, sFrameInfo.iHeight),
+                        sFrameInfo.uiMediaType == CAMERA_MEDIA_TYPE_MONO8 ? CV_8UC1 : CV_8UC3,
+                        g_pRgbBuffer
+                );
+                //imshow("Opencv Demo", matImage);
 
-            if (mutex1.try_lock()) {
-                matImage.copyTo(*pFrame);
-                mutex1.unlock();
+                if (mutex1.try_lock()) {
+                    matImage.copyTo(*pFrame);
+                    mutex1.unlock();
+                }
+                waitKey(5);
+
+                //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
+                //否则再次调用CameraGetImageBuffer时，程序将被挂起一直阻塞，直到其他线程中调用CameraReleaseImageBuffer来释放了buffer
+                CameraReleaseImageBuffer(hCamera, pbyBuffer);
+
             }
-            waitKey(5);
-
-            //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
-            //否则再次调用CameraGetImageBuffer时，程序将被挂起一直阻塞，直到其他线程中调用CameraReleaseImageBuffer来释放了buffer
-            CameraReleaseImageBuffer(hCamera, pbyBuffer);
-
         }
+    }
+    else{
+        VideoCapture capture;
+        capture.open(ControlSwitch::functionConfig.localVideoPath);
+        if (!capture.isOpened()) {
+            printf("could not read this video file...\n");
+            exit(0);
+        }
+        while (CameraisOpen)
+        {
+
+            Mat frame;
+            capture >> frame;  //读取当前帧
+
+            //若视频播放完成，退出循环
+            if (frame.empty())
+            {
+                std::cout << 1 << std::endl;
+                continue;
+            }
+            /*
+            if (frame.cols != 960 || frame.rows != 640){
+                cv::resize(frame, frame, cv::Size(960,640));
+            }
+            if (mutex1.try_lock()) {
+                frame.copyTo(*pFrame);
+                mutex1.unlock();
+            }*/
+            imshow("读取视频", frame);  //显示当前帧
+            //waitKey(5);  //延时30ms
+        }
+
     }
 }
 

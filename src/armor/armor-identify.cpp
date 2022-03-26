@@ -37,7 +37,7 @@ std::vector<cv::RotatedRect> IdentifyArmor::filteredLightBars;
 std::vector<IdentifyArmor::ArmorStruct> IdentifyArmor::armorStructs;
 
 static ArmorPara armorPara = ArmorParaFactory::getArmorPara();
-static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
+//static FunctionConfig functionConfig = FunctionConfigFactory::getFunctionConfig();
 
 cv::Point IdentifyArmor::lastArmorTargetHitPoint = cv::Point(0,0);
 cv::Rect IdentifyArmor::lastArmorTarget;
@@ -481,7 +481,7 @@ void IdentifyArmor::TargetSelection() {
             }
         }
 
-        if(functionConfig._enableRoiScaling && _roiScaling)
+        if(ControlSwitch::functionConfig._enableRoiScaling && _roiScaling)
         {
             armorStructs[targetArmorIdex].hitPoint.x /= roiScalingRatio_x;
             armorStructs[targetArmorIdex].hitPoint.y /= roiScalingRatio_y;
@@ -511,7 +511,7 @@ void IdentifyArmor::DynamicResolutionResize() {
         cropOriginPoint = cv::Point(0,0);
         lastArmorTarget = cv::Rect(0, 0, 0, 0);
         lastArmorTargetHitPoint = cv::Point(0,0);
-        roiRatio_x = 2;
+        roiRatio_x = 1.5;
         roiRatio_y = 2;
         _cropRoi = false;
         _roiScaling = false;
@@ -589,7 +589,7 @@ void IdentifyArmor::DynamicResolutionResize() {
         cropOriginPoint = roi_UL;
         searchSrc = roi.clone();
 
-        if (functionConfig._enableRoiScaling && searchSrc.rows * searchSrc.cols <= 270 * 170 && searchSrc.rows * searchSrc.cols >= 80 * 50){
+        if (ControlSwitch::functionConfig._enableRoiScaling && searchSrc.rows * searchSrc.cols <= 270 * 170 && searchSrc.rows * searchSrc.cols >= 80 * 50){
             roiScalingRatio_x = 270.00/searchSrc.cols;
             roiScalingRatio_y = 170.00/searchSrc.rows;
             //std::cout << roiScalingRatio_x << " " << roiScalingRatio_y <<std::endl;
