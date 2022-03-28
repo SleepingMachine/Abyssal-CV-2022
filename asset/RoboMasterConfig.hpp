@@ -11,11 +11,19 @@ struct FunctionConfig
 {
     bool _enableEnergyBuffMode      = false;
 
+<<<<<<< HEAD
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
     std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+=======
+    bool _enableSaveVideo           = true;
+    bool _enableRoiScaling          = true;
+
+    bool _enableLocalVideoStreaming = false;
+    std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
 };
 
 class FunctionConfigFactory{

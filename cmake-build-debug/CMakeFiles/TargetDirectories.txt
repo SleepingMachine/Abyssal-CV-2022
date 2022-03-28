@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles/Abyssal_CV_2022.dir
+=======
+/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-debug/CMakeFiles/Abyssal_CV_2022.dir
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda

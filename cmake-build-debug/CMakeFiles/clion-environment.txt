@@ -1,3 +1,7 @@
 ToolSet: 1.0 (local)Options: 
 
+<<<<<<< HEAD
 Options:
+=======
+Options:-DCMAKE_MAKE_PROGRAM=/home/sleepingmachine/RoboMaster-Data/clion-2021.3.3/bin/ninja/linux/ninja
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda

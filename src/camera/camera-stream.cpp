@@ -131,19 +131,32 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
             //若视频播放完成，退出循环
             if (frame.empty())
             {
+<<<<<<< HEAD
                 //std::cout << 1 << std::endl;
                 exit(0);
             }
 
+=======
+                std::cout << 1 << std::endl;
+                continue;
+            }
+            /*
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
             if (frame.cols != 960 || frame.rows != 640){
                 cv::resize(frame, frame, cv::Size(960,640));
             }
             if (mutex1.try_lock()) {
                 frame.copyTo(*pFrame);
                 mutex1.unlock();
+<<<<<<< HEAD
             }
             //imshow("读取视频", frame);  //显示当前帧
             waitKey(10);  //延时30ms
+=======
+            }*/
+            imshow("读取视频", frame);  //显示当前帧
+            //waitKey(5);  //延时30ms
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
         }
 
     }

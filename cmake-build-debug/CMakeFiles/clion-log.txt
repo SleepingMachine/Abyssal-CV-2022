@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main
 -- Found OpenCV: /usr/local (found version "4.5.5") 
 -- Looking for pthread.h
@@ -15,3 +16,9 @@
 
 收集编译器信息时遇到问题:
 	c++: error: unrecognized command line option '-std=c++20'; did you mean '-std=c++2a'?
+=======
+/home/sleepingmachine/RoboMaster-Data/clion-2021.3.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/sleepingmachine/RoboMaster-Data/clion-2021.3.3/bin/ninja/linux/ninja -G Ninja /home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-debug
+>>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
