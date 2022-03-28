@@ -1,0 +1,17 @@
+/snap/clion/184/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main
+-- Found OpenCV: /usr/local (found version "4.5.5") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug
+
+收集编译器信息时遇到问题:
+	c++: error: unrecognized command line option '-std=c++20'; did you mean '-std=c++2a'?

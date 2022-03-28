@@ -1,0 +1,16 @@
+Log file created at: 2022/02/21 21:47:14
+Running on machine: Abyssal-NUC8-0
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0221 21:47:14.901355 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:eno1-192.168.100.10-Unknown-1500)Heart Fail:1
+W0221 21:47:17.265305 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:eno1-192.168.100.10-Unknown-1500)Heart Fail:2
+W0221 21:47:18.577458 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:3
+W0221 21:47:18.628032 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:4
+W0221 21:47:19.630610 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:5
+W0221 21:47:20.632804 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:6
+W0221 21:47:21.634817 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:7
+W0221 21:47:22.636723 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:8
+W0221 21:47:23.639286 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:9
+W0221 21:47:24.677402 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:10
+W0221 21:47:25.679711 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:11
+W0221 21:47:26.681871 34942 CameraGigeBase.cpp:3399] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)Heart Fail:12
+W0221 21:47:26.682199 34942 CameraGigeBase.cpp:3404] Device:(name:MV-GE134GC-IT#0 sn:059022810144 cam:192.168.100.82-1000-1400 nic:-192.168.100.10-Unknown-0)CommIsFailed!!!
