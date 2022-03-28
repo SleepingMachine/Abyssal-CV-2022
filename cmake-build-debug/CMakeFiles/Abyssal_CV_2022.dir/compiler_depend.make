@@ -2228,6 +2228,10 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energ
   /usr/include/x86_64-linux-gnu/bits/termios-misc.h \
   /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
   /usr/local/gcc-11.2/include/c++/11.2.0/atomic \
+  ../src/armor/armor-identify.hpp \
+  ../src/control/control-switch.hpp \
+  ../src/energy/energy-buff.hpp \
+  ../src/armor/armor-tool.hpp \
   /usr/local/include/opencv4/opencv2/core/core.hpp \
   /usr/local/include/opencv4/opencv2/core.hpp \
   /usr/local/include/opencv4/opencv2/core/operations.hpp \
@@ -2249,12 +2253,12 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energ
   /usr/local/include/opencv4/opencv2/highgui.hpp \
   /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
   /usr/local/include/opencv4/opencv2/videoio.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
-  /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
-  /usr/local/include/opencv4/opencv2/core/core_c.h \
-  /usr/local/include/opencv4/opencv2/core/types_c.h \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
   /usr/local/include/opencv4/opencv2/imgproc.hpp \
   /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+  ../src/armor/KCF/armor-KCF.hpp \
+  /usr/local/include/opencv4/opencv2/tracking.hpp \
+  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
   /usr/local/include/opencv4/opencv2/opencv.hpp \
   /usr/local/include/opencv4/opencv2/calib3d.hpp \
   /usr/local/include/opencv4/opencv2/features2d.hpp \
@@ -2352,8 +2356,13 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energ
   /usr/local/include/opencv4/opencv2/stitching/detail/blenders.hpp \
   /usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp \
   /usr/local/include/opencv4/opencv2/video.hpp \
-  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
-  /usr/local/include/opencv4/opencv2/video/background_segm.hpp
+  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
+  ../asset/RoboMasterConfig.hpp \
+  ../src/armor/armor-identify.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
+  /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
+  /usr/local/include/opencv4/opencv2/core/core_c.h \
+  /usr/local/include/opencv4/opencv2/core/types_c.h
 
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/stdc-predef.h \

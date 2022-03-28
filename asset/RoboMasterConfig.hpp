@@ -9,13 +9,19 @@
 
 struct FunctionConfig
 {
+    //RED => false
+    // BLUE => true
+    bool _enemyColor                = false;
+
     bool _enableEnergyBuffMode      = false;
 
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
-    bool _enableLocalVideoStreaming = true;
+    bool _enableLocalVideoStreaming = false;
     std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+
+    bool _enableDebugMode           = true;
 };
 
 class FunctionConfigFactory{

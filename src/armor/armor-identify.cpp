@@ -11,12 +11,20 @@ extern std::atomic_bool CameraisOpen;
 int IdentifyArmor::getFrameErrorCounter = 0;
 
 //默认hsv颜色阈值
-int IdentifyArmor::hmin = 53;
-int IdentifyArmor::hmax = 148;
-int IdentifyArmor::smin = 128;
-int IdentifyArmor::smax = 255;
-int IdentifyArmor::vmin = 98;
-int IdentifyArmor::vmax = 255;
+
+int IdentifyArmor::hmin_0 = 53;
+int IdentifyArmor::hmax_0 = 148;
+int IdentifyArmor::smin_0 = 128;
+int IdentifyArmor::smax_0 = 255;
+int IdentifyArmor::vmin_0 = 98;
+int IdentifyArmor::vmax_0 = 255;
+
+int IdentifyArmor::hmin_1 = 53;
+int IdentifyArmor::hmax_1 = 148;
+int IdentifyArmor::smin_1 = 128;
+int IdentifyArmor::smax_1 = 255;
+int IdentifyArmor::vmin_1 = 98;
+int IdentifyArmor::vmax_1 = 255;
 
 //默认二值化操作阈值
 int IdentifyArmor::open = 1;
@@ -52,6 +60,8 @@ bool IdentifyArmor::_roiScaling = false;
 
 cv::Mat IdentifyArmor::src(480, 960, CV_8UC3);
 cv::Mat IdentifyArmor::srcHSV(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::maskHSV_0(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::maskHSV_1(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::maskHSV(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::dstHSV(640, 1280, CV_8UC3);
 
@@ -126,12 +136,20 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
 
 void IdentifyArmor::CreatTrackbars() {
     cv::namedWindow("阈值调整",cv::WINDOW_AUTOSIZE);
-    cv::createTrackbar("hmin", "阈值调整",&IdentifyArmor::hmin, 255,NULL);
-    cv::createTrackbar("hmax", "阈值调整",&IdentifyArmor::hmax, 255,NULL);
-    cv::createTrackbar("smin", "阈值调整",&IdentifyArmor::smin, 255,NULL);
-    cv::createTrackbar("smax", "阈值调整",&IdentifyArmor::smax, 255,NULL);
-    cv::createTrackbar("vmin", "阈值调整",&IdentifyArmor::vmin, 255,NULL);
-    cv::createTrackbar("vmax", "阈值调整",&IdentifyArmor::vmax, 255,NULL);
+    cv::createTrackbar("hmin0", "阈值调整",&IdentifyArmor::hmin_0, 255,NULL);
+    cv::createTrackbar("hmax0", "阈值调整",&IdentifyArmor::hmax_0, 255,NULL);
+    cv::createTrackbar("smin0", "阈值调整",&IdentifyArmor::smin_0, 255,NULL);
+    cv::createTrackbar("smax0", "阈值调整",&IdentifyArmor::smax_0, 255,NULL);
+    cv::createTrackbar("vmin0", "阈值调整",&IdentifyArmor::vmin_0, 255,NULL);
+    cv::createTrackbar("vmax0", "阈值调整",&IdentifyArmor::vmax_0, 255,NULL);
+
+    cv::createTrackbar("hmin1", "阈值调整",&IdentifyArmor::hmin_1, 255,NULL);
+    cv::createTrackbar("hmax1", "阈值调整",&IdentifyArmor::hmax_1, 255,NULL);
+    cv::createTrackbar("smin1", "阈值调整",&IdentifyArmor::smin_1, 255,NULL);
+    cv::createTrackbar("smax1", "阈值调整",&IdentifyArmor::smax_1, 255,NULL);
+    cv::createTrackbar("vmin1", "阈值调整",&IdentifyArmor::vmin_1, 255,NULL);
+    cv::createTrackbar("vmax1", "阈值调整",&IdentifyArmor::vmax_1, 255,NULL);
+
     cv::createTrackbar("open", "阈值调整",&IdentifyArmor::open, 10,NULL);
     cv::createTrackbar("close", "阈值调整",&IdentifyArmor::close, 30,NULL);
     cv::createTrackbar("erode", "阈值调整",&IdentifyArmor::erode, 10,NULL);
@@ -261,8 +279,43 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
     }
      */
     cv::cvtColor(src, srcHSV, CV_BGR2HSV, 0);
-    cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin, IdentifyArmor::smin, IdentifyArmor::vmin), cv::Scalar(IdentifyArmor::hmax, IdentifyArmor::smax, IdentifyArmor::vmax), maskHSV);
-    //cv::inRange(srcHSV, cv::Scalar(40,120,230), cv::Scalar(80, 120, 255), maskHSV);
+/*
+    if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_BLUE){
+        IdentifyArmor::hmin_0 = 53;
+        IdentifyArmor::hmax_0 = 148;
+        IdentifyArmor::smin_0 = 128;
+        IdentifyArmor::smax_0 = 255;
+        IdentifyArmor::vmin_0 = 98;
+        IdentifyArmor::vmax_0 = 255;
+
+        IdentifyArmor::hmin_1 = 53;
+        IdentifyArmor::hmax_1 = 148;
+        IdentifyArmor::smin_1 = 128;
+        IdentifyArmor::smax_1 = 255;
+        IdentifyArmor::vmin_1 = 98;
+        IdentifyArmor::vmax_1 = 255;
+    }
+    else if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_RED){
+        IdentifyArmor::hmin_0 = 53;
+        IdentifyArmor::hmax_0 = 148;
+        IdentifyArmor::smin_0 = 128;
+        IdentifyArmor::smax_0 = 255;
+        IdentifyArmor::vmin_0 = 98;
+        IdentifyArmor::vmax_0 = 255;
+
+        IdentifyArmor::hmin_1 = 53;
+        IdentifyArmor::hmax_1 = 148;
+        IdentifyArmor::smin_1 = 128;
+        IdentifyArmor::smax_1 = 255;
+        IdentifyArmor::vmin_1 = 98;
+        IdentifyArmor::vmax_1 = 255;
+    }
+    */
+    cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_0, IdentifyArmor::smin_0, IdentifyArmor::vmin_0), cv::Scalar(IdentifyArmor::hmax_0, IdentifyArmor::smax_0, IdentifyArmor::vmax_0), maskHSV_0);
+    cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_1, IdentifyArmor::smin_1, IdentifyArmor::vmin_1), cv::Scalar(IdentifyArmor::hmax_1, IdentifyArmor::smax_1, IdentifyArmor::vmax_1), maskHSV_1);
+    //cv::imshow("0", maskHSV_0);
+    //cv::imshow("1", maskHSV_1);
+    maskHSV = maskHSV_0 | maskHSV_1;
     morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::open,IdentifyArmor::open)));
     morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::close,IdentifyArmor::close)));
     morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::erode,IdentifyArmor::erode)));

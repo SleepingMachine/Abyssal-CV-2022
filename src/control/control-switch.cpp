@@ -20,8 +20,9 @@ int ControlSwitch::getFrameErrorCounter = 0;
 cv::Mat ControlSwitch::src(480, 960, CV_8UC3);
 
 void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
-    IdentifyArmor::CreatTrackbars();
     cv::Mat temp;
+    IdentifyArmor::CreatTrackbars();
+
     while(CameraisOpen) {
         if (mutex1.try_lock()) {
             temp = *pFrame;
@@ -70,6 +71,73 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
         else if (functionConfig._enableEnergyBuffMode){
             lastMode = NowMode::EnergyBuffMode;
             IdentifyEnergyBuff::EnergyBuffIdentifyStream(src, &sendData);
+        }
+    }
+}
+
+void ControlSwitch::initColorThresholdParameters() {
+    if(functionConfig._enableEnergyBuffMode == false){
+        if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_BLUE){
+            IdentifyArmor::hmin_0 = 53;
+            IdentifyArmor::hmax_0 = 148;
+            IdentifyArmor::smin_0 = 128;
+            IdentifyArmor::smax_0 = 255;
+            IdentifyArmor::vmin_0 = 98;
+            IdentifyArmor::vmax_0 = 255;
+
+            IdentifyArmor::hmin_1 = 53;
+            IdentifyArmor::hmax_1 = 148;
+            IdentifyArmor::smin_1 = 128;
+            IdentifyArmor::smax_1 = 255;
+            IdentifyArmor::vmin_1 = 98;
+            IdentifyArmor::vmax_1 = 255;
+        }
+        else if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_RED){
+            IdentifyArmor::hmin_0 = 87;
+            IdentifyArmor::hmax_0 = 255;
+            IdentifyArmor::smin_0 = 45;
+            IdentifyArmor::smax_0 = 255;
+            IdentifyArmor::vmin_0 = 51;
+            IdentifyArmor::vmax_0 = 255;
+
+            IdentifyArmor::hmin_1 = 0;
+            IdentifyArmor::hmax_1 = 255;
+            IdentifyArmor::smin_1 = 74;
+            IdentifyArmor::smax_1 = 255;
+            IdentifyArmor::vmin_1 = 51;
+            IdentifyArmor::vmax_1 = 255;
+        }
+    }
+    else if(functionConfig._enableEnergyBuffMode == true){
+        if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_BLUE){
+            IdentifyEnergyBuff::hmin_0 = 53;
+            IdentifyEnergyBuff::hmax_0 = 148;
+            IdentifyEnergyBuff::smin_0 = 128;
+            IdentifyEnergyBuff::smax_0 = 255;
+            IdentifyEnergyBuff::vmin_0 = 98;
+            IdentifyEnergyBuff::vmax_0 = 255;
+
+            IdentifyEnergyBuff::hmin_1 = 53;
+            IdentifyEnergyBuff::hmax_1 = 148;
+            IdentifyEnergyBuff::smin_1 = 128;
+            IdentifyEnergyBuff::smax_1 = 255;
+            IdentifyEnergyBuff::vmin_1 = 98;
+            IdentifyEnergyBuff::vmax_1 = 255;
+        }
+        else if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_RED){
+            IdentifyEnergyBuff::hmin_0 = 87;
+            IdentifyEnergyBuff::hmax_0 = 255;
+            IdentifyEnergyBuff::smin_0 = 45;
+            IdentifyEnergyBuff::smax_0 = 255;
+            IdentifyEnergyBuff::vmin_0 = 51;
+            IdentifyEnergyBuff::vmax_0 = 255;
+
+            IdentifyEnergyBuff::hmin_1 = 0;
+            IdentifyEnergyBuff::hmax_1 = 255;
+            IdentifyEnergyBuff::smin_1 = 74;
+            IdentifyEnergyBuff::smax_1 = 255;
+            IdentifyEnergyBuff::vmin_1 = 51;
+            IdentifyEnergyBuff::vmax_1 = 255;
         }
     }
 }

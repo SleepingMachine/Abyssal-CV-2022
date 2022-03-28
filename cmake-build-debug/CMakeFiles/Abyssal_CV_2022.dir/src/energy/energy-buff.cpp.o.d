@@ -310,6 +310,10 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/termios-misc.h \
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
  /usr/local/gcc-11.2/include/c++/11.2.0/atomic \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/armor-identify.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/control/control-switch.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/armor-tool.hpp \
  /usr/local/include/opencv4/opencv2/core/core.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
  /usr/local/include/opencv4/opencv2/core/operations.hpp \
@@ -331,12 +335,12 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: \
  /usr/local/include/opencv4/opencv2/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
  /usr/local/include/opencv4/opencv2/videoio.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
- /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
- /usr/local/include/opencv4/opencv2/core/core_c.h \
- /usr/local/include/opencv4/opencv2/core/types_c.h \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
  /usr/local/include/opencv4/opencv2/imgproc.hpp \
  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/KCF/armor-KCF.hpp \
+ /usr/local/include/opencv4/opencv2/tracking.hpp \
+ /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/features2d.hpp \
@@ -434,5 +438,10 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: \
  /usr/local/include/opencv4/opencv2/stitching/detail/blenders.hpp \
  /usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp \
  /usr/local/include/opencv4/opencv2/video.hpp \
- /usr/local/include/opencv4/opencv2/video/tracking.hpp \
- /usr/local/include/opencv4/opencv2/video/background_segm.hpp
+ /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/KCF/../../../asset/RoboMasterConfig.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/KCF/../armor-identify.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
+ /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
+ /usr/local/include/opencv4/opencv2/core/core_c.h \
+ /usr/local/include/opencv4/opencv2/core/types_c.h

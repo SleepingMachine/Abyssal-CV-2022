@@ -24,6 +24,7 @@ private:
     static int lastMode;
     static cv::Mat src;
     static int getFrameErrorCounter;
+    static void initColorThresholdParameters();
 };
 
 #endif //ABYSSAL_CV_2022_CONTROL_SWITCH_HPP
