@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include -I/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src -isystem /usr/local/include/opencv4
 
-CXX_FLAGS =  -std=c++20  -pthread -g -std=gnu++2a
+CXX_FLAGS =  -std=c++20  -pthread -g -std=gnu++20
 

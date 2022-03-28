@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Install script for directory: /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main
-=======
-# Install script for directory: /home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -54,9 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-<<<<<<< HEAD
 file(WRITE "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
-=======
-file(WRITE "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV@2022/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

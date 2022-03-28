@@ -10,18 +10,22 @@
 				{
 					"includeDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-linux-gnu/11/include",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include",
 						"/usr/local/include",
+						"/usr/local/gcc-11.2/include",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include-fixed",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-linux-gnu/11",
-						"/usr/lib/x86_64-linux-gnu",
-						"/usr/lib",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0",
+						"/usr/local/gcc-11.2/lib64",
 						"/lib/x86_64-linux-gnu",
-						"/lib"
+						"/lib64",
+						"/usr/lib/x86_64-linux-gnu",
+						"/usr/lib64",
+						"/usr/local/gcc-11.2/lib"
 					],
 					"linkFrameworkDirectories" : [],
 					"linkLibraries" : 
@@ -51,21 +55,25 @@
 				{
 					"includeDirectories" : 
 					[
-						"/usr/include/c++/11",
-						"/usr/include/x86_64-linux-gnu/c++/11",
-						"/usr/include/c++/11/backward",
-						"/usr/lib/gcc/x86_64-linux-gnu/11/include",
+						"/usr/local/gcc-11.2/include/c++/11.2.0",
+						"/usr/local/gcc-11.2/include/c++/11.2.0/x86_64-linux-gnu",
+						"/usr/local/gcc-11.2/include/c++/11.2.0/backward",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include",
 						"/usr/local/include",
+						"/usr/local/gcc-11.2/include",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include-fixed",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-linux-gnu/11",
-						"/usr/lib/x86_64-linux-gnu",
-						"/usr/lib",
+						"/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0",
+						"/usr/local/gcc-11.2/lib64",
 						"/lib/x86_64-linux-gnu",
-						"/lib"
+						"/lib64",
+						"/usr/lib/x86_64-linux-gnu",
+						"/usr/lib64",
+						"/usr/local/gcc-11.2/lib"
 					],
 					"linkFrameworkDirectories" : [],
 					"linkLibraries" : 

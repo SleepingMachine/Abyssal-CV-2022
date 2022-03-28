@@ -89,7 +89,7 @@ void CameraStream::UnInitCamera() {
 
 
 void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
-    if(!ControlSwitch::functionConfig._enableLocalVideoStreaming) {
+    if (!ControlSwitch::functionConfig._enableLocalVideoStreaming) {
         //显示图像
         while (CameraisOpen) {
             if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {
@@ -115,54 +115,33 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
             }
         }
     }
-    else{
+    else {
         VideoCapture capture;
+        Mat frame;
         capture.open(ControlSwitch::functionConfig.localVideoPath);
         if (!capture.isOpened()) {
             printf("could not read this video file...\n");
             exit(0);
         }
-        while (CameraisOpen)
-        {
-
-            Mat frame;
+        while (CameraisOpen) {
             capture >> frame;  //读取当前帧
-
             //若视频播放完成，退出循环
-            if (frame.empty())
-            {
-<<<<<<< HEAD
+            if (frame.empty()) {
                 //std::cout << 1 << std::endl;
                 exit(0);
             }
-
-=======
-                std::cout << 1 << std::endl;
-                continue;
-            }
-            /*
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
-            if (frame.cols != 960 || frame.rows != 640){
-                cv::resize(frame, frame, cv::Size(960,640));
+            if (frame.cols != 960 || frame.rows != 640) {
+                cv::resize(frame, frame, cv::Size(960, 640));
             }
             if (mutex1.try_lock()) {
                 frame.copyTo(*pFrame);
                 mutex1.unlock();
-<<<<<<< HEAD
             }
             //imshow("读取视频", frame);  //显示当前帧
             waitKey(10);  //延时30ms
-=======
-            }*/
-            imshow("读取视频", frame);  //显示当前帧
-            //waitKey(5);  //延时30ms
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
         }
-
     }
 }
-
-
 int CameraStream::SetCameraResolution(int hCamera, int offsetx, int offsety, int width, int height)
 {
     tSdkImageResolution sRoiResolution = { 0 };

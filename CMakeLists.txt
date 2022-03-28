@@ -35,17 +35,15 @@ add_executable(Abyssal_CV_2022
         src/armor/armor-identify.hpp
         asset/RoboMasterConfig.hpp
         src/armor/armor-tool.hpp
-<<<<<<< HEAD
+
         src/armor/KCF/armor-KCF.hpp
         src/armor/KCF/armor-KCF.cpp
-=======
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
 
         src/video/video-save.hpp
         src/video/video-save.cpp
 
         src/serial/serial-port.hpp
-<<<<<<< HEAD
+
         src/serial/serial-port.cpp
 
         src/energy/energy-buff.hpp
@@ -53,9 +51,6 @@ add_executable(Abyssal_CV_2022
 
         src/control/control-switch.cpp
         src/control/control-switch.hpp)
-=======
-        src/serial/serial-port.cpp src/armor/KCF/armor-KCF.hpp src/armor/KCF/armor-KCF.cpp src/energy/energy-buff.hpp src/energy/energy-buff.cpp src/control/control-switch.cpp src/control/control-switch.hpp)
->>>>>>> 1bb4af68e6d6f4c2317e5238eb44ecc12e02fdda
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/lib/libMVSDK.so")
