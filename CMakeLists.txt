@@ -50,7 +50,7 @@ add_executable(Abyssal_CV_2022
         src/energy/energy-buff.cpp
 
         src/control/control-switch.cpp
-        src/control/control-switch.hpp)
+        src/control/control-switch.hpp src/energy/energy-tools.hpp)
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} "${PROJECT_SOURCE_DIR}/lib/libMVSDK.so")

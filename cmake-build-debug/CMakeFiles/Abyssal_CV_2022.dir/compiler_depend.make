@@ -463,6 +463,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: ../src/armor/KCF/a
   ../src/control/control-switch.hpp \
   ../src/armor/armor-identify.hpp \
   ../src/energy/energy-buff.hpp \
+  ../src/energy/energy-tools.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
   /usr/local/include/opencv4/opencv2/core/core.hpp \
   /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
   /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
@@ -470,7 +472,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: ../src/armor/KCF/a
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
   ../src/armor/armor-tool.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
   ../src/armor/KCF/armor-KCF.hpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armor-identify.cpp \
@@ -812,7 +813,9 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armo
   ../src/control/control-switch.hpp \
   ../src/armor/armor-identify.hpp \
   ../src/energy/energy-buff.hpp \
-  /usr/local/include/opencv4/opencv2/core/core.hpp \
+  ../src/energy/energy-tools.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+  /usr/local/include/opencv4/opencv2/imgproc.hpp \
   /usr/local/include/opencv4/opencv2/core.hpp \
   /usr/local/include/opencv4/opencv2/core/operations.hpp \
   /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp \
@@ -829,6 +832,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armo
   /usr/local/include/opencv4/opencv2/core/optim.hpp \
   /usr/local/include/opencv4/opencv2/core/ovx.hpp \
   /usr/local/include/opencv4/opencv2/core/cvdef.h \
+  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+  /usr/local/include/opencv4/opencv2/core/core.hpp \
   /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
   /usr/local/include/opencv4/opencv2/highgui.hpp \
   /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
@@ -837,8 +842,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armo
   /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
-  /usr/local/include/opencv4/opencv2/imgproc.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
   /usr/local/include/opencv4/opencv2/opencv.hpp \
   /usr/local/include/opencv4/opencv2/calib3d.hpp \
   /usr/local/include/opencv4/opencv2/features2d.hpp \
@@ -939,7 +942,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armo
   /usr/local/include/opencv4/opencv2/video/tracking.hpp \
   /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
   ../src/armor/armor-tool.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
   ../src/armor/KCF/armor-KCF.hpp \
   /usr/local/include/opencv4/opencv2/tracking.hpp \
   ../asset/RoboMasterConfig.hpp \
@@ -1418,7 +1420,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o: ../src/camera/cam
   /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
-  ../src/energy/energy-buff.hpp
+  ../src/energy/energy-buff.hpp \
+  ../src/energy/energy-tools.hpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: ../src/control/control-switch.cpp \
   /usr/include/stdc-predef.h \
@@ -1890,7 +1893,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: ../src/control/
   /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
-  ../src/energy/energy-buff.hpp
+  ../src/energy/energy-buff.hpp \
+  ../src/energy/energy-tools.hpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energy-buff.cpp \
   /usr/include/stdc-predef.h \
@@ -2362,7 +2366,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energ
   /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
   /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
-  /usr/local/include/opencv4/opencv2/core/types_c.h
+  /usr/local/include/opencv4/opencv2/core/types_c.h \
+  ../src/energy/energy-tools.hpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/stdc-predef.h \
@@ -2838,6 +2843,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
   ../src/energy/energy-buff.hpp \
+  ../src/energy/energy-tools.hpp \
   ../src/armor/armor-identify.hpp \
   ../src/video/video-save.hpp \
   ../src/control/control-switch.hpp \
@@ -3658,7 +3664,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-sa
   /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
-  ../src/energy/energy-buff.hpp
+  ../src/energy/energy-buff.hpp \
+  ../src/energy/energy-tools.hpp
 
 
 ../src/video/video-save.cpp:
@@ -3689,8 +3696,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-sa
 
 ../src/camera/camera-stream.hpp:
 
-/usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
-
 /usr/local/include/opencv4/opencv2/core/types_c.h:
 
 /usr/local/include/opencv4/opencv2/core/core_c.h:
@@ -3698,6 +3703,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-sa
 /usr/local/include/opencv4/opencv2/imgproc/types_c.h:
 
 /usr/local/include/opencv4/opencv2/highgui/highgui.hpp:
+
+/usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
 
 ../src/energy/energy-buff.hpp:
 
@@ -4112,6 +4119,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-sa
 /usr/include/endian.h:
 
 /usr/local/gcc-11.2/include/c++/11.2.0/bits/std_abs.h:
+
+../src/energy/energy-tools.hpp:
 
 /usr/local/gcc-11.2/include/c++/11.2.0/deque:
 

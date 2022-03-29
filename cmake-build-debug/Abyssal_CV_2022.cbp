@@ -137,6 +137,9 @@
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-tools.hpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/main.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>

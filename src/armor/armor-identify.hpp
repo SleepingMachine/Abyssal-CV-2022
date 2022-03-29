@@ -99,6 +99,7 @@ private:
     static void TargetSelection();
     static void DynamicResolutionResize();
     static void DrawReferenceGraphics();
+    static void resourceRelease();
 
 public:
     IdentifyArmor();

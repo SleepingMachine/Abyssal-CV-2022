@@ -83,18 +83,18 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
 void ControlSwitch::initColorThresholdParameters() {
 
         if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_BLUE){
-            IdentifyArmor::hmin_0 = 53;
+            IdentifyArmor::hmin_0 = 0;
             IdentifyArmor::hmax_0 = 225;
-            IdentifyArmor::smin_0 = 128;
-            IdentifyArmor::smax_0 = 255;
-            IdentifyArmor::vmin_0 = 98;
+            IdentifyArmor::smin_0 = 0;
+            IdentifyArmor::smax_0 = 126;
+            IdentifyArmor::vmin_0 = 214;
             IdentifyArmor::vmax_0 = 255;
 
-            IdentifyArmor::hmin_1 = 53;
-            IdentifyArmor::hmax_1 = 148;
-            IdentifyArmor::smin_1 = 128;
-            IdentifyArmor::smax_1 = 255;
-            IdentifyArmor::vmin_1 = 98;
+            IdentifyArmor::hmin_1 = 0;
+            IdentifyArmor::hmax_1 = 185;
+            IdentifyArmor::smin_1 = 0;
+            IdentifyArmor::smax_1 = 174;
+            IdentifyArmor::vmin_1 = 141;
             IdentifyArmor::vmax_1 = 255;
 
             IdentifyEnergyBuff::hmin_0 = 53;

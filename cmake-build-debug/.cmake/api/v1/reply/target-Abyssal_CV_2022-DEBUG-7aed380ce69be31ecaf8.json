@@ -420,7 +420,8 @@
 				12,
 				14,
 				16,
-				19
+				19,
+				20
 			]
 		},
 		{
@@ -546,6 +547,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "src/control/control-switch.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/energy/energy-tools.hpp",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -18,8 +18,10 @@ int main(int argc, char* argv[]) {
     CameraisOpen = true;
     SerialPortStart = true;
     cv::Mat frame(1280, 720, CV_8UC3), gray;
-    CameraStream::InitCamera();
 
+    //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
+        CameraStream::InitCamera();
+    //}
     //std::thread serial_thread(SerialPort::SendData, &sendData);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);

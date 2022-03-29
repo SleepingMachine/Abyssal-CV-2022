@@ -8,6 +8,7 @@
 #include "../asset/RoboMasterConfig.hpp"
 #include "../src/serial/serial-port.hpp"
 #include "../src/armor/armor-identify.hpp"
+#include "../src/energy/energy-tools.hpp"
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -19,6 +20,7 @@
 #include <vector>
 #include <iostream>
 #include <atomic>
+#include <vector>
 
 class IdentifyEnergyBuff{
 public:
@@ -48,10 +50,24 @@ private:
     static int erode;
     static int dilate;
 
+    static cv::RotatedRect rLogoRect;
+
+    static std::vector<std::vector<cv::Point2i> > allContours;
+    static std::vector<cv::Vec4i> hierarchy;
+
+    static std::vector<cv::RotatedRect> possibleRects;
+    static std::vector<cv::RotatedRect> possibleRLogoRects;
+    static std::vector<float> possibleCoutoursArea;
+
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat maskHSV_0;
     static cv::Mat maskHSV_1;
+    static cv::Mat dstHSV;
     static void ImagePreprocess(const cv::Mat &src);
+    static void searchContours_RLogoRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas);
+    static void searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects);
+    static void resourceRelease();
+
 };
 #endif //ABYSSAL_CV_2022_ENERGY_BUFF_HPP

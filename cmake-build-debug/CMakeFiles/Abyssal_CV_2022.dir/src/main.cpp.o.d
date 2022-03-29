@@ -448,6 +448,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/core/core_c.h \
  /usr/local/include/opencv4/opencv2/core/types_c.h \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-tools.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.hpp \

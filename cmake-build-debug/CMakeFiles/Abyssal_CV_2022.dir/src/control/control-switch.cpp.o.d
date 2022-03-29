@@ -445,4 +445,5 @@ CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: \
  /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
  /usr/local/include/opencv4/opencv2/core/core_c.h \
  /usr/local/include/opencv4/opencv2/core/types_c.h \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-tools.hpp

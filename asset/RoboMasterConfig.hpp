@@ -13,13 +13,13 @@ struct FunctionConfig
     // BLUE => true
     bool _enemyColor                = true;
 
-    bool _enableEnergyBuffMode      = false;
+    bool _enableEnergyBuffMode      = true;
 
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
-    bool _enableLocalVideoStreaming = false;
-    std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+    bool _enableLocalVideoStreaming = true;
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
 
     bool _enableDebugMode           = true;
 };
@@ -69,7 +69,7 @@ typedef enum {
 //装甲板参数
 struct ArmorPara {
     EnemyColor enemyColor;
-    int minLightBarArea = 200;
+    int minLightBarArea = 100;
     int maxLightBarArea = 8000;
     int minLightBarLength = 8;
     int minLightBarWidth = 2;
@@ -108,77 +108,7 @@ public:
     static void resetAllConfig() {
         instance().armorPara = ArmorPara();
     }
-/*
-    static void readArmorPara(const std::string &filename) {
-        cv::FileStorage fs(filename, cv::FileStorage::READ);
-        if (!fs.isOpened()) {
-            writeArmorPara(filename);
-            LOG::error("default config not find, write config to " + filename);
-        } else {
-            // 读入普通节点
-            //读入map类型的节点
-            cv::FileNode map_node = fs["armorPara"];
-            map_node["minLightBarArea"] >> instance().armorPara.minLightBarArea;
-            map_node["minLightBarLength"] >> instance().armorPara.minLightBarLength;
-            map_node["minLightBarWidth"] >> instance().armorPara.minLightBarWidth;
-            map_node["maxLightBarLength"] >> instance().armorPara.maxLightBarLength;
-            map_node["maxLightBarWidth"] >> instance().armorPara.maxLightBarWidth;
-            map_node["maxErrorAngle"] >> instance().armorPara.maxErrorAngle;
-            map_node["grayThreshold_PURPLE"] >> instance().armorPara.grayThreshold_PURPLE;
-            map_node["grayThreshold_RED"] >> instance().armorPara.grayThreshold_RED;
-            map_node["separationThreshold_RED"] >> instance().armorPara.separationThreshold_RED;
-            map_node["grayThreshold_BLUE"] >> instance().armorPara.grayThreshold_BLUE;
-            map_node["separationThreshold_BLUE"] >> instance().armorPara.separationThreshold_BLUE;
-            map_node["separationThreshold_GREEN"] >> instance().armorPara.separationThreshold_GREEN;
-            LOG::debug("armorPara.minLightBarArea=" + std::to_string(instance().armorPara.minLightBarArea));
-            LOG::debug("armorPara.minLightBarLength=" + std::to_string(instance().armorPara.minLightBarLength));
-            LOG::debug("armorPara.minLightBarWidth=" + std::to_string(instance().armorPara.minLightBarWidth));
-            LOG::debug("armorPara.maxLightBarLength=" + std::to_string(instance().armorPara.maxLightBarLength));
-            LOG::debug("armorPara.maxLightBarWidth=" + std::to_string(instance().armorPara.maxLightBarWidth));
-            LOG::debug("armorPara.maxErrorAngle=" + std::to_string(instance().armorPara.maxErrorAngle));
-            LOG::debug("armorPara.grayThreshold_PURPLE=" + std::to_string(instance().armorPara.grayThreshold_PURPLE));
-            LOG::debug("armorPara.grayThreshold_RED=" + std::to_string(instance().armorPara.grayThreshold_RED));
-            LOG::debug("armorPara.separationThreshold_RED=" + std::to_string(instance().armorPara.separationThreshold_RED));
-            LOG::debug("armorPara.grayThreshold_BLUE=" + std::to_string(instance().armorPara.grayThreshold_BLUE));
-            LOG::debug("armorPara.separationThreshold_BLUE=" + std::to_string(instance().armorPara.separationThreshold_BLUE));
-            LOG::debug("armorPara.separationThreshold_GREEN=" + std::to_string(instance().armorPara.separationThreshold_GREEN));
-        }
-    }
 
-    static void writeArmorPara(const std::string &filename) {
-        cv::FileStorage fs(filename, cv::FileStorage::WRITE);
-
-        fs.writeComment("装甲板识别数据");
-        fs << "armorPara" << "{";
-        fs.writeComment("最小的灯条面积");
-        fs << "minLightBarArea" << instance().armorPara.minLightBarArea;
-        fs.writeComment("最小的灯条长度");
-        fs << "minLightBarLength" << instance().armorPara.minLightBarLength;
-        fs.writeComment("最小的灯条宽度");
-        fs << "minLightBarWidth" << instance().armorPara.minLightBarWidth;
-        fs.writeComment("最大灯条长度");
-        fs << "maxLightBarLength" << instance().armorPara.maxLightBarLength;
-        fs.writeComment("最大灯条宽度");
-        fs << "maxLightBarWidth" << instance().armorPara.maxLightBarWidth;
-        fs.writeComment("容许的最大角度差");
-        fs << "maxErrorAngle" << instance().armorPara.maxErrorAngle;
-        fs.writeComment("灰度二值化阈值-紫色");
-        fs << "grayThreshold_PURPLE" << instance().armorPara.grayThreshold_PURPLE;
-        fs.writeComment("灰度二值化阈值-红色");
-        fs << "grayThreshold_RED" << instance().armorPara.grayThreshold_RED;
-        fs.writeComment("色彩分离二值化阈值-红色");
-        fs << "separationThreshold_RED" << instance().armorPara.separationThreshold_RED;
-        fs.writeComment("灰度二值化阈值-蓝色");
-        fs << "grayThreshold_BLUE" << instance().armorPara.grayThreshold_BLUE;
-        fs.writeComment("色彩分离二值化阈值-蓝色");
-        fs << "separationThreshold_BLUE" << instance().armorPara.separationThreshold_BLUE;
-        fs.writeComment("色彩分离二值化阈值-绿色");
-        fs << "separationThreshold_GREEN" << instance().armorPara.separationThreshold_GREEN;
-        fs << "}";
-        //销毁
-        fs.release();
-    }
-*/
 public:
     ArmorPara armorPara;
 };
@@ -209,4 +139,28 @@ public:
     }
 };
 
+struct EnergyBuffPara {
+    EnemyColor enemyColor;
+    int minBuffCenterRectArea = 100;
+
+};
+
+class EnergyBuffParaFactory {
+private:
+    static EnergyBuffParaFactory &instance() {
+        static EnergyBuffParaFactory energyBuffParaFactory;
+        return energyBuffParaFactory;
+    }
+
+public:
+    static EnergyBuffPara getEnergyBuffPara() {
+        return instance().energyBuffPara;
+    }
+
+    static void resetAllConfig() {
+        instance().energyBuffPara = EnergyBuffPara();
+    }
+public:
+    EnergyBuffPara energyBuffPara;
+};
 #endif //ABYSSAL_CV_2022_ROBOMASTERDEFINE_HPP

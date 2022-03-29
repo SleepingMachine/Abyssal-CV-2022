@@ -121,15 +121,13 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
             //SerialPort::getHitPointData(hitPointx,hitPointy);
         }
 
-        allContours.clear();                                //轮廓
-        hierarchy.clear();
-        filteredLightBars.clear();
-        armorStructs.clear();
-
         //cv::imshow("mask", maskHSV);
         cv::imshow("Preprocessed Dst", dstHSV);
         cv::imshow("Src", src);
         cv::imshow("SeaechSrc", searchSrc);
+
+        resourceRelease();
+
         cv::waitKey(5);
     //}
 }
@@ -673,6 +671,13 @@ void IdentifyArmor::DrawReferenceGraphics() {
     for (int i = 0; i < filteredLightBars.size(); ++i) {
         ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
     }
+}
+
+void IdentifyArmor::resourceRelease() {
+    allContours.clear();                                //轮廓
+    hierarchy.clear();
+    filteredLightBars.clear();
+    armorStructs.clear();
 }
 
 /*

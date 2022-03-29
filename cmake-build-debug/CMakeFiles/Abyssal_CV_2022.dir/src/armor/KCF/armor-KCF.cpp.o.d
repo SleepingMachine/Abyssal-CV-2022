@@ -437,6 +437,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/control/control-switch.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/armor-identify.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-tools.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
  /usr/local/include/opencv4/opencv2/core/core.hpp \
  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
@@ -444,5 +446,4 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: \
  /usr/local/include/opencv4/opencv2/core/core_c.h \
  /usr/local/include/opencv4/opencv2/core/types_c.h \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/../armor-tool.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/../KCF/armor-KCF.hpp

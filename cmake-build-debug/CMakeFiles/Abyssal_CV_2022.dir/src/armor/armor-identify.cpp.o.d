@@ -313,7 +313,9 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/control/control-switch.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/armor/armor-identify.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-buff.hpp \
- /usr/local/include/opencv4/opencv2/core/core.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/../src/energy/energy-tools.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
  /usr/local/include/opencv4/opencv2/core/operations.hpp \
  /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp \
@@ -330,6 +332,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: \
  /usr/local/include/opencv4/opencv2/core/optim.hpp \
  /usr/local/include/opencv4/opencv2/core/ovx.hpp \
  /usr/local/include/opencv4/opencv2/core/cvdef.h \
+ /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
+ /usr/local/include/opencv4/opencv2/core/core.hpp \
  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
  /usr/local/include/opencv4/opencv2/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
@@ -338,8 +342,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: \
  /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
  /usr/local/include/opencv4/opencv2/core/core_c.h \
  /usr/local/include/opencv4/opencv2/core/types_c.h \
- /usr/local/include/opencv4/opencv2/imgproc.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/features2d.hpp \
@@ -440,7 +442,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-tool.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.hpp \
  /usr/local/include/opencv4/opencv2/tracking.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/../../../asset/RoboMasterConfig.hpp \
