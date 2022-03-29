@@ -11,7 +11,7 @@ struct FunctionConfig
 {
     //RED => false
     // BLUE => true
-    bool _enemyColor                = false;
+    bool _enemyColor                = true;
 
     bool _enableEnergyBuffMode      = false;
 
@@ -87,7 +87,9 @@ struct ArmorPara {
     int grayThreshold_BLUE = 160;
     int separationThreshold_BLUE = 80;
     int separationThreshold_GREEN = 10;
-    float reflectionError = 1.1;
+    //float reflectionError = 1.1;
+    float reflectionErrorWidthThreshold = 1.5;
+    float reflectionErrorPositionThreshold = 1.2;
     float detect_thresh = 0.03f;
 };
 
