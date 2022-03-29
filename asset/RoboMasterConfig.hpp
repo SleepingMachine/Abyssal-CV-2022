@@ -69,7 +69,7 @@ typedef enum {
 //装甲板参数
 struct ArmorPara {
     EnemyColor enemyColor;
-    int minLightBarArea = 300;
+    int minLightBarArea = 200;
     int maxLightBarArea = 8000;
     int minLightBarLength = 8;
     int minLightBarWidth = 2;

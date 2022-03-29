@@ -27,6 +27,7 @@ public:
     friend class ControlSwitch;
 
     static void EnergyBuffIdentifyStream(cv::Mat importSrc, int* sendData);
+    static void CreatTrackbars();
 private:
     static int hmin_0;
     static int hmax_0;

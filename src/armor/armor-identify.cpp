@@ -12,19 +12,19 @@ int IdentifyArmor::getFrameErrorCounter = 0;
 
 //默认hsv颜色阈值
 
-int IdentifyArmor::hmin_0 = 53;
-int IdentifyArmor::hmax_0 = 148;
-int IdentifyArmor::smin_0 = 128;
-int IdentifyArmor::smax_0 = 255;
-int IdentifyArmor::vmin_0 = 98;
-int IdentifyArmor::vmax_0 = 255;
+int IdentifyArmor::hmin_0 = 0;
+int IdentifyArmor::hmax_0 = 0;
+int IdentifyArmor::smin_0 = 0;
+int IdentifyArmor::smax_0 = 0;
+int IdentifyArmor::vmin_0 = 0;
+int IdentifyArmor::vmax_0 = 0;
 
-int IdentifyArmor::hmin_1 = 53;
-int IdentifyArmor::hmax_1 = 148;
-int IdentifyArmor::smin_1 = 128;
-int IdentifyArmor::smax_1 = 255;
-int IdentifyArmor::vmin_1 = 98;
-int IdentifyArmor::vmax_1 = 255;
+int IdentifyArmor::hmin_1 = 0;
+int IdentifyArmor::hmax_1 = 0;
+int IdentifyArmor::smin_1 = 0;
+int IdentifyArmor::smax_1 = 0;
+int IdentifyArmor::vmin_1 = 0;
+int IdentifyArmor::vmax_1 = 0;
 
 //默认二值化操作阈值
 int IdentifyArmor::open = 1;
@@ -135,25 +135,25 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
 }
 
 void IdentifyArmor::CreatTrackbars() {
-    cv::namedWindow("阈值调整",cv::WINDOW_AUTOSIZE);
-    cv::createTrackbar("hmin0", "阈值调整",&IdentifyArmor::hmin_0, 255,NULL);
-    cv::createTrackbar("hmax0", "阈值调整",&IdentifyArmor::hmax_0, 255,NULL);
-    cv::createTrackbar("smin0", "阈值调整",&IdentifyArmor::smin_0, 255,NULL);
-    cv::createTrackbar("smax0", "阈值调整",&IdentifyArmor::smax_0, 255,NULL);
-    cv::createTrackbar("vmin0", "阈值调整",&IdentifyArmor::vmin_0, 255,NULL);
-    cv::createTrackbar("vmax0", "阈值调整",&IdentifyArmor::vmax_0, 255,NULL);
+    cv::namedWindow("装甲板识别中的阈值调整",cv::WINDOW_AUTOSIZE);
+    cv::createTrackbar("hmin0", "装甲板识别中的阈值调整",&IdentifyArmor::hmin_0, 255,NULL);
+    cv::createTrackbar("hmax0", "装甲板识别中的阈值调整",&IdentifyArmor::hmax_0, 255,NULL);
+    cv::createTrackbar("smin0", "装甲板识别中的阈值调整",&IdentifyArmor::smin_0, 255,NULL);
+    cv::createTrackbar("smax0", "装甲板识别中的阈值调整",&IdentifyArmor::smax_0, 255,NULL);
+    cv::createTrackbar("vmin0", "装甲板识别中的阈值调整",&IdentifyArmor::vmin_0, 255,NULL);
+    cv::createTrackbar("vmax0", "装甲板识别中的阈值调整",&IdentifyArmor::vmax_0, 255,NULL);
 
-    cv::createTrackbar("hmin1", "阈值调整",&IdentifyArmor::hmin_1, 255,NULL);
-    cv::createTrackbar("hmax1", "阈值调整",&IdentifyArmor::hmax_1, 255,NULL);
-    cv::createTrackbar("smin1", "阈值调整",&IdentifyArmor::smin_1, 255,NULL);
-    cv::createTrackbar("smax1", "阈值调整",&IdentifyArmor::smax_1, 255,NULL);
-    cv::createTrackbar("vmin1", "阈值调整",&IdentifyArmor::vmin_1, 255,NULL);
-    cv::createTrackbar("vmax1", "阈值调整",&IdentifyArmor::vmax_1, 255,NULL);
+    cv::createTrackbar("hmin1", "装甲板识别中的阈值调整",&IdentifyArmor::hmin_1, 255,NULL);
+    cv::createTrackbar("hmax1", "装甲板识别中的阈值调整",&IdentifyArmor::hmax_1, 255,NULL);
+    cv::createTrackbar("smin1", "装甲板识别中的阈值调整",&IdentifyArmor::smin_1, 255,NULL);
+    cv::createTrackbar("smax1", "装甲板识别中的阈值调整",&IdentifyArmor::smax_1, 255,NULL);
+    cv::createTrackbar("vmin1", "装甲板识别中的阈值调整",&IdentifyArmor::vmin_1, 255,NULL);
+    cv::createTrackbar("vmax1", "装甲板识别中的阈值调整",&IdentifyArmor::vmax_1, 255,NULL);
 
-    cv::createTrackbar("open", "阈值调整",&IdentifyArmor::open, 10,NULL);
-    cv::createTrackbar("close", "阈值调整",&IdentifyArmor::close, 30,NULL);
-    cv::createTrackbar("erode", "阈值调整",&IdentifyArmor::erode, 10,NULL);
-    cv::createTrackbar("dilate", "阈值调整",&IdentifyArmor::dilate, 20,NULL);
+    cv::createTrackbar("open", "装甲板识别中的阈值调整",&IdentifyArmor::open, 10,NULL);
+    cv::createTrackbar("close", "装甲板识别中的阈值调整",&IdentifyArmor::close, 30,NULL);
+    cv::createTrackbar("erode", "装甲板识别中的阈值调整",&IdentifyArmor::erode, 10,NULL);
+    cv::createTrackbar("dilate", "装甲板识别中的阈值调整",&IdentifyArmor::dilate, 20,NULL);
 }
 
 void IdentifyArmor::FindLightbar(cv::Mat &preprocessedImage) {

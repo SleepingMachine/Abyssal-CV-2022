@@ -6,19 +6,19 @@
 
 //默认hsv颜色阈值
 
-int IdentifyEnergyBuff::hmin_0 = 53;
-int IdentifyEnergyBuff::hmax_0 = 148;
-int IdentifyEnergyBuff::smin_0 = 128;
-int IdentifyEnergyBuff::smax_0 = 255;
-int IdentifyEnergyBuff::vmin_0 = 98;
-int IdentifyEnergyBuff::vmax_0 = 255;
+int IdentifyEnergyBuff::hmin_0 = 0;
+int IdentifyEnergyBuff::hmax_0 = 0;
+int IdentifyEnergyBuff::smin_0 = 0;
+int IdentifyEnergyBuff::smax_0 = 0;
+int IdentifyEnergyBuff::vmin_0 = 0;
+int IdentifyEnergyBuff::vmax_0 = 0;
 
-int IdentifyEnergyBuff::hmin_1 = 53;
-int IdentifyEnergyBuff::hmax_1 = 148;
-int IdentifyEnergyBuff::smin_1 = 128;
-int IdentifyEnergyBuff::smax_1 = 255;
-int IdentifyEnergyBuff::vmin_1 = 98;
-int IdentifyEnergyBuff::vmax_1 = 255;
+int IdentifyEnergyBuff::hmin_1 = 0;
+int IdentifyEnergyBuff::hmax_1 = 0;
+int IdentifyEnergyBuff::smin_1 = 0;
+int IdentifyEnergyBuff::smax_1 = 0;
+int IdentifyEnergyBuff::vmin_1 = 0;
+int IdentifyEnergyBuff::vmax_1 = 0;
 
 //默认二值化操作阈值
 int IdentifyEnergyBuff::open = 1;
@@ -35,6 +35,7 @@ void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendDa
 
     ImagePreprocess(importSrc);
 
+    cv::imshow("energy1", importSrc);
     cv::imshow("energy", maskHSV);
 }
 
@@ -45,5 +46,27 @@ void IdentifyEnergyBuff::ImagePreprocess(const cv::Mat &src) {
     //cv::imshow("0", maskHSV_0);
     //cv::imshow("1", maskHSV_1);
     maskHSV = maskHSV_0 | maskHSV_1;
+}
+
+void IdentifyEnergyBuff::CreatTrackbars() {
+    cv::namedWindow("能量机关识别中的阈值调整",cv::WINDOW_AUTOSIZE);
+    cv::createTrackbar("hmin0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::hmin_0, 255,NULL);
+    cv::createTrackbar("hmax0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::hmax_0, 255,NULL);
+    cv::createTrackbar("smin0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::smin_0, 255,NULL);
+    cv::createTrackbar("smax0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::smax_0, 255,NULL);
+    cv::createTrackbar("vmin0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::vmin_0, 255,NULL);
+    cv::createTrackbar("vmax0", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::vmax_0, 255,NULL);
+
+    cv::createTrackbar("hmin1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::hmin_1, 255,NULL);
+    cv::createTrackbar("hmax1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::hmax_1, 255,NULL);
+    cv::createTrackbar("smin1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::smin_1, 255,NULL);
+    cv::createTrackbar("smax1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::smax_1, 255,NULL);
+    cv::createTrackbar("vmin1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::vmin_1, 255,NULL);
+    cv::createTrackbar("vmax1", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::vmax_1, 255,NULL);
+
+    cv::createTrackbar("open", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::open, 10,NULL);
+    cv::createTrackbar("close", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::close, 30,NULL);
+    cv::createTrackbar("erode", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::erode, 10,NULL);
+    cv::createTrackbar("dilate", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::dilate, 20,NULL);
 }
 
