@@ -6,6 +6,10 @@
 
 //默认hsv颜色阈值
 
+IdentifyEnergyBuff::IdentifyEnergyBuff() {
+    rLogoCenterSVM = cv::Algorithm::load<cv::ml::SVM>("../asset/TrainData/CIRCLE_SVM_DATA.xml");
+}
+
 int IdentifyEnergyBuff::hmin_0 = 0;
 int IdentifyEnergyBuff::hmax_0 = 0;
 int IdentifyEnergyBuff::smin_0 = 0;
@@ -26,6 +30,8 @@ int IdentifyEnergyBuff::close = 6;
 int IdentifyEnergyBuff::erode = 2;
 int IdentifyEnergyBuff::dilate = 4;
 
+bool IdentifyEnergyBuff::_findEnergyBuffTarget = false;
+
 cv::RotatedRect IdentifyEnergyBuff::rLogoRect;
 
 std::vector<std::vector<cv::Point2i> > IdentifyEnergyBuff::allContours;
@@ -43,14 +49,15 @@ cv::Mat IdentifyEnergyBuff::maskHSV_0(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_1(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::dstHSV(640, 960, CV_8UC3);
 
-void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
+cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 
+void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
+    IdentifyEnergyBuff();
     ImagePreprocess(importSrc);
     searchContours_RLogoRect(possibleRects, possibleCoutoursArea);
     searchContours_BuffCenter(possibleRLogoRects);
-    for (int i = 0; i < possibleRLogoRects.size(); ++i) {
-        EnergyBuffTool::drawRotatedRect(importSrc,possibleRLogoRects[i],cv::Scalar(51,48,245),2, 16);
-    }
+
+    EnergyBuffTool::drawRotatedRect(importSrc,rLogoRect,cv::Scalar(51,48,245),2, 16);
 
     cv::imshow("energy1", importSrc);
     cv::imshow("energy", dstHSV);
@@ -144,40 +151,75 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
             (possibleRLogoRects[i].size.width / possibleRLogoRects[i].size.height) < 0.8) {
             continue;
         }
-        rLogoRect = possibleRLogoRects[i];
-        /*
-        possibleCircles.push_back(buffRects[i]);
-        //如果SVM判断错误，则跳过
-        if (!circleCenterSVM(buffRects[i])) {
+        if (!circleCenterSVM(possibleRLogoRects[i])) {
             continue;
         }
-        //找出与圆心后确定圆心矩形长和宽
-        circleCenterRect = buffRects[i];
-        findFlag = true;
+        rLogoRect = possibleRLogoRects[i];
+        //std::cout << 1 << std::endl;
         break;
     }
-    if (!findFlag) {
-        for (int i = 0; i < possibleCircles.size(); i++) {
-            if (fabs(possibleCircles[i].size.area() - _circleCenterArea) < 30) {
-                circleCenterRect = possibleCircles[i];
-                findFlag = true;
-                break;
-            }
-        }
+
+}
+
+bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
+    std::vector<cv::RotatedRect> outputRects;
+    float longSide;
+    float shortSide;
+    cv::Point2f v[4];
+    inputRect.points(v);
+    if (EnergyBuffTool::getTwoPointDistance(v[0], v[1]) < EnergyBuffTool::getTwoPointDistance(v[2], v[1])) {
+        longSide = EnergyBuffTool::getTwoPointDistance(v[2], v[1]);
+        shortSide = EnergyBuffTool::getTwoPointDistance(v[0], v[1]);
     }
-    if (!findFlag) {
-        _findRectFlag = false;
-    } else {
-        if (circleCenterRect.size.width > circleCenterRect.size.height) {
-            _circleCenterLong = circleCenterRect.size.width;
-        } else {
-            _circleCenterLong = circleCenterRect.size.height;
-        }
-        _circleCenterArea = circleCenterRect.size.area();
-        _R_2D_Center = circleCenterRect.center;
-        _findRectFlag = true;
-        ++_find_cnt;
-    }*/
-        //Util::drawRectShow(_src.clone(), circleCenterRect);
+    else {
+        longSide = EnergyBuffTool::getTwoPointDistance(v[0], v[1]);
+        shortSide = EnergyBuffTool::getTwoPointDistance(v[2], v[1]);
     }
+
+    cv::Rect _bounding_roi = inputRect.boundingRect();
+    cv::Mat roi_circleCenter;
+    if (_bounding_roi.width < _bounding_roi.height) {
+        cv::Point center((_bounding_roi.tl().x + _bounding_roi.br().x) / 2,
+                         (_bounding_roi.tl().y + _bounding_roi.br().y) / 2);
+        cv::Point half(_bounding_roi.height / 2, _bounding_roi.width / 2);
+        _bounding_roi = cv::Rect(center - half, center + half);                                    //重新定位tl和br
+    }
+    //都加上长的一边是为了保证仿射变换后有完整的图进行检测
+    _bounding_roi.x -= (int) (shortSide / 2);
+    _bounding_roi.width += (int) shortSide;
+    _bounding_roi.y -= (int) (shortSide / 2);
+    _bounding_roi.height += (int) shortSide;
+    if (!EnergyBuffTool::makeRectSafe(_bounding_roi, srcHSV.size())) {
+        return bool();
+    }
+    srcHSV(_bounding_roi).copyTo(roi_circleCenter);
+    cv::Mat rectify_target = roi_circleCenter.clone();
+    transpose(rectify_target, rectify_target);
+    cv::Point half((int) (1.0f * longSide) / 2, (int) (1.0f * shortSide / 2));
+    cv::Point roiCenter(rectify_target.cols / 2, rectify_target.rows / 2);
+    cv::Point addOther(10, 10);
+    cv::Rect sampleRoiRect = cv::Rect(roiCenter - half - addOther, roiCenter + half + addOther);
+    sampleRoiRect.x = MAX(sampleRoiRect.x, 0);                        //确保矩形不越界
+    sampleRoiRect.y = MAX(sampleRoiRect.y, 0);
+    if (!EnergyBuffTool::makeRectSafe(sampleRoiRect, rectify_target.size())) {
+        return bool();
+    }
+    cv::Mat sample = rectify_target(sampleRoiRect);//重新定位tl和br
+    cv::resize(sample, sample, cv::Size(30, 30), 0, 0);
+    //_circleSampleData.image = sample;
+    cv::cvtColor(sample, sample, cv::COLOR_HSV2BGR);
+    cv::cvtColor(sample, sample, cv::COLOR_BGR2GRAY);
+    cv::Mat p = sample.reshape(1, 1);
+    p.convertTo(p, CV_32FC1);
+    normalize(p, p);
+    int response = 0;
+    response = (int) rLogoCenterSVM->predict(p);
+    //setSampleCaptureState(true);
+    _findEnergyBuffTarget = true;
+    if (!response) {
+        //_circleSampleData.classifyState = false;
+        return false;
+    }
+    //_circleSampleData.classifyState = true;
+    return true;
 }

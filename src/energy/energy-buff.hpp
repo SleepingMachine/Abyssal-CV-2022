@@ -64,10 +64,14 @@ private:
     static cv::Mat maskHSV_0;
     static cv::Mat maskHSV_1;
     static cv::Mat dstHSV;
+
+    static bool _findEnergyBuffTarget;
+
     static void ImagePreprocess(const cv::Mat &src);
     static void searchContours_RLogoRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas);
     static void searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects);
     static void resourceRelease();
-
+    static bool circleCenterSVM(cv::RotatedRect &inputRect);
+    static cv::Ptr<cv::ml::SVM> rLogoCenterSVM;
 };
 #endif //ABYSSAL_CV_2022_ENERGY_BUFF_HPP

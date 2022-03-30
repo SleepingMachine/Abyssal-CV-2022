@@ -162,5 +162,17 @@ public:
         return (getTwoPointDistance(r1.center, r2.center) < distance);
     }
 
+    static inline bool makeRectSafe(cv::Rect &rect, const cv::Size &size) {
+        if (rect.x < 0)
+            rect.x = 0;
+        if (rect.x + rect.width > size.width)
+            rect.width = size.width - rect.x;
+        if (rect.y < 0)
+            rect.y = 0;
+        if (rect.y + rect.height > size.height)
+            rect.height = size.height - rect.y;
+        return !(rect.width <= 0 || rect.height <= 0);
+    }
+
 };
 #endif //ABYSSAL_CV_2022_ENERGY_TOOLS_HPP

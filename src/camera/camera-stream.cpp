@@ -90,6 +90,7 @@ void CameraStream::UnInitCamera() {
 
 void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
     if (!ControlSwitch::functionConfig._enableLocalVideoStreaming) {
+        CameraStream::InitCamera();
         //显示图像
         while (CameraisOpen) {
             if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {

@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     cv::Mat frame(1280, 720, CV_8UC3), gray;
 
     //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
-        CameraStream::InitCamera();
+        //CameraStream::InitCamera();
     //}
     //std::thread serial_thread(SerialPort::SendData, &sendData);
     //std::thread Synchronize_thread();
