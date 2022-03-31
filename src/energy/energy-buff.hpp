@@ -50,8 +50,6 @@ private:
     static int erode;
     static int dilate;
 
-    static float rLogoRectLongSide;
-    static float rLogoRectArea;
     static cv::Point_<float> rLogoRectCenterPoint;
 
     static cv::RotatedRect rLogoRect;
@@ -61,8 +59,14 @@ private:
 
     static std::vector<cv::RotatedRect> possibleBladeRects;
     static std::vector<cv::RotatedRect> possibleRLogoRects;
-    static std::vector<float> possibleCoutoursArea;
+    static std::vector<float> possibleBladeRectsArea;
+    static std::vector<int> possibleBladeRectParentProfiles;
+    static std::vector<int> possibleBladeRectChildProfiles;
 
+    static float rLogoRectLongSide;
+    static float rLogoRectArea;
+
+    static cv::Mat src;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat maskHSV_0;
@@ -72,8 +76,9 @@ private:
     static bool _findEnergyBuffTarget;
 
     static void ImagePreprocess(const cv::Mat &src);
-    static void searchContours_PossibleRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas);
+    static void searchContours_PossibleRect();
     static void searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects);
+    static void searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects);
     static void resourceRelease();
     static bool circleCenterSVM(cv::RotatedRect &inputRect);
     static void DrawReferenceGraphics();

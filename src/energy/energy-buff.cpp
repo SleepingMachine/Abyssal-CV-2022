@@ -32,6 +32,7 @@ int IdentifyEnergyBuff::dilate = 4;
 
 float IdentifyEnergyBuff::rLogoRectLongSide    = 0;
 float IdentifyEnergyBuff::rLogoRectArea        = 0;
+
 cv::Point_<float> IdentifyEnergyBuff::rLogoRectCenterPoint = cv::Point_<float>(0,0);
 
 bool IdentifyEnergyBuff::_findEnergyBuffTarget = false;
@@ -42,11 +43,16 @@ std::vector<std::vector<cv::Point2i> > IdentifyEnergyBuff::allContours;
 std::vector<cv::Vec4i> IdentifyEnergyBuff::hierarchy;
 
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleBladeRects;
-std::vector<float> IdentifyEnergyBuff::possibleCoutoursArea;
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleRLogoRects;
+
+std::vector<int> IdentifyEnergyBuff::possibleBladeRectParentProfiles;
+std::vector<int> IdentifyEnergyBuff::possibleBladeRectChildProfiles;
+
+std::vector<float> IdentifyEnergyBuff::possibleBladeRectsArea;
 
 static EnergyBuffPara energyBuffPara = EnergyBuffParaFactory::getEnergyBuffPara();
 
+cv::Mat IdentifyEnergyBuff::src(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::srcHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_0(640, 960, CV_8UC3);
@@ -56,19 +62,13 @@ cv::Mat IdentifyEnergyBuff::dstHSV(640, 960, CV_8UC3);
 cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 
 void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
+    src = importSrc;
     IdentifyEnergyBuff();
     ImagePreprocess(importSrc);
-    searchContours_PossibleRect(possibleBladeRects, possibleCoutoursArea);
+    searchContours_PossibleRect();
     searchContours_BuffCenter(possibleRLogoRects);
-
-    EnergyBuffTool::drawRotatedRect(importSrc,rLogoRect,cv::Scalar(51,48,245),2, 16);
-    cv::circle(importSrc, rLogoRectCenterPoint, 1, cv::Scalar(25,255,25), 2);  // 画半径为1的圆(画点）
-    for (int i = 0; i < possibleBladeRects.size(); ++i) {
-        EnergyBuffTool::drawRotatedRect(importSrc,possibleBladeRects[i],cv::Scalar(25,255,25),2, 16);
-    }
-    cv::imshow("energy1", importSrc);
-    cv::imshow("energy", dstHSV);
-
+    searchContours_Cantilever(possibleBladeRects);
+    DrawReferenceGraphics();
     resourceRelease();
 }
 
@@ -107,15 +107,13 @@ void IdentifyEnergyBuff::CreatTrackbars() {
     cv::createTrackbar("dilate", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::dilate, 20,NULL);
 }
 
-void IdentifyEnergyBuff::searchContours_PossibleRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas) {
+void IdentifyEnergyBuff::searchContours_PossibleRect() {
     cv::findContours(dstHSV, allContours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_NONE);
-    std::vector<std::vector<cv::Point2i> >::iterator it = allContours.begin();
-    int i = 0;
-    while (it != allContours.end()) {
-        cv::RotatedRect scanRect = minAreaRect(*it);   //检测最小面积的矩形
+    std::vector<std::vector<cv::Point2i> >::iterator it_allContours = allContours.begin();
+
+    for (int i = 0; i < allContours.size(); ++i) {
+        cv::RotatedRect scanRect = minAreaRect(allContours[i]);
         float area = float(cv::contourArea(allContours[i]));
-        i++;
-        ++it;
         float longSide = EnergyBuffTool::findExtremumOfSide(scanRect, LONG_SIDE);
         float shortSide = EnergyBuffTool::findExtremumOfSide(scanRect, SHORT_SIDE);
 
@@ -123,22 +121,57 @@ void IdentifyEnergyBuff::searchContours_PossibleRect(std::vector<cv::RotatedRect
             possibleRLogoRects.push_back(scanRect);
             continue;
         }
-        else if(_findEnergyBuffTarget && scanRect.size.area() <= 10 * rLogoRect.size.area())
+        else if(_findEnergyBuffTarget && scanRect.size.area() <= 2 * rLogoRect.size.area())
         {
             continue;
         }
+        /*
+        for (int j = 0; j < 4; ++j) {
+            std::cout << hierarchy[i][j] << " ";
+        }
+        std::cout << std::endl;
+        */
+        //std::cout << hierarchy.size() << " " << allContours.size() << std::endl;
+        possibleBladeRectParentProfiles.push_back(hierarchy[i][2]);
+        possibleBladeRectChildProfiles.push_back(hierarchy[i][3]);
         possibleBladeRects.push_back(scanRect);
-        rects.push_back(scanRect);
-        areas.push_back(area);
+        possibleBladeRectsArea.push_back(area);
     }
+
+    /*
+    int i = 0;
+    while (it_allContours != allContours.end()) {
+        cv::RotatedRect scanRect = minAreaRect(*it_allContours);   //检测最小面积的矩形
+        float area = float(cv::contourArea(allContours[i]));
+        ++it_allContours;
+        float longSide = EnergyBuffTool::findExtremumOfSide(scanRect, LONG_SIDE);
+        float shortSide = EnergyBuffTool::findExtremumOfSide(scanRect, SHORT_SIDE);
+
+        if (longSide / shortSide <= 1.2) {
+            possibleRLogoRects.push_back(scanRect);
+            continue;
+        }
+        else if(_findEnergyBuffTarget && scanRect.size.area() <= 2 * rLogoRect.size.area())
+        {
+            continue;
+        }
+
+        std::cout << hierarchy.size() << " " << allContours.size() << std::endl;
+        possibleBladeRectParentProfiles.push_back(hierarchy[i][2]);
+        possibleBladeRectChildProfiles.push_back(hierarchy[i][3]);
+        possibleBladeRects.push_back(scanRect);
+        possibleBladeRectsArea.push_back(area);
+        i++;
+    }*/
 }
 
 void IdentifyEnergyBuff::resourceRelease() {
     allContours.clear();
     hierarchy.clear();
     possibleBladeRects.clear();
-    possibleCoutoursArea.clear();
     possibleRLogoRects.clear();
+    possibleBladeRectChildProfiles.clear();
+    possibleBladeRectParentProfiles.clear();
 }
 
 void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects) {
@@ -237,5 +270,33 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
 }
 
 void IdentifyEnergyBuff::DrawReferenceGraphics() {
+    EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
+    cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+    for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        if(possibleBladeRectParentProfiles[i] == -1){
+            EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(204,209,72),2, 16);
+        }
+        else{
+            EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(4,159,72),2, 16);
+        }
+    }
+    cv::imshow("energy1", src);
+    cv::imshow("energy", dstHSV);
+}
 
+void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects) {
+    if (possibleBladeRects.empty() || !_findEnergyBuffTarget) {
+        return;
+    }
+    /*
+    for (int i = 0; i < possibleBladeRectParentProfiles.size(); ++i) {
+        std::cout << possibleBladeRectParentProfiles[i] << " ";
+    }
+    std::cout << std::endl;
+    */
+    for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        if (EnergyBuffTool::getTwoPointDistance(possibleBladeRects[i].center, rLogoRectCenterPoint) > 12 * rLogoRectLongSide) {
+            continue;
+        }
+    }
 }
