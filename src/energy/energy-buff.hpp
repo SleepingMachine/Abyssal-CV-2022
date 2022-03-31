@@ -50,12 +50,16 @@ private:
     static int erode;
     static int dilate;
 
+    static float rLogoRectLongSide;
+    static float rLogoRectArea;
+    static cv::Point_<float> rLogoRectCenterPoint;
+
     static cv::RotatedRect rLogoRect;
 
     static std::vector<std::vector<cv::Point2i> > allContours;
     static std::vector<cv::Vec4i> hierarchy;
 
-    static std::vector<cv::RotatedRect> possibleRects;
+    static std::vector<cv::RotatedRect> possibleBladeRects;
     static std::vector<cv::RotatedRect> possibleRLogoRects;
     static std::vector<float> possibleCoutoursArea;
 
@@ -68,10 +72,12 @@ private:
     static bool _findEnergyBuffTarget;
 
     static void ImagePreprocess(const cv::Mat &src);
-    static void searchContours_RLogoRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas);
+    static void searchContours_PossibleRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas);
     static void searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects);
     static void resourceRelease();
     static bool circleCenterSVM(cv::RotatedRect &inputRect);
+    static void DrawReferenceGraphics();
+
     static cv::Ptr<cv::ml::SVM> rLogoCenterSVM;
 };
 #endif //ABYSSAL_CV_2022_ENERGY_BUFF_HPP

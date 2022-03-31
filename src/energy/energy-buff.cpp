@@ -25,10 +25,14 @@ int IdentifyEnergyBuff::vmin_1 = 0;
 int IdentifyEnergyBuff::vmax_1 = 0;
 
 //默认二值化操作阈值
-int IdentifyEnergyBuff::open = 1;
-int IdentifyEnergyBuff::close = 6;
-int IdentifyEnergyBuff::erode = 2;
+int IdentifyEnergyBuff::open   = 1;
+int IdentifyEnergyBuff::close  = 6;
+int IdentifyEnergyBuff::erode  = 2;
 int IdentifyEnergyBuff::dilate = 4;
+
+float IdentifyEnergyBuff::rLogoRectLongSide    = 0;
+float IdentifyEnergyBuff::rLogoRectArea        = 0;
+cv::Point_<float> IdentifyEnergyBuff::rLogoRectCenterPoint = cv::Point_<float>(0,0);
 
 bool IdentifyEnergyBuff::_findEnergyBuffTarget = false;
 
@@ -37,7 +41,7 @@ cv::RotatedRect IdentifyEnergyBuff::rLogoRect;
 std::vector<std::vector<cv::Point2i> > IdentifyEnergyBuff::allContours;
 std::vector<cv::Vec4i> IdentifyEnergyBuff::hierarchy;
 
-std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleRects;
+std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleBladeRects;
 std::vector<float> IdentifyEnergyBuff::possibleCoutoursArea;
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleRLogoRects;
 
@@ -54,11 +58,14 @@ cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
     IdentifyEnergyBuff();
     ImagePreprocess(importSrc);
-    searchContours_RLogoRect(possibleRects, possibleCoutoursArea);
+    searchContours_PossibleRect(possibleBladeRects, possibleCoutoursArea);
     searchContours_BuffCenter(possibleRLogoRects);
 
     EnergyBuffTool::drawRotatedRect(importSrc,rLogoRect,cv::Scalar(51,48,245),2, 16);
-
+    cv::circle(importSrc, rLogoRectCenterPoint, 1, cv::Scalar(25,255,25), 2);  // 画半径为1的圆(画点）
+    for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        EnergyBuffTool::drawRotatedRect(importSrc,possibleBladeRects[i],cv::Scalar(25,255,25),2, 16);
+    }
     cv::imshow("energy1", importSrc);
     cv::imshow("energy", dstHSV);
 
@@ -100,7 +107,7 @@ void IdentifyEnergyBuff::CreatTrackbars() {
     cv::createTrackbar("dilate", "能量机关识别中的阈值调整",&IdentifyEnergyBuff::dilate, 20,NULL);
 }
 
-void IdentifyEnergyBuff::searchContours_RLogoRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas) {
+void IdentifyEnergyBuff::searchContours_PossibleRect(std::vector<cv::RotatedRect> &rects, std::vector<float> &areas) {
     cv::findContours(dstHSV, allContours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_NONE);
     std::vector<std::vector<cv::Point2i> >::iterator it = allContours.begin();
     int i = 0;
@@ -112,13 +119,15 @@ void IdentifyEnergyBuff::searchContours_RLogoRect(std::vector<cv::RotatedRect> &
         float longSide = EnergyBuffTool::findExtremumOfSide(scanRect, LONG_SIDE);
         float shortSide = EnergyBuffTool::findExtremumOfSide(scanRect, SHORT_SIDE);
 
-        if (longSide < shortSide * 1.2) {
+        if (longSide / shortSide <= 1.2) {
             possibleRLogoRects.push_back(scanRect);
-            //continue;
-        }
-        if (scanRect.size.area() <= 2 * rLogoRect.size.area()) {
             continue;
         }
+        else if(_findEnergyBuffTarget && scanRect.size.area() <= 10 * rLogoRect.size.area())
+        {
+            continue;
+        }
+        possibleBladeRects.push_back(scanRect);
         rects.push_back(scanRect);
         areas.push_back(area);
     }
@@ -127,7 +136,7 @@ void IdentifyEnergyBuff::searchContours_RLogoRect(std::vector<cv::RotatedRect> &
 void IdentifyEnergyBuff::resourceRelease() {
     allContours.clear();
     hierarchy.clear();
-    possibleRects.clear();
+    possibleBladeRects.clear();
     possibleCoutoursArea.clear();
     possibleRLogoRects.clear();
 }
@@ -136,45 +145,47 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
     //如果轮廓容量为零则返回
     //_findRectFlag = false;
     if (IdentifyEnergyBuff::possibleRLogoRects.empty()) {
+        _findEnergyBuffTarget = false;
         return;
     }
     //bool findFlag = false;
 
     //筛选圆心矩形
-
     for (int i = 0; i < possibleRLogoRects.size(); i++) {
         if (possibleRLogoRects[i].size.area() < energyBuffPara.minBuffCenterRectArea) {
+            _findEnergyBuffTarget = false;
             continue;
         }
         //如果轮廓不是类正方形，则跳过
         if ((possibleRLogoRects[i].size.width / possibleRLogoRects[i].size.height) > 1.2 ||
             (possibleRLogoRects[i].size.width / possibleRLogoRects[i].size.height) < 0.8) {
+            _findEnergyBuffTarget = false;
             continue;
         }
         if (!circleCenterSVM(possibleRLogoRects[i])) {
+            _findEnergyBuffTarget = false;
             continue;
         }
-        rLogoRect = possibleRLogoRects[i];
-        //std::cout << 1 << std::endl;
-        break;
+        else{
+            rLogoRect = possibleRLogoRects[i];
+            _findEnergyBuffTarget = true;
+            break;
+        }
     }
 
+    if (_findEnergyBuffTarget){
+        rLogoRectLongSide = rLogoRect.size.width > rLogoRect.size.height? rLogoRect.size.width : rLogoRect.size.height;
+        rLogoRectArea = rLogoRect.size.area();
+        rLogoRectCenterPoint = rLogoRect.center;
+    }
 }
 
 bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
     std::vector<cv::RotatedRect> outputRects;
-    float longSide;
-    float shortSide;
     cv::Point2f v[4];
     inputRect.points(v);
-    if (EnergyBuffTool::getTwoPointDistance(v[0], v[1]) < EnergyBuffTool::getTwoPointDistance(v[2], v[1])) {
-        longSide = EnergyBuffTool::getTwoPointDistance(v[2], v[1]);
-        shortSide = EnergyBuffTool::getTwoPointDistance(v[0], v[1]);
-    }
-    else {
-        longSide = EnergyBuffTool::getTwoPointDistance(v[0], v[1]);
-        shortSide = EnergyBuffTool::getTwoPointDistance(v[2], v[1]);
-    }
+    float longSide  = EnergyBuffTool::getTwoPointDistance(v[0], v[1]) < EnergyBuffTool::getTwoPointDistance(v[2], v[1])? EnergyBuffTool::getTwoPointDistance(v[2], v[1]) : EnergyBuffTool::getTwoPointDistance(v[0], v[1]);
+    float shortSide = EnergyBuffTool::getTwoPointDistance(v[0], v[1]) < EnergyBuffTool::getTwoPointDistance(v[2], v[1])? EnergyBuffTool::getTwoPointDistance(v[0], v[1]) : EnergyBuffTool::getTwoPointDistance(v[2], v[1]);
 
     cv::Rect _bounding_roi = inputRect.boundingRect();
     cv::Mat roi_circleCenter;
@@ -222,4 +233,9 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
     }
     //_circleSampleData.classifyState = true;
     return true;
+
+}
+
+void IdentifyEnergyBuff::DrawReferenceGraphics() {
+
 }
