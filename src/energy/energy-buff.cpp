@@ -79,6 +79,7 @@ void IdentifyEnergyBuff::ImagePreprocess(const cv::Mat &src) {
     //cv::imshow("0", maskHSV_0);
     //cv::imshow("1", maskHSV_1);
     maskHSV = maskHSV_0 | maskHSV_1;
+    cv::GaussianBlur(dstHSV, dstHSV, cv::Size(5, 5), 3, 3);
     morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::open,IdentifyEnergyBuff::open)));
     morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::close,IdentifyEnergyBuff::close)));
     morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::erode,IdentifyEnergyBuff::erode)));
@@ -132,8 +133,8 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         std::cout << std::endl;
         */
         //std::cout << hierarchy.size() << " " << allContours.size() << std::endl;
-        possibleBladeRectParentProfiles.push_back(hierarchy[i][2]);
-        possibleBladeRectChildProfiles.push_back(hierarchy[i][3]);
+        possibleBladeRectParentProfiles.push_back(hierarchy[i][3]);
+        possibleBladeRectChildProfiles.push_back(hierarchy[i][2]);
         possibleBladeRects.push_back(scanRect);
         possibleBladeRectsArea.push_back(area);
     }
@@ -272,6 +273,7 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
 void IdentifyEnergyBuff::DrawReferenceGraphics() {
     EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
     cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+    /*
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
         if(possibleBladeRectParentProfiles[i] == -1){
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(204,209,72),2, 16);
@@ -279,24 +281,61 @@ void IdentifyEnergyBuff::DrawReferenceGraphics() {
         else{
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(4,159,72),2, 16);
         }
-    }
-    cv::imshow("energy1", src);
+    }*/
+
     cv::imshow("energy", dstHSV);
+    cv::imshow("energy1", src);
 }
 
 void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects) {
     if (possibleBladeRects.empty() || !_findEnergyBuffTarget) {
         return;
     }
-    /*
+
     for (int i = 0; i < possibleBladeRectParentProfiles.size(); ++i) {
         std::cout << possibleBladeRectParentProfiles[i] << " ";
     }
     std::cout << std::endl;
-    */
+    for (int i = 0; i < possibleBladeRectChildProfiles.size(); ++i) {
+        std::cout << possibleBladeRectChildProfiles[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << std::endl;
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        int childRectsCounter = 0;
         if (EnergyBuffTool::getTwoPointDistance(possibleBladeRects[i].center, rLogoRectCenterPoint) > 12 * rLogoRectLongSide) {
+            possibleBladeRects.erase(possibleBladeRects.begin()+i);
+            possibleBladeRectParentProfiles.erase(possibleBladeRectParentProfiles.begin()+i);
+            possibleBladeRectChildProfiles.erase(possibleBladeRectChildProfiles.begin()+i);
             continue;
+        }
+        if (possibleBladeRectParentProfiles[i] == -1){
+            for (int j = i+1; j < possibleBladeRectParentProfiles.size() ; ++j) {
+                if(possibleBladeRectParentProfiles[j] == possibleBladeRectParentProfiles[i+1])
+                    ++childRectsCounter;
+            }
+            /*
+            //EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,0,255),5, 16);
+            for (int j = 0; j < possibleBladeRectParentProfiles.size(); ++j) {
+
+                if (possibleBladeRectParentProfiles[j] == i+1 || (i == 0 && possibleBladeRectParentProfiles[j] == 0)){
+                    ++childRectsCounter;
+                }
+
+
+            }*/
+        }
+        if (childRectsCounter == 1){
+            EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,0,255),2, 16);
+            if (possibleBladeRectChildProfiles[i] != -1){
+                cv::circle(src, possibleBladeRects[i+1].center, 20, cv::Scalar(0, 127, 255), 2);  // 画半径为1的圆(画点）
+            }
+        }
+        if (childRectsCounter == 2){
+            EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,255,0),2, 16);
+        }
+        if (childRectsCounter == 3){
+            EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(255,0,0),2, 16);
         }
     }
 }
