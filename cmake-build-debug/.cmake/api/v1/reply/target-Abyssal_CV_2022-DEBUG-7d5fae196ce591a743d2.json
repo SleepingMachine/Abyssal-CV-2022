@@ -77,11 +77,11 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include"
+					"path" : "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src"
+					"path" : "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src"
 				},
 				{
 					"backtrace" : 6,
@@ -125,7 +125,12 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/usr/local/lib:/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/lib",
+				"fragment" : "-Wl,-rpath,/usr/local/lib:/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/local/lib/libopencv_gapi.so.4.5.5",
 				"role" : "libraries"
 			},
 			{

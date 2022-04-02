@@ -14,6 +14,8 @@ extern std::mutex mutex2;
 extern std::atomic_bool CameraisOpen;
 extern std::atomic_bool SerialPortStart;
 
+static int sentPortData;
+
 int main(int argc, char* argv[]) {
     CameraisOpen = true;
     SerialPortStart = true;
@@ -22,13 +24,12 @@ int main(int argc, char* argv[]) {
     //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
         //CameraStream::InitCamera();
     //}
-    //std::thread serial_thread(SerialPort::SendData, &sendData);
+    std::thread serial_thread(SerialPort::SendData, &sentPortData);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);
-    std::thread control_thread(ControlSwitch::SwitchMode, &frame);
+    std::thread control_thread(ControlSwitch::SwitchMode, &frame, &sentPortData);
     std::thread video_thread(VideoSave::SaveRunningVideo, &frame);
-
     //TODO：监控线程、通信线程/
     /*
     while(CameraisOpen) {

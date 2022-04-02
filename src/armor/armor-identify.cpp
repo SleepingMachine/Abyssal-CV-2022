@@ -5,7 +5,6 @@
 #include "../asset/RoboMasterConfig.hpp"
 
 extern std::mutex mutex1;
-extern std::mutex mutex2;
 extern std::atomic_bool CameraisOpen;
 
 int IdentifyArmor::getFrameErrorCounter = 0;
@@ -113,11 +112,7 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
             int hitPointx = armorStructs[targetArmorIdex].hitPoint.x + cropOriginPoint.x;
             int hitPointy = armorStructs[targetArmorIdex].hitPoint.y + cropOriginPoint.y;
             int hitPointData = hitPointx * 1000 + hitPointy;
-
-            if (mutex2.try_lock()) {
-                *sentData = hitPointData;
-                mutex2.unlock();
-            }
+            *sentData = hitPointData;
             //SerialPort::getHitPointData(hitPointx,hitPointy);
         }
 

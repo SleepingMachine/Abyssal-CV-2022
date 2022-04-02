@@ -13,14 +13,15 @@ struct FunctionConfig
     // BLUE => true
     bool _enemyColor                = true;
 
-    bool _enableEnergyBuffMode      = true;
+    bool _enableEnergyBuffMode      = false;
 
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
-    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/EnergyBuffVideo/blue_low.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
 
     bool _enableDebugMode           = true;
 };
