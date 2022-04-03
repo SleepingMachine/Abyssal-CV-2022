@@ -49,8 +49,6 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
             src = src(cv::Rect(0,80,960,480));
         }
 
-
-
         /*
         if ((!functionConfig._enableEnergyBuffMode && lastMode == NowMode::InitMode) || (!functionConfig._enableEnergyBuffMode && lastMode == NowMode::ArmorMode)){
             lastMode = NowMode::ArmorMode;
@@ -112,32 +110,33 @@ void ControlSwitch::initColorThresholdParameters() {
             IdentifyEnergyBuff::vmax_1 = 255;
         }
         else if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_RED){
-            IdentifyArmor::hmin_0 = 87;
-            IdentifyArmor::hmax_0 = 255;
-            IdentifyArmor::smin_0 = 45;
-            IdentifyArmor::smax_0 = 255;
-            IdentifyArmor::vmin_0 = 51;
+            IdentifyArmor::hmin_0 = 0;
+            IdentifyArmor::hmax_0 = 181;
+            IdentifyArmor::smin_0 = 0;
+            IdentifyArmor::smax_0 = 116;
+            IdentifyArmor::vmin_0 = 175;
             IdentifyArmor::vmax_0 = 255;
 
             IdentifyArmor::hmin_1 = 0;
-            IdentifyArmor::hmax_1 = 255;
-            IdentifyArmor::smin_1 = 74;
+            IdentifyArmor::hmax_1 = 181;
+            IdentifyArmor::smin_1 = 77;
             IdentifyArmor::smax_1 = 255;
-            IdentifyArmor::vmin_1 = 51;
+            IdentifyArmor::vmin_1 = 205;
             IdentifyArmor::vmax_1 = 255;
 
-            IdentifyEnergyBuff::hmin_0 = 87;
-            IdentifyEnergyBuff::hmax_0 = 255;
-            IdentifyEnergyBuff::smin_0 = 45;
-            IdentifyEnergyBuff::smax_0 = 255;
-            IdentifyEnergyBuff::vmin_0 = 51;
+            IdentifyEnergyBuff::hmin_0 = 150;
+            IdentifyEnergyBuff::hmax_0 = 101;
+            IdentifyEnergyBuff::smin_0 = 0;
+            IdentifyEnergyBuff::smax_0 = 116;
+            IdentifyEnergyBuff::vmin_0 = 175;
             IdentifyEnergyBuff::vmax_0 = 255;
 
             IdentifyEnergyBuff::hmin_1 = 0;
-            IdentifyEnergyBuff::hmax_1 = 255;
+            IdentifyEnergyBuff::hmax_1 = 138;
             IdentifyEnergyBuff::smin_1 = 74;
             IdentifyEnergyBuff::smax_1 = 255;
-            IdentifyEnergyBuff::vmin_1 = 51;
+            IdentifyEnergyBuff::vmin_1 = 88;
             IdentifyEnergyBuff::vmax_1 = 255;
+
     }
 }

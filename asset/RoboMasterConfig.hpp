@@ -21,6 +21,7 @@ struct FunctionConfig
     bool _enableLocalVideoStreaming = true;
     std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/EnergyBuffVideo/blue_low.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
 
     bool _enableDebugMode           = true;
 };
@@ -142,7 +143,7 @@ public:
 
 struct EnergyBuffPara {
     EnemyColor enemyColor;
-    int minBuffCenterRectArea = 100;
+    float minBuffCenterRectArea = 50.0;
 
 };
 

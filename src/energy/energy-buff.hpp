@@ -67,6 +67,7 @@ private:
     static float rLogoRectArea;
 
     static cv::Mat src;
+    static cv::Mat searchSrc;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat maskHSV_0;
@@ -74,6 +75,9 @@ private:
     static cv::Mat dstHSV;
 
     static bool _findEnergyBuffTarget;
+    static bool _cropRoi;
+
+    static cv::Point cropOriginPoint;
 
     static void ImagePreprocess(const cv::Mat &src);
     static void searchContours_PossibleRect();
@@ -81,6 +85,7 @@ private:
     static void searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects);
     static void resourceRelease();
     static bool circleCenterSVM(cv::RotatedRect &inputRect);
+    static void DynamicResolutionResize();
     static void DrawReferenceGraphics();
 
     static cv::Ptr<cv::ml::SVM> rLogoCenterSVM;

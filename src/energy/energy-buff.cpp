@@ -36,6 +36,9 @@ float IdentifyEnergyBuff::rLogoRectArea        = 0;
 cv::Point_<float> IdentifyEnergyBuff::rLogoRectCenterPoint = cv::Point_<float>(0,0);
 
 bool IdentifyEnergyBuff::_findEnergyBuffTarget = false;
+bool IdentifyEnergyBuff::_cropRoi = false;
+
+cv::Point IdentifyEnergyBuff::cropOriginPoint;
 
 cv::RotatedRect IdentifyEnergyBuff::rLogoRect;
 
@@ -54,6 +57,7 @@ static EnergyBuffPara energyBuffPara = EnergyBuffParaFactory::getEnergyBuffPara(
 
 cv::Mat IdentifyEnergyBuff::src(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::srcHSV(640, 960, CV_8UC3);
+cv::Mat IdentifyEnergyBuff::searchSrc(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_0(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_1(640, 960, CV_8UC3);
@@ -64,7 +68,8 @@ cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
     src = importSrc;
     IdentifyEnergyBuff();
-    ImagePreprocess(importSrc);
+    DynamicResolutionResize();
+    ImagePreprocess(searchSrc);
     searchContours_PossibleRect();
     searchContours_BuffCenter(possibleRLogoRects);
     searchContours_Cantilever(possibleBladeRects);
@@ -79,6 +84,7 @@ void IdentifyEnergyBuff::ImagePreprocess(const cv::Mat &src) {
     //cv::imshow("0", maskHSV_0);
     //cv::imshow("1", maskHSV_1);
     maskHSV = maskHSV_0 | maskHSV_1;
+    //maskHSV = maskHSV_1;
     cv::GaussianBlur(dstHSV, dstHSV, cv::Size(5, 5), 3, 3);
     morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::open,IdentifyEnergyBuff::open)));
     morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::close,IdentifyEnergyBuff::close)));
@@ -117,12 +123,14 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         float area = float(cv::contourArea(allContours[i]));
         float longSide = EnergyBuffTool::findExtremumOfSide(scanRect, LONG_SIDE);
         float shortSide = EnergyBuffTool::findExtremumOfSide(scanRect, SHORT_SIDE);
-
-        if (longSide / shortSide <= 1.2) {
+        if (scanRect.size.area() < energyBuffPara.minBuffCenterRectArea){
+            continue;
+        }
+        if (longSide / shortSide <= 1.5) {
             possibleRLogoRects.push_back(scanRect);
             continue;
         }
-        else if(_findEnergyBuffTarget && scanRect.size.area() <= 2 * rLogoRect.size.area())
+        else if(scanRect.size.area() <= 2 * rLogoRect.size.area())
         {
             continue;
         }
@@ -173,6 +181,9 @@ void IdentifyEnergyBuff::resourceRelease() {
     possibleRLogoRects.clear();
     possibleBladeRectChildProfiles.clear();
     possibleBladeRectParentProfiles.clear();
+
+    //_findEnergyBuffTarget = false;
+    //_cropRoi = false;
 }
 
 void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> possibleRLogoRects) {
@@ -196,20 +207,24 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
             _findEnergyBuffTarget = false;
             continue;
         }
+
         if (!circleCenterSVM(possibleRLogoRects[i])) {
             _findEnergyBuffTarget = false;
             continue;
         }
-        else{
-            rLogoRect = possibleRLogoRects[i];
-            _findEnergyBuffTarget = true;
-            break;
-        }
+
+        rLogoRect = possibleRLogoRects[i];
+        _findEnergyBuffTarget = true;
     }
 
     if (_findEnergyBuffTarget){
         rLogoRectLongSide = rLogoRect.size.width > rLogoRect.size.height? rLogoRect.size.width : rLogoRect.size.height;
         rLogoRectArea = rLogoRect.size.area();
+        if (_cropRoi){
+            rLogoRectCenterPoint.x = rLogoRect.center.x + cropOriginPoint.x;
+            rLogoRectCenterPoint.y = rLogoRect.center.y + cropOriginPoint.y;
+            _cropRoi = false;
+        }
         rLogoRectCenterPoint = rLogoRect.center;
     }
 }
@@ -271,9 +286,11 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
 }
 
 void IdentifyEnergyBuff::DrawReferenceGraphics() {
-    EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
-    cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
-    /*
+    if (_findEnergyBuffTarget){
+        EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
+        cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+    }
+
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
         if(possibleBladeRectParentProfiles[i] == -1){
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(204,209,72),2, 16);
@@ -281,7 +298,7 @@ void IdentifyEnergyBuff::DrawReferenceGraphics() {
         else{
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(4,159,72),2, 16);
         }
-    }*/
+    }
 
     cv::imshow("energy", dstHSV);
     cv::imshow("energy1", src);
@@ -291,7 +308,7 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
     if (possibleBladeRects.empty() || !_findEnergyBuffTarget) {
         return;
     }
-
+/*
     for (int i = 0; i < possibleBladeRectParentProfiles.size(); ++i) {
         std::cout << possibleBladeRectParentProfiles[i] << " ";
     }
@@ -300,7 +317,8 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
         std::cout << possibleBladeRectChildProfiles[i] << " ";
     }
     std::cout << std::endl;
-    std::cout << std::endl;
+    std::cout << std::endl;*/
+
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
         int childRectsCounter = 0;
         if (EnergyBuffTool::getTwoPointDistance(possibleBladeRects[i].center, rLogoRectCenterPoint) > 12 * rLogoRectLongSide) {
@@ -337,5 +355,31 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
         if (childRectsCounter == 3){
             EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(255,0,0),2, 16);
         }
+    }
+}
+
+void IdentifyEnergyBuff::DynamicResolutionResize() {
+    cv::Point roi_UL = cv::Point(0,0);
+    cv::Point roi_LR = cv::Point(0,0);
+    if (_findEnergyBuffTarget && !_cropRoi){
+        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 10 * rLogoRectLongSide;
+        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 10 * rLogoRectLongSide;
+
+        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 10 * rLogoRectLongSide;
+        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 10 * rLogoRectLongSide;
+        searchSrc = src(cv::Rect(roi_UL,roi_LR));
+        cropOriginPoint = roi_LR;
+        _cropRoi = true;
+        //= rLogoRect.center;
+    }
+    else if (_findEnergyBuffTarget && _cropRoi){
+        searchSrc = src(cv::Rect(roi_UL,roi_LR));
+        cropOriginPoint = roi_LR;
+        _cropRoi = true;
+    }
+    else{
+        searchSrc = src;
+        cropOriginPoint = roi_LR;
+        _cropRoi = false;
     }
 }
