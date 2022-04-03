@@ -19,7 +19,7 @@ int ControlSwitch::getFrameErrorCounter = 0;
 
 cv::Mat ControlSwitch::src(480, 960, CV_8UC3);
 
-void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
+void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
     cv::Mat temp;
     IdentifyArmor::CreatTrackbars();
     IdentifyEnergyBuff::CreatTrackbars();
@@ -29,6 +29,11 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
         if (mutex1.try_lock()) {
             temp = *pFrame;
             mutex1.unlock();
+        }
+        if (mutex2.try_lock()) {
+            *sentPortData = sendData;
+            std::cout << *sentPortData << std::endl;
+            mutex2.unlock();
         }
         temp.copyTo(src);
         //cv::cvtColor(src, src, cv::COLOR_RGB2BGR);
@@ -49,6 +54,11 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame) {
             src = src(cv::Rect(0,80,960,480));
         }
 
+<<<<<<< HEAD
+=======
+        //std::cout << sendData << std::endl;
+
+>>>>>>> 92ebcb014d325dc781fd4c5c93bb3d64fbce7809
         /*
         if ((!functionConfig._enableEnergyBuffMode && lastMode == NowMode::InitMode) || (!functionConfig._enableEnergyBuffMode && lastMode == NowMode::ArmorMode)){
             lastMode = NowMode::ArmorMode;

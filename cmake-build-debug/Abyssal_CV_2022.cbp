@@ -8,166 +8,162 @@
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug"/>
+				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug"/>
+				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug"/>
+				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Abyssal_CV_2022">
-				<Option output="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Abyssal_CV_2022" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug"/>
+				<Option output="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Abyssal_CV_2022" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include"/>
-					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src"/>
+					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include"/>
+					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src"/>
 					<Add directory="/usr/local/include/opencv4"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0/x86_64-linux-gnu"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/local/gcc-11.2/include"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 Abyssal_CV_2022"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 Abyssal_CV_2022"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Abyssal_CV_2022/fast">
-				<Option output="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Abyssal_CV_2022" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug"/>
+				<Option output="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Abyssal_CV_2022" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include"/>
-					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src"/>
+					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include"/>
+					<Add directory="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src"/>
 					<Add directory="/usr/local/include/opencv4"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0/x86_64-linux-gnu"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/../../../../include/c++/11.2.0/backward"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/local/gcc-11.2/include"/>
-					<Add directory="/usr/local/gcc-11.2/lib/gcc/x86_64-linux-gnu/11.2.0/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 Abyssal_CV_2022/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 Abyssal_CV_2022/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/asset/RoboMasterConfig.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/RoboMasterConfig.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/camera/CameraApi.h">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/camera/CameraApi.h">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/camera/CameraDefine.h">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/camera/CameraDefine.h">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/include/camera/CameraStatus.h">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/camera/CameraStatus.h">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/KCF/armor-KCF.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/KCF/armor-KCF.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-tool.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-tool.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/camera/camera-stream.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/camera/camera-stream.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/camera/camera-stream.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/camera/camera-stream.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-tools.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-tools.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/main.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/serial/serial-port.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/serial/serial-port.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.cpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.hpp">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/CMakeLists.txt">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
 		</Unit>
-		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
 		</Unit>
 	</Project>

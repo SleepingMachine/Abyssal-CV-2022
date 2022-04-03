@@ -86,7 +86,8 @@ void SerialPort::SendData(int* sentData) {
         bytes_written = write(fd, SerialPort::testData, sizeof(testData));
         printf("\n  %d written to ttyUSB0", tempSendData);
         printf("\n  %d Bytes written to ttyUSB0", bytes_written);
-        printf("\n +----------------------------------+\n\n");
+        printf("\n +----------------------------------+\n");
+
 /*
     for (int i = 0; i < sizeof(testData); ++i) {
         std::cout << testData[i] << std::endl;
@@ -107,12 +108,13 @@ void SerialPort::getHitPointData(int tempData) {
     int hitPointData_x = (tempData - hitPointData_y)/1000;
 
     for (int i = 0; i < 4; ++i) {
-        testData[0] = 'p';
+        testData[0] = 's';
         testData[1] = (( hitPointData_x>> 8) & 0xFF);
         testData[2] = (( hitPointData_x>> 0) & 0xFF);
         testData[3] = (( hitPointData_y>> 8) & 0xFF);
         testData[4] = (( hitPointData_y>> 0) & 0xFF);
     }
+
     //std::cout << hitPointData_x << std::endl;
     //std::cout << hitPointData_y << std::endl;
     //std::cout << testData[0] << " " << testData[1] << std::endl;

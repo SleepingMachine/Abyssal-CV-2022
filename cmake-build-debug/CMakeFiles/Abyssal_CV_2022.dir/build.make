@@ -53,10 +53,10 @@ RM = /snap/clion/184/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main
+CMAKE_SOURCE_DIR = /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug
+CMAKE_BINARY_DIR = /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Abyssal_CV_2022.dir/depend.make
@@ -72,114 +72,114 @@ include CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/main.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/main.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o: ../src/camera/camera-stream.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/camera/camera-stream.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/camera/camera-stream.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/camera/camera-stream.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/camera/camera-stream.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/camera/camera-stream.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/camera/camera-stream.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: ../src/armor/armor-identify.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/armor-identify.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: ../src/armor/KCF/armor-KCF.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/KCF/armor-KCF.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/KCF/armor-KCF.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/armor/KCF/armor-KCF.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/KCF/armor-KCF.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-save.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/video/video-save.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o: ../src/serial/serial-port.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/serial/serial-port.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/serial/serial-port.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/serial/serial-port.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energy-buff.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/energy/energy-buff.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.s
 
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: ../src/control/control-switch.cpp
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.cpp
 
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.i
 
 CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/src/control/control-switch.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.s
 
 # Object files for target Abyssal_CV_2022
 Abyssal_CV_2022_OBJECTS = \
@@ -204,6 +204,7 @@ Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/build.make
+Abyssal_CV_2022: /usr/local/lib/libopencv_gapi.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_stitching.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_aruco.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_barcode.so.4.5.5
@@ -258,7 +259,7 @@ Abyssal_CV_2022: /usr/local/lib/libopencv_photo.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_imgproc.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_core.so.4.5.5
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Abyssal_CV_2022"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Abyssal_CV_2022"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Abyssal_CV_2022.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -270,6 +271,6 @@ CMakeFiles/Abyssal_CV_2022.dir/clean:
 .PHONY : CMakeFiles/Abyssal_CV_2022.dir/clean
 
 CMakeFiles/Abyssal_CV_2022.dir/depend:
-	cd /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022-main/cmake-build-debug/CMakeFiles/Abyssal_CV_2022.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022 /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022 /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles/Abyssal_CV_2022.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Abyssal_CV_2022.dir/depend
 
