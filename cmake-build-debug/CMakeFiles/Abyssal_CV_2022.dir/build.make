@@ -204,7 +204,6 @@ Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/build.make
-Abyssal_CV_2022: /usr/local/lib/libopencv_gapi.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_stitching.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_aruco.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_barcode.so.4.5.5

@@ -11,21 +11,18 @@ struct FunctionConfig
 {
     //RED => false
     // BLUE => true
-    bool _enemyColor                = true;
+    bool _enemyColor                = false;
 
-    bool _enableEnergyBuffMode      = false;
+    bool _enableEnergyBuffMode      = true;
 
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
-    //std::string localVideoPath = "/home/sleepingmachine/视频/EnergyBuffVideo/blue_low.mp4";
-<<<<<<< HEAD
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
-=======
-    std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
->>>>>>> 92ebcb014d325dc781fd4c5c93bb3d64fbce7809
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+
 
     bool _enableDebugMode           = true;
 };

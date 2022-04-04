@@ -54,11 +54,8 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
             src = src(cv::Rect(0,80,960,480));
         }
 
-<<<<<<< HEAD
-=======
         //std::cout << sendData << std::endl;
 
->>>>>>> 92ebcb014d325dc781fd4c5c93bb3d64fbce7809
         /*
         if ((!functionConfig._enableEnergyBuffMode && lastMode == NowMode::InitMode) || (!functionConfig._enableEnergyBuffMode && lastMode == NowMode::ArmorMode)){
             lastMode = NowMode::ArmorMode;
