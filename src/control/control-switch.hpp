@@ -18,7 +18,7 @@ public:
     ~ControlSwitch() {};
     static FunctionConfig functionConfig;
 
-    static void SwitchMode(cv::Mat *pFrame);
+    static void SwitchMode(cv::Mat *pFrame,  int *sentPortData);
 private:
     static int sendData;
     static int lastMode;

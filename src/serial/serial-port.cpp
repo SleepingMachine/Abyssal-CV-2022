@@ -105,9 +105,9 @@ void SerialPort::getHitPointData(int tempData) {
 */
     int hitPointData_y = tempData % 1000;
     int hitPointData_x = (tempData - hitPointData_y)/1000;
-
+    
     for (int i = 0; i < 4; ++i) {
-        testData[0] = 'p';
+        testData[0] = 's';
         testData[1] = (( hitPointData_x>> 8) & 0xFF);
         testData[2] = (( hitPointData_x>> 0) & 0xFF);
         testData[3] = (( hitPointData_y>> 8) & 0xFF);
