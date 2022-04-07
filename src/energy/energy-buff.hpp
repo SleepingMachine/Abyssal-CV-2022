@@ -68,6 +68,7 @@ private:
 
     static cv::Mat src;
     static cv::Mat searchSrc;
+    static cv::Mat testSearch;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat maskHSV_0;

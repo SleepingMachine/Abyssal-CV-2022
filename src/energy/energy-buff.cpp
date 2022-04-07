@@ -58,6 +58,7 @@ static EnergyBuffPara energyBuffPara = EnergyBuffParaFactory::getEnergyBuffPara(
 cv::Mat IdentifyEnergyBuff::src(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::srcHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::searchSrc(640, 960, CV_8UC3);
+cv::Mat IdentifyEnergyBuff::testSearch(640, 960, CV_8UC3);;
 cv::Mat IdentifyEnergyBuff::maskHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_0(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_1(640, 960, CV_8UC3);
@@ -68,11 +69,15 @@ cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
     src = importSrc;
     IdentifyEnergyBuff();
-    DynamicResolutionResize();
-    ImagePreprocess(searchSrc);
+
+    //DynamicResolutionResize();
+    //ImagePreprocess(searchSrc);
+    ImagePreprocess(src);
+
     searchContours_PossibleRect();
     searchContours_BuffCenter(possibleRLogoRects);
     searchContours_Cantilever(possibleBladeRects);
+
     DrawReferenceGraphics();
     resourceRelease();
 }
@@ -178,10 +183,10 @@ void IdentifyEnergyBuff::resourceRelease() {
     allContours.clear();
     hierarchy.clear();
     possibleBladeRects.clear();
-    possibleRLogoRects.clear();
+    //possibleRLogoRects.clear();
     possibleBladeRectChildProfiles.clear();
     possibleBladeRectParentProfiles.clear();
-
+    //rLogoRectCenterPoint = cv::Point(0,0);
     //_findEnergyBuffTarget = false;
     //_cropRoi = false;
 }
@@ -223,9 +228,11 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
         if (_cropRoi){
             rLogoRectCenterPoint.x = rLogoRect.center.x + cropOriginPoint.x;
             rLogoRectCenterPoint.y = rLogoRect.center.y + cropOriginPoint.y;
-            _cropRoi = false;
+            //_cropRoi = false;
         }
-        rLogoRectCenterPoint = rLogoRect.center;
+        else{
+            rLogoRectCenterPoint = rLogoRect.center;
+        }
     }
 }
 
@@ -269,6 +276,7 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
     //_circleSampleData.image = sample;
     cv::cvtColor(sample, sample, cv::COLOR_HSV2BGR);
     cv::cvtColor(sample, sample, cv::COLOR_BGR2GRAY);
+    cv::imshow("1",sample);
     cv::Mat p = sample.reshape(1, 1);
     p.convertTo(p, CV_32FC1);
     normalize(p, p);
@@ -289,6 +297,7 @@ void IdentifyEnergyBuff::DrawReferenceGraphics() {
     if (_findEnergyBuffTarget){
         EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
         cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+        cv::circle(src, cropOriginPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
     }
 
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
@@ -300,8 +309,9 @@ void IdentifyEnergyBuff::DrawReferenceGraphics() {
         }
     }
 
-    cv::imshow("energy", dstHSV);
-    cv::imshow("energy1", src);
+    cv::imshow("Seach", searchSrc);
+    cv::imshow("Dst", dstHSV);
+    cv::imshow("Energy", src);
 }
 
 void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects) {
@@ -360,26 +370,68 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
 
 void IdentifyEnergyBuff::DynamicResolutionResize() {
     cv::Point roi_UL = cv::Point(0,0);
-    cv::Point roi_LR = cv::Point(0,0);
+    cv::Point roi_LR = cv::Point(960,640);
+    std::cout << _findEnergyBuffTarget << " " << _cropRoi << std::endl;
     if (_findEnergyBuffTarget && !_cropRoi){
+        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
+        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
+
+        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
+        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+        cropOriginPoint = roi_UL;
+        _cropRoi = true;
+    }
+    else if (_findEnergyBuffTarget && _cropRoi){
+        /*
+        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide + rLogoRectCenterPoint.x < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide + rLogoRectCenterPoint.x;
+        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide + rLogoRectCenterPoint.y < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide + rLogoRectCenterPoint.y;
+
+        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide + rLogoRectCenterPoint.x > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide + rLogoRectCenterPoint.x;
+        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide + rLogoRectCenterPoint.y > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide + rLogoRectCenterPoint.y;
+        */
+        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
+        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
+
+        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
+        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+         cropOriginPoint = roi_UL;
+        _cropRoi = true;
+        std::cout << 2 << std::endl;
+    }
+    else{
+        roi_UL = cv::Point(0,0);
+        roi_LR = cv::Point(960,640);
+        cropOriginPoint = roi_UL;
+        _cropRoi = false;
+    }
+    /*
+    testSearch = src(cv::Rect(roi_UL,roi_LR));
+
+    cv::imshow("121", testSearch);
+    */
+    searchSrc = src(cv::Rect(roi_UL,roi_LR));
+    //cv::rectangle(src, roi_LR, roi_UL, cv::Scalar(255, 255, 255), 2);
+    //cv::waitKey(1500);
+    /*
+    if (!_findEnergyBuffTarget && !_cropRoi){
+        searchSrc = src(cv::Rect(roi_UL,roi_LR));
+        cropOriginPoint = roi_LR;
+        _cropRoi = false;
+    }
+
+    if (_findEnergyBuffTarget && !_cropRoi){
+    //if (_findEnergyBuffTarget && !_cropRoi){
         roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 10 * rLogoRectLongSide;
         roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 10 * rLogoRectLongSide;
 
         roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 10 * rLogoRectLongSide;
         roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 10 * rLogoRectLongSide;
+        std::cout << roi_UL.x << " " << roi_UL.y << " " << roi_LR.x << " " << roi_LR.y << std::endl;
         searchSrc = src(cv::Rect(roi_UL,roi_LR));
         cropOriginPoint = roi_LR;
         _cropRoi = true;
         //= rLogoRect.center;
     }
-    else if (_findEnergyBuffTarget && _cropRoi){
-        searchSrc = src(cv::Rect(roi_UL,roi_LR));
-        cropOriginPoint = roi_LR;
-        _cropRoi = true;
-    }
-    else{
-        searchSrc = src;
-        cropOriginPoint = roi_LR;
-        _cropRoi = false;
-    }
+     */
+
 }

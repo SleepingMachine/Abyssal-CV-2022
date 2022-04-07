@@ -32,7 +32,7 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
         }
         if (mutex2.try_lock()) {
             *sentPortData = sendData;
-            std::cout << *sentPortData << std::endl;
+            //std::cout << *sentPortData << std::endl;
             mutex2.unlock();
         }
         temp.copyTo(src);
