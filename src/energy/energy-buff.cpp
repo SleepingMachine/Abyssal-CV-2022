@@ -70,9 +70,9 @@ void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendDa
     src = importSrc;
     IdentifyEnergyBuff();
 
-    //DynamicResolutionResize();
-    //ImagePreprocess(searchSrc);
-    ImagePreprocess(src);
+    DynamicResolutionResize();
+    ImagePreprocess(searchSrc);
+    //ImagePreprocess(src);
 
     searchContours_PossibleRect();
     searchContours_BuffCenter(possibleRLogoRects);
@@ -131,7 +131,7 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         if (scanRect.size.area() < energyBuffPara.minBuffCenterRectArea){
             continue;
         }
-        if (longSide / shortSide <= 1.5) {
+        if (longSide / shortSide <= energyBuffPara.maxBuffCenterRectAspectRatio && scanRect.size.area() <= energyBuffPara.maxBuffCenterRectArea) {
             possibleRLogoRects.push_back(scanRect);
             continue;
         }
@@ -139,13 +139,6 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         {
             continue;
         }
-        /*
-        for (int j = 0; j < 4; ++j) {
-            std::cout << hierarchy[i][j] << " ";
-        }
-        std::cout << std::endl;
-        */
-        //std::cout << hierarchy.size() << " " << allContours.size() << std::endl;
         possibleBladeRectParentProfiles.push_back(hierarchy[i][3]);
         possibleBladeRectChildProfiles.push_back(hierarchy[i][2]);
         possibleBladeRects.push_back(scanRect);
@@ -201,17 +194,20 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
     //bool findFlag = false;
 
     //筛选圆心矩形
+
     for (int i = 0; i < possibleRLogoRects.size(); i++) {
-        if (possibleRLogoRects[i].size.area() < energyBuffPara.minBuffCenterRectArea) {
+    /*    if (possibleRLogoRects[i].size.area() < energyBuffPara.minBuffCenterRectArea) {
             _findEnergyBuffTarget = false;
             continue;
-        }
+        }*/
         //如果轮廓不是类正方形，则跳过
+        /*
         if ((possibleRLogoRects[i].size.width / possibleRLogoRects[i].size.height) > 1.2 ||
             (possibleRLogoRects[i].size.width / possibleRLogoRects[i].size.height) < 0.8) {
             _findEnergyBuffTarget = false;
             continue;
         }
+        */
 
         if (!circleCenterSVM(possibleRLogoRects[i])) {
             _findEnergyBuffTarget = false;
@@ -276,7 +272,6 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
     //_circleSampleData.image = sample;
     cv::cvtColor(sample, sample, cv::COLOR_HSV2BGR);
     cv::cvtColor(sample, sample, cv::COLOR_BGR2GRAY);
-    cv::imshow("1",sample);
     cv::Mat p = sample.reshape(1, 1);
     p.convertTo(p, CV_32FC1);
     normalize(p, p);

@@ -145,7 +145,8 @@ public:
 struct EnergyBuffPara {
     EnemyColor enemyColor;
     float minBuffCenterRectArea = 50.0;
-
+    float maxBuffCenterRectArea = 500.0;
+    float maxBuffCenterRectAspectRatio = 1.2;
 };
 
 class EnergyBuffParaFactory {
