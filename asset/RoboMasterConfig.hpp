@@ -11,7 +11,7 @@ struct FunctionConfig
 {
     //RED => false
     // BLUE => true
-    bool _enemyColor                = true;
+    bool _enemyColor                = false;
 
     bool _enableEnergyBuffMode      = true;
 
@@ -19,8 +19,8 @@ struct FunctionConfig
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
-    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
 
 
@@ -146,7 +146,17 @@ struct EnergyBuffPara {
     EnemyColor enemyColor;
     float minBuffCenterRectArea = 50.0;
     float maxBuffCenterRectArea = 500.0;
+
     float maxBuffCenterRectAspectRatio = 1.2;
+
+    float minBuffBladeRectsAreaRatio = 20;
+    float maxBuffBladeRectsAreaRatio = 50;
+
+    float minBuffBladeInlineRectsAspectRatio = 1.5;
+    float maxBuffBladeInlineRectsAspectRatio = 3;
+
+    float minBuffBladeInlineRectsAreaRatio = 2;
+    float maxBuffBladeInlineRectsAreaRatio = 4;
 };
 
 class EnergyBuffParaFactory {

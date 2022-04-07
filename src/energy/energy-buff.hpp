@@ -59,6 +59,8 @@ private:
 
     static std::vector<cv::RotatedRect> possibleBladeRects;
     static std::vector<cv::RotatedRect> possibleRLogoRects;
+
+    static std::vector<cv::RotatedRect> bladeRects;
     static std::vector<float> possibleBladeRectsArea;
     static std::vector<int> possibleBladeRectParentProfiles;
     static std::vector<int> possibleBladeRectChildProfiles;
@@ -68,7 +70,6 @@ private:
 
     static cv::Mat src;
     static cv::Mat searchSrc;
-    static cv::Mat testSearch;
     static cv::Mat srcHSV;
     static cv::Mat maskHSV;
     static cv::Mat maskHSV_0;

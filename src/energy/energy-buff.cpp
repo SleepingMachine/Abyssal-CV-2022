@@ -48,6 +48,8 @@ std::vector<cv::Vec4i> IdentifyEnergyBuff::hierarchy;
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleBladeRects;
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleRLogoRects;
 
+std::vector<cv::RotatedRect> IdentifyEnergyBuff::bladeRects;
+
 std::vector<int> IdentifyEnergyBuff::possibleBladeRectParentProfiles;
 std::vector<int> IdentifyEnergyBuff::possibleBladeRectChildProfiles;
 
@@ -58,7 +60,6 @@ static EnergyBuffPara energyBuffPara = EnergyBuffParaFactory::getEnergyBuffPara(
 cv::Mat IdentifyEnergyBuff::src(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::srcHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::searchSrc(640, 960, CV_8UC3);
-cv::Mat IdentifyEnergyBuff::testSearch(640, 960, CV_8UC3);;
 cv::Mat IdentifyEnergyBuff::maskHSV(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_0(640, 960, CV_8UC3);
 cv::Mat IdentifyEnergyBuff::maskHSV_1(640, 960, CV_8UC3);
@@ -143,9 +144,15 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         possibleBladeRectChildProfiles.push_back(hierarchy[i][2]);
         possibleBladeRects.push_back(scanRect);
         possibleBladeRectsArea.push_back(area);
+        /*
+        for (int j = 0; j < possibleBladeRectsArea.size(); ++j) {
+            std::cout << possibleBladeRectsArea[j] << " ";
+        }
+        std::cout << std::endl;*/
+
     }
 
-    /*
+  /*
     int i = 0;
     while (it_allContours != allContours.end()) {
         cv::RotatedRect scanRect = minAreaRect(*it_allContours);   //检测最小面积的矩形
@@ -215,6 +222,7 @@ void IdentifyEnergyBuff::searchContours_BuffCenter(std::vector<cv::RotatedRect> 
         }
 
         rLogoRect = possibleRLogoRects[i];
+        //std::cout << rLogoRect.size.area() << std::endl;
         _findEnergyBuffTarget = true;
     }
 
@@ -313,6 +321,35 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
     if (possibleBladeRects.empty() || !_findEnergyBuffTarget) {
         return;
     }
+    for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        /*
+        if (possibleBladeRects[i].size.area() < rLogoRectArea * energyBuffPara.maxBuffBladeRectsAreaRatio &&
+            possibleBladeRects[i].size.area() > rLogoRectArea * energyBuffPara.minBuffBladeRectsAreaRatio &&
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > 3 &&
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < 5){
+            //possibleBladeRects.erase(possibleBladeRects.begin()+i);
+        }*/
+        if (possibleBladeRects[i].size.area() > rLogoRectArea * energyBuffPara.minBuffBladeRectsAreaRatio &&
+            possibleBladeRects[i].size.area() < rLogoRectArea * energyBuffPara.maxBuffBladeRectsAreaRatio &&
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > energyBuffPara.minBuffBladeInlineRectsAspectRatio &&
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < energyBuffPara.maxBuffBladeInlineRectsAspectRatio){
+
+            //EnergyBuffTool::drawRotatedRect(searchSrc, possibleBladeRects[i], cv::Scalar(255,255,255),2, 16);
+            //std::cout << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << " " << possibleBladeRects[i].size.area() << std::endl;
+            bladeRects.push_back(possibleBladeRects[i]);
+        }
+        else{
+            EnergyBuffTool::drawRotatedRect(searchSrc, possibleBladeRects[i], cv::Scalar(255,255,255),2, 16);
+            std::cout << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << " " << possibleBladeRects[i].size.area() << std::endl;
+        }
+
+    }
+    /*
+    for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(255,255,255),2, 16);
+        std::cout << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << std::endl;
+
+    }*/
 /*
     for (int i = 0; i < possibleBladeRectParentProfiles.size(); ++i) {
         std::cout << possibleBladeRectParentProfiles[i] << " ";
@@ -324,29 +361,32 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
     std::cout << std::endl;
     std::cout << std::endl;*/
 
-    for (int i = 0; i < possibleBladeRects.size(); ++i) {
-        int childRectsCounter = 0;
-        if (EnergyBuffTool::getTwoPointDistance(possibleBladeRects[i].center, rLogoRectCenterPoint) > 12 * rLogoRectLongSide) {
-            possibleBladeRects.erase(possibleBladeRects.begin()+i);
-            possibleBladeRectParentProfiles.erase(possibleBladeRectParentProfiles.begin()+i);
-            possibleBladeRectChildProfiles.erase(possibleBladeRectChildProfiles.begin()+i);
-            continue;
-        }
-        if (possibleBladeRectParentProfiles[i] == -1){
-            for (int j = i+1; j < possibleBladeRectParentProfiles.size() ; ++j) {
-                if(possibleBladeRectParentProfiles[j] == possibleBladeRectParentProfiles[i+1])
-                    ++childRectsCounter;
-            }
-            /*
-            //EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,0,255),5, 16);
-            for (int j = 0; j < possibleBladeRectParentProfiles.size(); ++j) {
 
-                if (possibleBladeRectParentProfiles[j] == i+1 || (i == 0 && possibleBladeRectParentProfiles[j] == 0)){
-                    ++childRectsCounter;
-                }
+        /*
+     }
+         int childRectsCounter = 0;
+         if (EnergyBuffTool::getTwoPointDistance(possibleBladeRects[i].center, rLogoRectCenterPoint) > 12 * rLogoRectLongSide) {
+             possibleBladeRects.erase(possibleBladeRects.begin()+i);
+             possibleBladeRectParentProfiles.erase(possibleBladeRectParentProfiles.begin()+i);
+             possibleBladeRectChildProfiles.erase(possibleBladeRectChildProfiles.begin()+i);
+             continue;
+         }
+         if (possibleBladeRectParentProfiles[i] == -1){
+             for (int j = i+1; j < possibleBladeRectParentProfiles.size() ; ++j) {
+                 if(possibleBladeRectParentProfiles[j] == possibleBladeRectParentProfiles[i+1])
+                     ++childRectsCounter;
+             }
+             /*
+             //EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,0,255),5, 16);
+             for (int j = 0; j < possibleBladeRectParentProfiles.size(); ++j) {
+
+                 if (possibleBladeRectParentProfiles[j] == i+1 || (i == 0 && possibleBladeRectParentProfiles[j] == 0)){
+                     ++childRectsCounter;
+                 }
 
 
-            }*/
+             }*/
+        /*
         }
         if (childRectsCounter == 1){
             EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(0,0,255),2, 16);
@@ -361,12 +401,13 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
             EnergyBuffTool::drawRotatedRect(src, possibleBladeRects[i], cv::Scalar(255,0,0),2, 16);
         }
     }
+    */
 }
 
 void IdentifyEnergyBuff::DynamicResolutionResize() {
     cv::Point roi_UL = cv::Point(0,0);
     cv::Point roi_LR = cv::Point(960,640);
-    std::cout << _findEnergyBuffTarget << " " << _cropRoi << std::endl;
+    //std::cout << _findEnergyBuffTarget << " " << _cropRoi << std::endl;
     if (_findEnergyBuffTarget && !_cropRoi){
         roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
         roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
@@ -391,7 +432,6 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
         roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
          cropOriginPoint = roi_UL;
         _cropRoi = true;
-        std::cout << 2 << std::endl;
     }
     else{
         roi_UL = cv::Point(0,0);
@@ -404,7 +444,7 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
 
     cv::imshow("121", testSearch);
     */
-    searchSrc = src(cv::Rect(roi_UL,roi_LR));
+    src(cv::Rect(roi_UL,roi_LR)).copyTo(searchSrc);
     //cv::rectangle(src, roi_LR, roi_UL, cv::Scalar(255, 255, 255), 2);
     //cv::waitKey(1500);
     /*
