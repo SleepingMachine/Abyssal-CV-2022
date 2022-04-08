@@ -11,7 +11,7 @@ struct FunctionConfig
 {
     //RED => false
     // BLUE => true
-    bool _enemyColor                = false;
+    bool _enemyColor                = true;
 
     bool _enableEnergyBuffMode      = true;
 
@@ -19,8 +19,8 @@ struct FunctionConfig
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
-    std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
 
 
@@ -145,18 +145,25 @@ public:
 struct EnergyBuffPara {
     EnemyColor enemyColor;
     float minBuffCenterRectArea = 50.0;
-    float maxBuffCenterRectArea = 500.0;
+    float maxBuffCenterRectArea = 450.0;
 
-    float maxBuffCenterRectAspectRatio = 1.2;
+    float maxBuffCenterRectAspectRatio = 1.5;
 
     float minBuffBladeRectsAreaRatio = 20;
     float maxBuffBladeRectsAreaRatio = 50;
+    float minBuffBladeRectsAspectRatio = 1.5;
+    float maxBuffBladeRectsAspectRatio = 3;
 
-    float minBuffBladeInlineRectsAspectRatio = 1.5;
-    float maxBuffBladeInlineRectsAspectRatio = 3;
+    float minBuffBladeInlineRectsAreaRatio = 4;
+    float maxBuffBladeInlineRectsAreaRatio = 10;
+    float minBuffBladeInlineRectsAspectRatio = 3;
+    float maxBuffBladeInlineRectsAspectRatio = 10;
 
-    float minBuffBladeInlineRectsAreaRatio = 2;
-    float maxBuffBladeInlineRectsAreaRatio = 4;
+    float minBuffBladeArmorRectsAreaRatio = 2;
+    float maxBuffBladeArmorRectsAreaRatio = 6;
+    float minBuffBladeArmorRectsAspectRatio = 1;
+    float maxBuffBladeArmorRectsAspectRatio = 3;
+
 };
 
 class EnergyBuffParaFactory {

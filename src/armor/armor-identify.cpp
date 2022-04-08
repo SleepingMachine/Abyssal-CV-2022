@@ -116,6 +116,7 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
             //SerialPort::getHitPointData(hitPointx,hitPointy);
         }
 
+
         //cv::imshow("mask", maskHSV);
         cv::imshow("Preprocessed Dst", dstHSV);
         cv::imshow("Src", src);

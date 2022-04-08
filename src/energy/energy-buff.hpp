@@ -28,7 +28,7 @@ public:
     ~IdentifyEnergyBuff() {};
     friend class ControlSwitch;
 
-    static void EnergyBuffIdentifyStream(cv::Mat importSrc, int* sendData);
+    static void EnergyBuffIdentifyStream(cv::Mat importSrc, int* sentData);
     static void CreatTrackbars();
 private:
     static int hmin_0;
@@ -51,6 +51,7 @@ private:
     static int dilate;
 
     static cv::Point_<float> rLogoRectCenterPoint;
+    static cv::Point hitPoint;
 
     static cv::RotatedRect rLogoRect;
 
@@ -61,6 +62,9 @@ private:
     static std::vector<cv::RotatedRect> possibleRLogoRects;
 
     static std::vector<cv::RotatedRect> bladeRects;
+    static std::vector<cv::RotatedRect> bladeInlineRects;
+    static std::vector<cv::RotatedRect> bladeArmorRects;
+
     static std::vector<float> possibleBladeRectsArea;
     static std::vector<int> possibleBladeRectParentProfiles;
     static std::vector<int> possibleBladeRectChildProfiles;
@@ -89,6 +93,7 @@ private:
     static bool circleCenterSVM(cv::RotatedRect &inputRect);
     static void DynamicResolutionResize();
     static void DrawReferenceGraphics();
+    static void HitBladePairing();
 
     static cv::Ptr<cv::ml::SVM> rLogoCenterSVM;
 };

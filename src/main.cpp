@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
         //CameraStream::InitCamera();
     //}
-    //std::thread serial_thread(SerialPort::SendData, &sentPortData);
+    std::thread serial_thread(SerialPort::SendData, &sentPortData);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
         cv::waitKey(5);
     }
     */
-    //serial_thread.join();
+    serial_thread.join();
     camera_thread.join();
     //armor_thread.join();
     control_thread.join();

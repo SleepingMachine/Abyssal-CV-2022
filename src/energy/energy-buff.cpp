@@ -39,6 +39,7 @@ bool IdentifyEnergyBuff::_findEnergyBuffTarget = false;
 bool IdentifyEnergyBuff::_cropRoi = false;
 
 cv::Point IdentifyEnergyBuff::cropOriginPoint;
+cv::Point IdentifyEnergyBuff::hitPoint;
 
 cv::RotatedRect IdentifyEnergyBuff::rLogoRect;
 
@@ -49,6 +50,8 @@ std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleBladeRects;
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::possibleRLogoRects;
 
 std::vector<cv::RotatedRect> IdentifyEnergyBuff::bladeRects;
+std::vector<cv::RotatedRect> IdentifyEnergyBuff::bladeInlineRects;
+std::vector<cv::RotatedRect> IdentifyEnergyBuff::bladeArmorRects;
 
 std::vector<int> IdentifyEnergyBuff::possibleBladeRectParentProfiles;
 std::vector<int> IdentifyEnergyBuff::possibleBladeRectChildProfiles;
@@ -67,7 +70,7 @@ cv::Mat IdentifyEnergyBuff::dstHSV(640, 960, CV_8UC3);
 
 cv::Ptr<cv::ml::SVM> IdentifyEnergyBuff::rLogoCenterSVM;
 
-void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendData) {
+void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sentData) {
     src = importSrc;
     IdentifyEnergyBuff();
 
@@ -78,7 +81,14 @@ void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sendDa
     searchContours_PossibleRect();
     searchContours_BuffCenter(possibleRLogoRects);
     searchContours_Cantilever(possibleBladeRects);
-
+    HitBladePairing();
+    if(hitPoint.x && hitPoint.y){
+        int hitPointx = hitPoint.x + cropOriginPoint.x;
+        int hitPointy = hitPoint.y + cropOriginPoint.y;
+        int hitPointData = hitPointx * 1000 + hitPointy;
+        *sentData = hitPointData;
+        //SerialPort::getHitPointData(hitPointx,hitPointy);
+    }
     DrawReferenceGraphics();
     resourceRelease();
 }
@@ -90,12 +100,14 @@ void IdentifyEnergyBuff::ImagePreprocess(const cv::Mat &src) {
     //cv::imshow("0", maskHSV_0);
     //cv::imshow("1", maskHSV_1);
     maskHSV = maskHSV_0 | maskHSV_1;
-    //maskHSV = maskHSV_1;
-    cv::GaussianBlur(dstHSV, dstHSV, cv::Size(5, 5), 3, 3);
+    //maskHSV = maskHSV_1;cv::
+    GaussianBlur(dstHSV, dstHSV, cv::Size(7, 7), 3, 3);
     morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::open,IdentifyEnergyBuff::open)));
     morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::close,IdentifyEnergyBuff::close)));
+
     morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::erode,IdentifyEnergyBuff::erode)));
     morphologyEx(dstHSV, dstHSV, 1, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyEnergyBuff::dilate,IdentifyEnergyBuff::dilate)));
+
 }
 
 void IdentifyEnergyBuff::CreatTrackbars() {
@@ -129,6 +141,7 @@ void IdentifyEnergyBuff::searchContours_PossibleRect() {
         float area = float(cv::contourArea(allContours[i]));
         float longSide = EnergyBuffTool::findExtremumOfSide(scanRect, LONG_SIDE);
         float shortSide = EnergyBuffTool::findExtremumOfSide(scanRect, SHORT_SIDE);
+
         if (scanRect.size.area() < energyBuffPara.minBuffCenterRectArea){
             continue;
         }
@@ -186,6 +199,10 @@ void IdentifyEnergyBuff::resourceRelease() {
     //possibleRLogoRects.clear();
     possibleBladeRectChildProfiles.clear();
     possibleBladeRectParentProfiles.clear();
+    bladeRects.clear();
+    bladeInlineRects.clear();
+    bladeArmorRects.clear();
+    hitPoint = cv::Point(0,0);
     //rLogoRectCenterPoint = cv::Point(0,0);
     //_findEnergyBuffTarget = false;
     //_cropRoi = false;
@@ -298,18 +315,41 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
 
 void IdentifyEnergyBuff::DrawReferenceGraphics() {
     if (_findEnergyBuffTarget){
+        rLogoRect.center.x += cropOriginPoint.x;
+        rLogoRect.center.y += cropOriginPoint.y;
         EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
         cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
-        cv::circle(src, cropOriginPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+        //cv::circle(src, cropOriginPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
     }
-
+/*
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
+        possibleBladeRects[i].center.x += cropOriginPoint.x;
+        possibleBladeRects[i].center.y += cropOriginPoint.y;
         if(possibleBladeRectParentProfiles[i] == -1){
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(204,209,72),2, 16);
         }
         else{
             EnergyBuffTool::drawRotatedRect(src,possibleBladeRects[i],cv::Scalar(4,159,72),2, 16);
         }
+    }
+*/
+    for (int i = 0; i < bladeRects.size(); ++i) {
+        bladeRects[i].center.x += cropOriginPoint.x;
+        bladeRects[i].center.y += cropOriginPoint.y;
+        EnergyBuffTool::drawRotatedRect(src,bladeRects[i],cv::Scalar(4,159,72),2, 16);
+    }
+    for (int i = 0; i < bladeInlineRects.size(); ++i) {
+        bladeInlineRects[i].center.x += cropOriginPoint.x;
+        bladeInlineRects[i].center.y += cropOriginPoint.y;
+        EnergyBuffTool::drawRotatedRect(src,bladeInlineRects[i],cv::Scalar(100,200,170),2, 16);
+    }
+    for (int i = 0; i < bladeArmorRects.size(); ++i) {
+        bladeArmorRects[i].center.x += cropOriginPoint.x;
+        bladeArmorRects[i].center.y += cropOriginPoint.y;
+        EnergyBuffTool::drawRotatedRect(src,bladeArmorRects[i],cv::Scalar(200,20,170),2, 16);
+    }
+    if(hitPoint.x && hitPoint.y){
+        cv::circle(src, cv::Point (hitPoint.x + cropOriginPoint.x, hitPoint.y + cropOriginPoint.y), 15, cv::Scalar(51,48,245), 2);
     }
 
     cv::imshow("Seach", searchSrc);
@@ -331,18 +371,27 @@ void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> 
         }*/
         if (possibleBladeRects[i].size.area() > rLogoRectArea * energyBuffPara.minBuffBladeRectsAreaRatio &&
             possibleBladeRects[i].size.area() < rLogoRectArea * energyBuffPara.maxBuffBladeRectsAreaRatio &&
-            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > energyBuffPara.minBuffBladeInlineRectsAspectRatio &&
-            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < energyBuffPara.maxBuffBladeInlineRectsAspectRatio){
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > energyBuffPara.minBuffBladeRectsAspectRatio &&
+            EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < energyBuffPara.maxBuffBladeRectsAspectRatio){
 
             //EnergyBuffTool::drawRotatedRect(searchSrc, possibleBladeRects[i], cv::Scalar(255,255,255),2, 16);
             //std::cout << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << " " << possibleBladeRects[i].size.area() << std::endl;
             bladeRects.push_back(possibleBladeRects[i]);
         }
-        else{
-            EnergyBuffTool::drawRotatedRect(searchSrc, possibleBladeRects[i], cv::Scalar(255,255,255),2, 16);
-            std::cout << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << " " << possibleBladeRects[i].size.area() << std::endl;
+        else if (possibleBladeRects[i].size.area() > rLogoRectArea * energyBuffPara.minBuffBladeInlineRectsAreaRatio &&
+                 possibleBladeRects[i].size.area() < rLogoRectArea * energyBuffPara.maxBuffBladeInlineRectsAreaRatio &&
+                 EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > energyBuffPara.minBuffBladeInlineRectsAspectRatio &&
+                 EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < energyBuffPara.maxBuffBladeInlineRectsAspectRatio){
+        //else{
+            //std::cout << possibleBladeRects[i].size.area() / rLogoRectArea << " " << EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) << std::endl;
+            bladeInlineRects.push_back(possibleBladeRects[i]);
         }
-
+        else if (possibleBladeRects[i].size.area() > rLogoRectArea * energyBuffPara.minBuffBladeArmorRectsAreaRatio &&
+                 possibleBladeRects[i].size.area() < rLogoRectArea * energyBuffPara.maxBuffBladeArmorRectsAreaRatio &&
+                 EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) > energyBuffPara.minBuffBladeArmorRectsAspectRatio &&
+                 EnergyBuffTool::getRectLengthWidthRatio(possibleBladeRects[i]) < energyBuffPara.maxBuffBladeArmorRectsAspectRatio){
+            bladeArmorRects.push_back(possibleBladeRects[i]);
+        }
     }
     /*
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
@@ -409,11 +458,15 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
     cv::Point roi_LR = cv::Point(960,640);
     //std::cout << _findEnergyBuffTarget << " " << _cropRoi << std::endl;
     if (_findEnergyBuffTarget && !_cropRoi){
-        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
-        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
+        roi_UL.x = rLogoRectCenterPoint.x - 12 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
+        roi_UL.y = rLogoRectCenterPoint.y - 12 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
+        roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
+        roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
 
-        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
-        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+        roi_LR.x = rLogoRectCenterPoint.x + 12 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
+        roi_LR.y = rLogoRectCenterPoint.y + 12 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+        roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
+        roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
         cropOriginPoint = roi_UL;
         _cropRoi = true;
     }
@@ -425,11 +478,14 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
         roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide + rLogoRectCenterPoint.x > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide + rLogoRectCenterPoint.x;
         roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide + rLogoRectCenterPoint.y > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide + rLogoRectCenterPoint.y;
         */
-        roi_UL.x = rLogoRectCenterPoint.x - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
-        roi_UL.y = rLogoRectCenterPoint.y - 10 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
-
-        roi_LR.x = rLogoRectCenterPoint.x + 10 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
-        roi_LR.y = rLogoRectCenterPoint.y + 10 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+        roi_UL.x = rLogoRectCenterPoint.x - 12 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.x - 12 * rLogoRectLongSide;
+        roi_UL.y = rLogoRectCenterPoint.y - 12 * rLogoRectLongSide < 0? 0 : rLogoRectCenterPoint.y - 12 * rLogoRectLongSide;
+        roi_UL.x = (roi_UL.x) >= src.cols-1 ? src.cols-1 : (roi_UL.x);
+        roi_UL.y = (roi_UL.y) >= src.rows-1 ? src.rows-1 : (roi_UL.y);
+        roi_LR.x = rLogoRectCenterPoint.x + 12 * rLogoRectLongSide > 960? 960 : rLogoRectCenterPoint.x + 12 * rLogoRectLongSide;
+        roi_LR.y = rLogoRectCenterPoint.y + 12 * rLogoRectLongSide > 640? 640 : rLogoRectCenterPoint.y + 12 * rLogoRectLongSide;
+        roi_LR.x = (roi_LR.x) <= 0+1 ? 0+1 : (roi_LR.x);
+        roi_LR.y = (roi_LR.y) <= 0+1 ? 0+1 : (roi_LR.y);
          cropOriginPoint = roi_UL;
         _cropRoi = true;
     }
@@ -444,6 +500,7 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
 
     cv::imshow("121", testSearch);
     */
+    //std::cout << roi_UL.x << " " << roi_UL.y << " " << roi_LR.x << " " << roi_LR.y << std::endl;
     src(cv::Rect(roi_UL,roi_LR)).copyTo(searchSrc);
     //cv::rectangle(src, roi_LR, roi_UL, cv::Scalar(255, 255, 255), 2);
     //cv::waitKey(1500);
@@ -469,4 +526,22 @@ void IdentifyEnergyBuff::DynamicResolutionResize() {
     }
      */
 
+}
+
+void IdentifyEnergyBuff::HitBladePairing() {
+    for (int i = 0; i < bladeRects.size(); ++i) {
+        int inlineRectCounter = 0;
+        for (int j = 0; j < bladeInlineRects.size(); ++j) {
+            if (EnergyBuffTool::embeddedRectJudge(bladeRects[i], bladeInlineRects[j])){
+                inlineRectCounter++;
+            }
+        }
+        if (!inlineRectCounter){
+            for (int j = 0; j < bladeArmorRects.size(); ++j) {
+                if (EnergyBuffTool::embeddedRectJudge(bladeRects[i], bladeArmorRects[j])){
+                    hitPoint = bladeArmorRects[i].center;
+                }
+            }
+        }
+    }
 }
