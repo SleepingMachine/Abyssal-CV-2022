@@ -4,11 +4,14 @@
 
 //DEMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 #include "serial-port.hpp"
+#include "serial/serial-TUP/serial-port-TUP.hpp"
+
 std::mutex mutex2;
 std::atomic_bool SerialPortStart;
 
 static SerialConfig serialConfig = SerialConfigFactory::getSerialConfig();
 SerialPort::SerialPort() {}
+
 
 std::string SerialPort::read_device;
 std::string SerialPort::write_device;
@@ -37,7 +40,7 @@ void SerialPort::SendData(int* sentData) {
         fd = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NDELAY);
 
         if (fd == -1) {/* Error Checking */
-            printf("\n  Error! in Opening ttyUSB0  ");
+            printf("\n  ERROR ! in Opening ttyUSB0  ");
             //exit(0);
             }
         else

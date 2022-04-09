@@ -2,6 +2,7 @@
 #include "armor/armor-identify.hpp"
 #include "video/video-save.hpp"
 #include "control/control-switch.hpp"
+#include "serial/serial-TUP/serial-port-TUP.hpp"
 
 #include <thread>
 #include <mutex>
@@ -24,7 +25,8 @@ int main(int argc, char* argv[]) {
     //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
         //CameraStream::InitCamera();
     //}
-    std::thread serial_thread(SerialPort::SendData, &sentPortData);
+    //std::thread serial_thread(SerialPort::SendData, &sentPortData);
+    std::thread serial_thread(SerialPortTUP::SerialSynchronize);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);

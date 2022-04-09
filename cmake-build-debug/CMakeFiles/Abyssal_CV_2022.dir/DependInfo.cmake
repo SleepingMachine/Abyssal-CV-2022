@@ -14,6 +14,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o.d"
   "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o.d"
   "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o.d"
+  "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o.d"
+  "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/serial-port-TUP.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o.d"
+  "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/serial-synchronize-TUP.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o.d"
   "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-port.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o.d"
   "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.cpp" "CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o" "gcc" "CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o.d"
   )

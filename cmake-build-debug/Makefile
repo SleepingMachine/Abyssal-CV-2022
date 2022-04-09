@@ -273,6 +273,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/serial/serial-TUP/CRC/serial-CRC-TUP.o: src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.o
+
+# target to build an object file
+src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
+
+src/serial/serial-TUP/CRC/serial-CRC-TUP.i: src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.i
+
+# target to preprocess a source file
+src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.i
+
+src/serial/serial-TUP/CRC/serial-CRC-TUP.s: src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.s
+
+# target to generate assembly for a file
+src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.s
+
+src/serial/serial-TUP/serial-port-TUP.o: src/serial/serial-TUP/serial-port-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/serial-port-TUP.o
+
+# target to build an object file
+src/serial/serial-TUP/serial-port-TUP.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/serial-port-TUP.cpp.o
+
+src/serial/serial-TUP/serial-port-TUP.i: src/serial/serial-TUP/serial-port-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/serial-port-TUP.i
+
+# target to preprocess a source file
+src/serial/serial-TUP/serial-port-TUP.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/serial-port-TUP.cpp.i
+
+src/serial/serial-TUP/serial-port-TUP.s: src/serial/serial-TUP/serial-port-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/serial-port-TUP.s
+
+# target to generate assembly for a file
+src/serial/serial-TUP/serial-port-TUP.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/serial-port-TUP.cpp.s
+
+src/serial/serial-TUP/serial-synchronize-TUP.o: src/serial/serial-TUP/serial-synchronize-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.o
+
+# target to build an object file
+src/serial/serial-TUP/serial-synchronize-TUP.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.cpp.o
+
+src/serial/serial-TUP/serial-synchronize-TUP.i: src/serial/serial-TUP/serial-synchronize-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.i
+
+# target to preprocess a source file
+src/serial/serial-TUP/serial-synchronize-TUP.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.i
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.cpp.i
+
+src/serial/serial-TUP/serial-synchronize-TUP.s: src/serial/serial-TUP/serial-synchronize-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.s
+
+# target to generate assembly for a file
+src/serial/serial-TUP/serial-synchronize-TUP.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.s
+.PHONY : src/serial/serial-TUP/serial-synchronize-TUP.cpp.s
+
 src/serial/serial-port.o: src/serial/serial-port.cpp.o
 .PHONY : src/serial/serial-port.o
 
@@ -348,6 +420,15 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.o"
+	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.i"
+	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.s"
+	@echo "... src/serial/serial-TUP/serial-port-TUP.o"
+	@echo "... src/serial/serial-TUP/serial-port-TUP.i"
+	@echo "... src/serial/serial-TUP/serial-port-TUP.s"
+	@echo "... src/serial/serial-TUP/serial-synchronize-TUP.o"
+	@echo "... src/serial/serial-TUP/serial-synchronize-TUP.i"
+	@echo "... src/serial/serial-TUP/serial-synchronize-TUP.s"
 	@echo "... src/serial/serial-port.o"
 	@echo "... src/serial/serial-port.i"
 	@echo "... src/serial/serial-port.s"
