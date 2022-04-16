@@ -1,0 +1,4 @@
+赛场录像保存在这里
+
+是否保存录像的控件在src/video/video-save.cpp
+TODO:修改一个更加安全的控件
