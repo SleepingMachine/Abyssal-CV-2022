@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         //CameraStream::InitCamera();
     //}
     //std::thread serial_thread(SerialPort::SendData, &sentPortData);
-    std::thread serial_thread(SerialPortTUP::SerialSynchronize);
+    std::thread serial_thread(SerialPortTUP::SerialSynchronize, &sentPortData);
     //std::thread Synchronize_thread();
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);

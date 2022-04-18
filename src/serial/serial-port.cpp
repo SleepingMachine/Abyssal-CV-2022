@@ -116,6 +116,7 @@ void SerialPort::getHitPointData(int tempData) {
         testData[2] = (( hitPointData_x>> 0) & 0xFF);
         testData[3] = (( hitPointData_y>> 8) & 0xFF);
         testData[4] = (( hitPointData_y>> 0) & 0xFF);
+
     }
 
     //std::cout << hitPointData_x << std::endl;

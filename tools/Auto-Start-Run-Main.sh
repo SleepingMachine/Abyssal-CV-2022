@@ -9,6 +9,7 @@ cd /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug
 renum=0
 #自动输入密码，启动Baldr
 sudo ./Abyssal_CV_2022
+echo abyssal | sudo -S cpufreq-set -g performance
 pwd
 while true; do
 #当Baldr不在运行时启动Baldr，重启三次就重新开机

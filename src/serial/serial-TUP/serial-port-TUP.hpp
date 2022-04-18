@@ -19,6 +19,8 @@
 #include <errno.h>
 #include <sys/ioctl.h>
 #include <iostream>
+#include <mutex>
+#include "../src/control/control-switch.hpp"
 #include "CRC/serial-CRC-TUP.hpp"
 
 using namespace std;
@@ -68,6 +70,7 @@ typedef struct
 } VisionData;
 
 //地图识别地方机器人信息
+/*
 typedef struct
 {
     int16uchar data_length;
@@ -75,7 +78,14 @@ typedef struct
     float2uchar target_position_x;
     float2uchar target_position_y;
 } Mapdata;
-
+*/
+typedef struct
+{
+    int16uchar data_length;
+    int16uchar target_robot_ID;
+    int target_position_x;
+    int target_position_y;
+} Mapdata;
 
 class SerialPortTUP
 {
@@ -96,7 +106,7 @@ public:
     void send();
     void closePort();
     void TransformDataFirst(int Xpos, int Ypos, int dis);//方案1
-    static void SerialSynchronize();
+    static void SerialSynchronize(int* sentData);
 //  int set_disp_mode(int);
 //  void TransformTarPos(const VisionData &data);
 };

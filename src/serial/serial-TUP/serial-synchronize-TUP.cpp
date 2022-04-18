@@ -3,20 +3,27 @@
 //
 
 #include "serial-port-TUP.hpp"
+extern std::mutex mutex2;
 
-void SerialPortTUP::SerialSynchronize() {
+void SerialPortTUP::SerialSynchronize(int* sentData) {
     int mode,sentry,base;
     char ttyUSB_path[] = "/dev/ttyUSB0";//设置串口名称
     SerialPortTUP port(ttyUSB_path);//创建串口类对象
     port.initSerialPort();//串口初始化
     Mapdata data;
-    float x,y;
+    int x,y;
     while (TRUE)
     {
-        data = {15,1,(float)x,(float)y};
+        if (mutex2.try_lock()) {
+            y = *sentData % 1000;
+            x = (*sentData - y)/1000;
+            mutex2.unlock();
+        }
+
+        data = {6,0,x,y};
+
         port.TransformData(data);
         port.send();
-        // port.get_Mode(mode,sentry,base);
+        port.get_Mode(mode,sentry,base);
     }
-
 }

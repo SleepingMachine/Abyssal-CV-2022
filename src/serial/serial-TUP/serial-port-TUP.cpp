@@ -44,8 +44,8 @@ bool SerialPortTUP::get_Mode(int &mode, int &sentry_mode, int &base_mode)
 {
     int bytes;
     char *name = ttyname(fd);
-    if (name != NULL)printf("device:%s\n",name);
-    else printf("tty is null\n");
+    //if (name != NULL)printf("device:%s\n",name);
+    //else printf("tty is null\n");
     int result = ioctl(fd, FIONREAD, &bytes);
     if (result == -1)return false;
 
@@ -57,7 +57,7 @@ bool SerialPortTUP::get_Mode(int &mode, int &sentry_mode, int &base_mode)
     }
 
     bytes = read(fd, rdata, 22);
-
+/*
     if (rdata[0] == 0xA5 && Verify_CRC8_Check_Sum(rdata, 3))
     {
         //判断针头和CRC校验是否正确
@@ -69,7 +69,20 @@ bool SerialPortTUP::get_Mode(int &mode, int &sentry_mode, int &base_mode)
         base_mode  = (int)rdata[16];
         printf("Is in base mode ? :%d\r\n", base_mode);
 
-    }
+    }*/
+    //if (rdata[0] == 0xA5){
+        //判断针头和CRC校验是否正确
+        printf("接收到的指令:%d\r\n", mode);
+        mode  = (int)rdata[1]; //通过此数据控制线程的开启	0关闭自瞄1开启自瞄2小能量机关3大能量机关
+
+        //----------No use---------//
+        /*
+        sentry_mode  = (int)rdata[15];
+        printf("Is in sentry mode ? :%d\r\n", sentry_mode);
+        base_mode  = (int)rdata[16];
+        printf("Is in base mode ? :%d\r\n", base_mode);*/
+
+    //}
     return true;
 }
 
@@ -127,7 +140,6 @@ void SerialPortTUP::set_Brate()
                 perror("tcsetattr fd1");
                 return;
             }
-
             tcflush(fd, TCIOFLUSH);
 
         }
@@ -239,43 +251,62 @@ int SerialPortTUP::set_Bit()
 
 void SerialPortTUP::TransformData(const Mapdata &data)
 {
+    /*
+    if (ControlSwitch::functionConfig._enableCRC){
+        Tdata[0] = 0xA5;
+        Tdata[1] = data.data_length.c[0];
+        Tdata[2] = data.data_length.c[1];
+        Tdata[3] = 0;
 
-    Tdata[0] = 0xA5;
-    Tdata[1] = data.data_length.c[0];
-    Tdata[2] = data.data_length.c[1];
-    Tdata[3] = 0;
-    Append_CRC8_Check_Sum(Tdata,5);
+        Append_CRC8_Check_Sum(Tdata,5);
 
-    Tdata[5] = data.target_robot_ID.c[0];
-    Tdata[6] = data.target_robot_ID.c[1];
+        Tdata[5] = data.target_robot_ID.c[0];
+        Tdata[6] = data.target_robot_ID.c[1];
 
-    Tdata[7] = data.target_position_x.c[0];
-    Tdata[8] = data.target_position_x.c[1];
-    Tdata[9] = data.target_position_x.c[2];
-    Tdata[10] = data.target_position_x.c[3];
+        Tdata[7] = data.target_position_x.c[0];
+        Tdata[8] = data.target_position_x.c[1];
+        Tdata[9] = data.target_position_x.c[2];
+        Tdata[10] = data.target_position_x.c[3];
 
-    Tdata[11] = data.target_position_y.c[0];
-    Tdata[12] = data.target_position_y.c[1];
-    Tdata[13] = data.target_position_y.c[2];
-    Tdata[14] = data.target_position_y.c[3];
+        Tdata[11] = data.target_position_y.c[0];
+        Tdata[12] = data.target_position_y.c[1];
+        Tdata[13] = data.target_position_y.c[2];
+        Tdata[14] = data.target_position_y.c[3];
 
-    Tdata[15] = 0;
-    Tdata[16] = 0;
-    Tdata[17] = 0;
-    Tdata[18] = 0;
+        Tdata[15] = 0;
+        Tdata[16] = 0;
+        Tdata[17] = 0;
+        Tdata[18] = 0;
 
-    Tdata[19] = 0;
+        Tdata[19] = 0;
 
-    Tdata[20] = 0;
-    Tdata[21] = 0;
+        Tdata[20] = 0;
+        Tdata[21] = 0;
 
-    Append_CRC16_Check_Sum(Tdata, 24);
+        Append_CRC16_Check_Sum(Tdata, 24);
+    }
+*/
+    for (int i = 0; i < 4; ++i) {
+        Tdata[0] = 's';
+
+        Tdata[1] = (( data.target_position_x >> 8) & 0xFF);
+        Tdata[2] = (( data.target_position_x >> 0) & 0xFF);
+        Tdata[3] = (( data.target_position_y >> 8) & 0xFF);
+        Tdata[4] = (( data.target_position_y >> 0) & 0xFF);
+
+        Tdata[5] = 'e';
+    }
 
 }
 //发送数据函数
 void SerialPortTUP::send()
 {
-    write(fd, Tdata, 24);
+    /*
+    if (ControlSwitch::functionConfig._enableCRC){
+        write(fd, Tdata, 24);
+    }*/
+
+    write(fd, Tdata, 6);
 }
 
 //关闭通讯协议接口

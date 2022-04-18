@@ -19,10 +19,12 @@ struct FunctionConfig
     bool _enableRoiScaling          = true;
 
     bool _enableLocalVideoStreaming = true;
+
+    bool _enableCRC                 = false;
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
-    std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
-
+    //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
+    std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
 
     bool _enableDebugMode           = true;
 };
