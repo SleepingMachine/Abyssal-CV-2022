@@ -3,6 +3,7 @@
 #include "video/video-save.hpp"
 #include "control/control-switch.hpp"
 #include "serial/serial-TUP/serial-port-TUP.hpp"
+#include "serial/serial-2nd/serial-port-2nd.hpp"
 
 #include <thread>
 #include <mutex>
@@ -22,12 +23,11 @@ int main(int argc, char* argv[]) {
     SerialPortStart = true;
     cv::Mat frame(1280, 720, CV_8UC3), gray;
 
-    //if (!ControlSwitch::functionConfig._enableLocalVideoStreaming){
-        //CameraStream::InitCamera();
-    //}
-    //std::thread serial_thread(SerialPort::SendData, &sentPortData);
-    std::thread serial_thread(SerialPortTUP::SerialSynchronize, &sentPortData);
-    //std::thread Synchronize_thread();
+
+    std::thread serial_thread(SerialPort::SendData, &sentPortData);
+    //std::thread serial_thread(SerialPortTUP::SerialSynchronizeTUP, &sentPortData);
+    //std::thread serial_thread(SerialPort2nd::SerialSynchronize2nd, &sentPortData);
+
     std::thread camera_thread(CameraStream::StreamRetrieve, &frame);
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);
     std::thread control_thread(ControlSwitch::SwitchMode, &frame, &sentPortData);

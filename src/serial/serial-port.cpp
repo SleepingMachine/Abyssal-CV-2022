@@ -6,7 +6,7 @@
 #include "serial-port.hpp"
 #include "serial/serial-TUP/serial-port-TUP.hpp"
 
-std::mutex mutex2;
+extern std::mutex mutex2;
 std::atomic_bool SerialPortStart;
 
 static SerialConfig serialConfig = SerialConfigFactory::getSerialConfig();
@@ -18,9 +18,8 @@ std::string SerialPort::write_device;
 int SerialPort::baud_write;
 int SerialPort::baud_read;
 
-char SerialPort::testData[5];
-
-
+char SerialPort::testData[6];
+char SerialPort::readData[4];
 
 void SerialPort::SendData(int* sentData) {
     while (SerialPortStart) {
@@ -84,9 +83,13 @@ void SerialPort::SendData(int* sentData) {
         char write_buffer[] = "Hello World";
         //传输字节数
         int bytes_written = 0;
-
+        int bytes_readten = 0;
         //串口写数据
         bytes_written = write(fd, SerialPort::testData, sizeof(testData));
+        bytes_readten = read(fd, SerialPort::readData, 3);
+        for (int i = 0; i < 4; ++i) {
+            std::cout << (int)readData[i] << std::endl;
+        }
         printf("\n  %d written to ttyUSB0", tempSendData);
         printf("\n  %d Bytes written to ttyUSB0", bytes_written);
         printf("\n +----------------------------------+\n");
@@ -109,15 +112,16 @@ void SerialPort::getHitPointData(int tempData) {
 */
     int hitPointData_y = tempData % 1000;
     int hitPointData_x = (tempData - hitPointData_y)/1000;
-    std::cout << hitPointData_x << " " << hitPointData_y << std::endl;
-    for (int i = 0; i < 4; ++i) {
-        testData[0] = 's';
-        testData[1] = (( hitPointData_x>> 8) & 0xFF);
-        testData[2] = (( hitPointData_x>> 0) & 0xFF);
-        testData[3] = (( hitPointData_y>> 8) & 0xFF);
-        testData[4] = (( hitPointData_y>> 0) & 0xFF);
+    //std::cout << hitPointData_x << " " << hitPointData_y << std::endl;
 
-    }
+    testData[0] = 's';
+
+    testData[1] = (( hitPointData_x>> 8) & 0xFF);
+    testData[2] = (( hitPointData_x>> 0) & 0xFF);
+    testData[3] = (( hitPointData_y>> 8) & 0xFF);
+    testData[4] = (( hitPointData_y>> 0) & 0xFF);
+
+    testData[5] = 'e';
 
     //std::cout << hitPointData_x << std::endl;
     //std::cout << hitPointData_y << std::endl;

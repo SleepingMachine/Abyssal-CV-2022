@@ -106,7 +106,7 @@ public:
     void send();
     void closePort();
     void TransformDataFirst(int Xpos, int Ypos, int dis);//方案1
-    static void SerialSynchronize(int* sentData);
+    static void SerialSynchronizeTUP(int* sentData);
 //  int set_disp_mode(int);
 //  void TransformTarPos(const VisionData &data);
 };

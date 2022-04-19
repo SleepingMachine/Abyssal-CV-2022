@@ -5,9 +5,9 @@
 #include "serial-port-TUP.hpp"
 extern std::mutex mutex2;
 
-void SerialPortTUP::SerialSynchronize(int* sentData) {
+void SerialPortTUP::SerialSynchronizeTUP(int* sentData) {
     int mode,sentry,base;
-    char ttyUSB_path[] = "/dev/ttyUSB0";//设置串口名称
+    char ttyUSB_path[] = "/dev/ttyUSB1";//设置串口名称
     SerialPortTUP port(ttyUSB_path);//创建串口类对象
     port.initSerialPort();//串口初始化
     Mapdata data;

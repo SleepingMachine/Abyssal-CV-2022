@@ -273,6 +273,54 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/serial/serial-2nd/serial-port-2nd.o: src/serial/serial-2nd/serial-port-2nd.cpp.o
+.PHONY : src/serial/serial-2nd/serial-port-2nd.o
+
+# target to build an object file
+src/serial/serial-2nd/serial-port-2nd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o
+.PHONY : src/serial/serial-2nd/serial-port-2nd.cpp.o
+
+src/serial/serial-2nd/serial-port-2nd.i: src/serial/serial-2nd/serial-port-2nd.cpp.i
+.PHONY : src/serial/serial-2nd/serial-port-2nd.i
+
+# target to preprocess a source file
+src/serial/serial-2nd/serial-port-2nd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.i
+.PHONY : src/serial/serial-2nd/serial-port-2nd.cpp.i
+
+src/serial/serial-2nd/serial-port-2nd.s: src/serial/serial-2nd/serial-port-2nd.cpp.s
+.PHONY : src/serial/serial-2nd/serial-port-2nd.s
+
+# target to generate assembly for a file
+src/serial/serial-2nd/serial-port-2nd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.s
+.PHONY : src/serial/serial-2nd/serial-port-2nd.cpp.s
+
+src/serial/serial-2nd/serial-synchronize-2nd.o: src/serial/serial-2nd/serial-synchronize-2nd.cpp.o
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.o
+
+# target to build an object file
+src/serial/serial-2nd/serial-synchronize-2nd.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.cpp.o
+
+src/serial/serial-2nd/serial-synchronize-2nd.i: src/serial/serial-2nd/serial-synchronize-2nd.cpp.i
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.i
+
+# target to preprocess a source file
+src/serial/serial-2nd/serial-synchronize-2nd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.i
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.cpp.i
+
+src/serial/serial-2nd/serial-synchronize-2nd.s: src/serial/serial-2nd/serial-synchronize-2nd.cpp.s
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.s
+
+# target to generate assembly for a file
+src/serial/serial-2nd/serial-synchronize-2nd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.s
+.PHONY : src/serial/serial-2nd/serial-synchronize-2nd.cpp.s
+
 src/serial/serial-TUP/CRC/serial-CRC-TUP.o: src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
 .PHONY : src/serial/serial-TUP/CRC/serial-CRC-TUP.o
 
@@ -420,6 +468,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/serial/serial-2nd/serial-port-2nd.o"
+	@echo "... src/serial/serial-2nd/serial-port-2nd.i"
+	@echo "... src/serial/serial-2nd/serial-port-2nd.s"
+	@echo "... src/serial/serial-2nd/serial-synchronize-2nd.o"
+	@echo "... src/serial/serial-2nd/serial-synchronize-2nd.i"
+	@echo "... src/serial/serial-2nd/serial-synchronize-2nd.s"
 	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.o"
 	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.i"
 	@echo "... src/serial/serial-TUP/CRC/serial-CRC-TUP.s"

@@ -33,7 +33,8 @@ private:
     static int baud_write;
     static int baud_read;
 
-    static char testData[5];
+    static char testData[6];
+    static char readData[4];
 
     static void checkPortAvailability();
     static void getSerialInfo();

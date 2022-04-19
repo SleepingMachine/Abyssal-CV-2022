@@ -139,6 +139,15 @@
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/main.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.cpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.hpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-synchronize-2nd.cpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>

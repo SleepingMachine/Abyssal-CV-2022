@@ -439,6 +439,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: \
  /usr/include/asm-generic/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/CRC/serial-CRC-TUP.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.hpp \
  /usr/include/c++/11/thread /usr/include/c++/11/stop_token \
  /usr/include/c++/11/bits/std_thread.h /usr/include/c++/11/semaphore \
  /usr/include/c++/11/bits/semaphore_base.h \

@@ -305,8 +305,8 @@ void SerialPortTUP::send()
     if (ControlSwitch::functionConfig._enableCRC){
         write(fd, Tdata, 24);
     }*/
-
     write(fd, Tdata, 6);
+
 }
 
 //关闭通讯协议接口

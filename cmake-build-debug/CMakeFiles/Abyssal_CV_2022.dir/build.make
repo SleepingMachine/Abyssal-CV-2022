@@ -223,6 +223,34 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/serial-synchronize-TUP.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.s
 
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o: ../src/serial/serial-2nd/serial-port-2nd.cpp
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.cpp
+
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.i
+
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-port-2nd.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.s
+
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/flags.make
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o: ../src/serial/serial-2nd/serial-synchronize-2nd.cpp
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o: CMakeFiles/Abyssal_CV_2022.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o -MF CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o.d -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o -c /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-synchronize-2nd.cpp
+
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-synchronize-2nd.cpp > CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.i
+
+CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-2nd/serial-synchronize-2nd.cpp -o CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.s
+
 # Object files for target Abyssal_CV_2022
 Abyssal_CV_2022_OBJECTS = \
 "CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o" \
@@ -235,7 +263,9 @@ Abyssal_CV_2022_OBJECTS = \
 "CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o" \
 "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o" \
 "CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o" \
-"CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o"
+"CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o" \
+"CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o" \
+"CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o"
 
 # External object files for target Abyssal_CV_2022
 Abyssal_CV_2022_EXTERNAL_OBJECTS =
@@ -251,6 +281,8 @@ Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.o
+Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o
+Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/build.make
 Abyssal_CV_2022: /usr/local/lib/libopencv_gapi.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_stitching.so.4.5.5
@@ -307,7 +339,7 @@ Abyssal_CV_2022: /usr/local/lib/libopencv_photo.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_imgproc.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_core.so.4.5.5
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Abyssal_CV_2022"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable Abyssal_CV_2022"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Abyssal_CV_2022.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
