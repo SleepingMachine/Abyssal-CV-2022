@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #相机驱动加载
-#echo 'abyssal' | sudo -S echo "USBDriver"
-#v4l2-ctl -d /dev/video0 -c exposure_absolute=200
+echo 'abyssal' | sudo -S echo "USBDriver"
+v4l2-ctl -d /dev/video0 -c exposure_absolute=200
 
 #sleep 1
 cd /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/cmake-build-debug

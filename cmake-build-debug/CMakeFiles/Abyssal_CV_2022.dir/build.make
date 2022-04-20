@@ -284,7 +284,6 @@ Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-syn
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.o
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/build.make
-Abyssal_CV_2022: /usr/local/lib/libopencv_gapi.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_stitching.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_aruco.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_barcode.so.4.5.5

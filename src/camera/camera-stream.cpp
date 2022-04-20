@@ -90,28 +90,52 @@ void CameraStream::UnInitCamera() {
 
 void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
     if (!ControlSwitch::functionConfig._enableLocalVideoStreaming) {
-        CameraStream::InitCamera();
-        //显示图像
-        while (CameraisOpen) {
-            if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {
-                CameraImageProcess(hCamera, pbyBuffer, g_pRgbBuffer, &sFrameInfo);
+        if (!ControlSwitch::functionConfig._enableUsbCamera){
+            CameraStream::InitCamera();
+            //显示图像
+            while (CameraisOpen) {
+                if (CameraGetImageBuffer(hCamera, &sFrameInfo, &pbyBuffer, 1000) == CAMERA_STATUS_SUCCESS) {
+                    CameraImageProcess(hCamera, pbyBuffer, g_pRgbBuffer, &sFrameInfo);
 
-                cv::Mat matImage(
-                        cvSize(sFrameInfo.iWidth, sFrameInfo.iHeight),
-                        sFrameInfo.uiMediaType == CAMERA_MEDIA_TYPE_MONO8 ? CV_8UC1 : CV_8UC3,
-                        g_pRgbBuffer
-                );
-                //imshow("Opencv Demo", matImage);
+                    cv::Mat matImage(
+                            cvSize(sFrameInfo.iWidth, sFrameInfo.iHeight),
+                            sFrameInfo.uiMediaType == CAMERA_MEDIA_TYPE_MONO8 ? CV_8UC1 : CV_8UC3,
+                            g_pRgbBuffer
+                    );
+                    //imshow("Opencv Demo", matImage);
 
-                if (mutex1.try_lock()) {
-                    matImage.copyTo(*pFrame);
-                    mutex1.unlock();
+                    if (mutex1.try_lock()) {
+                        matImage.copyTo(*pFrame);
+                        mutex1.unlock();
+                    }
+                    waitKey(5);
+
+                    //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
+                    //否则再次调用CameraGetImageBuffer时，程序将被挂起一直阻塞，直到其他线程中调用CameraReleaseImageBuffer来释放了buffer
+                    CameraReleaseImageBuffer(hCamera, pbyBuffer);
+
                 }
-                waitKey(5);
-
-                //在成功调用CameraGetImageBuffer后，必须调用CameraReleaseImageBuffer来释放获得的buffer。
-                //否则再次调用CameraGetImageBuffer时，程序将被挂起一直阻塞，直到其他线程中调用CameraReleaseImageBuffer来释放了buffer
-                CameraReleaseImageBuffer(hCamera, pbyBuffer);
+            }
+        }
+        else{
+            VideoCapture capture(0);    // 打开摄像头
+            if(!capture.isOpened())    // 判断是否打开成功
+            {
+                std::cout << "open USBcamera failed. " << std::endl;
+                exit(0);
+                //return -1;
+            }
+            while(CameraisOpen)
+            {
+                Mat frame;
+                capture >> frame;    // 读取图像帧至frame
+                if(!frame.empty())	// 判断是否为空
+                {
+                    if (mutex1.try_lock()) {
+                        frame.copyTo(*pFrame);
+                        mutex1.unlock();
+                    }
+                }
 
             }
         }
@@ -124,6 +148,9 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
             printf("could not read this video file...\n");
             exit(0);
         }
+        capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0.25);
+        capture.set(cv::CAP_PROP_EXPOSURE, 500);
+        //capture.set(CAP_PROP_EXPOSURE, -12);
         while (CameraisOpen) {
             capture >> frame;  //读取当前帧
             //若视频播放完成，退出循环
