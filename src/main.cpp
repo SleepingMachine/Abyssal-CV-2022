@@ -2,6 +2,7 @@
 #include "armor/armor-identify.hpp"
 #include "video/video-save.hpp"
 #include "control/control-switch.hpp"
+#include "decision/decision-making.hpp"
 #include "serial/serial-TUP/serial-port-TUP.hpp"
 #include "serial/serial-2nd/serial-port-2nd.hpp"
 
@@ -15,16 +16,18 @@ extern std::mutex mutex2;
 
 extern std::atomic_bool CameraisOpen;
 extern std::atomic_bool SerialPortStart;
+extern std::atomic_bool IdentifyStart;
 
 static int sentPortData;
 
 int main(int argc, char* argv[]) {
     CameraisOpen = true;
     SerialPortStart = true;
+    IdentifyStart = true;
     cv::Mat frame(1280, 720, CV_8UC3), gray;
 
 
-    std::thread serial_thread(SerialPort::SendData, &sentPortData);
+ //   std::thread serial_thread(SerialPort::SendData, &sentPortData);
     //std::thread serial_thread(SerialPortTUP::SerialSynchronizeTUP, &sentPortData);
     //std::thread serial_thread(SerialPort2nd::SerialSynchronize2nd, &sentPortData);
 
@@ -32,6 +35,7 @@ int main(int argc, char* argv[]) {
     //std::thread armor_thread(IdentifyArmor::ArmorIdentifyStream, &frame, &sendData);
     std::thread control_thread(ControlSwitch::SwitchMode, &frame, &sentPortData);
     std::thread video_thread(VideoSave::SaveRunningVideo, &frame);
+    std::thread decision_thread(DecisionMaking::DecisionStream, &sentPortData);
     //TODO：监控线程、通信线程/
     /*
     while(CameraisOpen) {
@@ -46,11 +50,12 @@ int main(int argc, char* argv[]) {
         cv::waitKey(5);
     }
     */
-    serial_thread.join();
+ //   serial_thread.join();
     camera_thread.join();
     //armor_thread.join();
     control_thread.join();
     video_thread.join();
+    decision_thread.join();
     CameraStream::UnInitCamera();
 
     return 0;

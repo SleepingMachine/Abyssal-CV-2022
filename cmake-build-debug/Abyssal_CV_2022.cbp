@@ -127,6 +127,15 @@
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.hpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-making.cpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-making.hpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
+		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-tool.hpp">
+			<Option target="Abyssal_CV_2022"/>
+		</Unit>
 		<Unit filename="/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/energy/energy-buff.cpp">
 			<Option target="Abyssal_CV_2022"/>
 		</Unit>

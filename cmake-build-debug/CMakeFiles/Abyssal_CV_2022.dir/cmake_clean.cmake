@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o.d"
   "CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o"
   "CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o.d"
+  "CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o"
+  "CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o.d"
   "CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o"
   "CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o.d"
   "CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o"

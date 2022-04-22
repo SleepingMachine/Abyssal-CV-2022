@@ -13,16 +13,16 @@ struct FunctionConfig
     // BLUE => true
     bool _enemyColor                = true;
 
-    bool _enableEnergyBuffMode      = false;
+    bool _enableEnergyBuffMode      = true;
 
     bool _enableSaveVideo           = false;
     bool _enableRoiScaling          = true;
 
-    bool _enableLocalVideoStreaming = false;
-    bool _enableUsbCamera           = true;
+    bool _enableLocalVideoStreaming = true;
+    bool _enableUsbCamera           = false;
 
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
-    std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.03.26 14-57-45.avi";
 
 

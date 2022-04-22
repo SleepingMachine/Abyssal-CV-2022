@@ -225,6 +225,30 @@ src/control/control-switch.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.s
 .PHONY : src/control/control-switch.cpp.s
 
+src/decision/decision-making.o: src/decision/decision-making.cpp.o
+.PHONY : src/decision/decision-making.o
+
+# target to build an object file
+src/decision/decision-making.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o
+.PHONY : src/decision/decision-making.cpp.o
+
+src/decision/decision-making.i: src/decision/decision-making.cpp.i
+.PHONY : src/decision/decision-making.i
+
+# target to preprocess a source file
+src/decision/decision-making.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.i
+.PHONY : src/decision/decision-making.cpp.i
+
+src/decision/decision-making.s: src/decision/decision-making.cpp.s
+.PHONY : src/decision/decision-making.s
+
+# target to generate assembly for a file
+src/decision/decision-making.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Abyssal_CV_2022.dir/build.make CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.s
+.PHONY : src/decision/decision-making.cpp.s
+
 src/energy/energy-buff.o: src/energy/energy-buff.cpp.o
 .PHONY : src/energy/energy-buff.o
 
@@ -462,6 +486,9 @@ help:
 	@echo "... src/control/control-switch.o"
 	@echo "... src/control/control-switch.i"
 	@echo "... src/control/control-switch.s"
+	@echo "... src/decision/decision-making.o"
+	@echo "... src/decision/decision-making.i"
+	@echo "... src/decision/decision-making.s"
 	@echo "... src/energy/energy-buff.o"
 	@echo "... src/energy/energy-buff.i"
 	@echo "... src/energy/energy-buff.s"

@@ -19,6 +19,8 @@ int ControlSwitch::getFrameErrorCounter = 0;
 
 cv::Mat ControlSwitch::src(480, 960, CV_8UC3);
 
+std::atomic_bool IdentifyStart;
+
 void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
     cv::Mat temp;
     IdentifyArmor::CreatTrackbars();
@@ -40,7 +42,7 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
         //if (src.empty() || (src.cols != 960 || src.rows != 640)) {
         if (src.empty()) {
             std::cout << "Get Frame Fail" << std::endl;
-            if (getFrameErrorCounter < 10)
+            if (getFrameErrorCounter < 5)
             {
                 getFrameErrorCounter++;
                 continue;
@@ -50,10 +52,9 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
             }
         }
         if (!functionConfig._enableEnergyBuffMode && src.cols == 960 && src.rows == 640){
-
             src = src(cv::Rect(0,80,960,480));
         }
-
+        IdentifyStart = true;
         //std::cout << sendData << std::endl;
 
         /*
