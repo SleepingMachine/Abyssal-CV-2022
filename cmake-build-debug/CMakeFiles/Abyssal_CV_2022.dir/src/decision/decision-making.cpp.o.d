@@ -406,4 +406,5 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o: \
  /usr/local/include/opencv4/opencv2/core/core_c.h \
  /usr/local/include/opencv4/opencv2/core/types_c.h \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-buff.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp \
+ /usr/local/include/opencv4/opencv2/highgui/highgui_c.h

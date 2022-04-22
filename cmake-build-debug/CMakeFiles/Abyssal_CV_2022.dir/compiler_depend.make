@@ -2388,7 +2388,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o: ../src/decisi
   /usr/local/include/opencv4/opencv2/core/core_c.h \
   /usr/local/include/opencv4/opencv2/core/types_c.h \
   ../src/energy/energy-buff.hpp \
-  ../src/energy/energy-tools.hpp
+  ../src/energy/energy-tools.hpp \
+  /usr/local/include/opencv4/opencv2/highgui/highgui_c.h
 
 CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o: ../src/energy/energy-buff.cpp \
   /usr/include/stdc-predef.h \
@@ -3351,6 +3352,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: ../src/main.cpp \
   ../src/control/control-switch.hpp \
   ../src/decision/decision-making.hpp \
   ../src/decision/decision-tool.hpp \
+  /usr/local/include/opencv4/opencv2/highgui/highgui_c.h \
   ../src/serial/serial-TUP/serial-port-TUP.hpp \
   /usr/include/x86_64-linux-gnu/sys/stat.h \
   /usr/include/x86_64-linux-gnu/bits/statx.h \
@@ -6138,6 +6140,8 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o: ../src/video/video-sa
 /usr/include/c++/11/bits/atomic_timed_wait.h:
 
 ../src/main.cpp:
+
+/usr/local/include/opencv4/opencv2/highgui/highgui_c.h:
 
 ../src/decision/decision-tool.hpp:
 

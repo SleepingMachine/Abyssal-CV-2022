@@ -419,6 +419,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-making.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-tool.hpp \
+ /usr/local/include/opencv4/opencv2/highgui/highgui_c.h \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/serial-port-TUP.hpp \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
  /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \

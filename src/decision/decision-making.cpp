@@ -14,7 +14,7 @@ int DecisionMaking::lastPointData = 0;
 
 DecisionMaking::DecisionMaking() {}
 void DecisionMaking::DecisionStream(int *rawData) {
-    KalmanDemo(rawData);
+    KalmanDemo2(rawData);
 }
 
 int DecisionMaking::KalmanDemo(int *rawData) {
@@ -107,3 +107,63 @@ int DecisionMaking::KalmanDemo(int *rawData) {
         return 0;
     }
 }
+
+
+void DecisionMaking::KalmanDemo2(int *rawData) {
+    const int winHeight=640;
+    const int winWidth=960;
+    RNG rng;
+    //1.kalman filter setup
+    const int stateNum=4;                                      //状态值4×1向量(x,y,△x,△y)
+    const int measureNum=2;                                    //测量值2×1向量(x,y)
+    KalmanFilter KF(stateNum, measureNum, 0);
+
+    KF.transitionMatrix = (Mat_<float>(4, 4) <<    //转移矩阵A
+            1,0,1,0,
+            0,1,0,1,
+            0,0,1,0,
+            0,0,0,1);
+    setIdentity(KF.measurementMatrix);                                                    //测量矩阵H
+    setIdentity(KF.processNoiseCov, Scalar::all(1e-5));                            //系统噪声方差矩阵Q
+    setIdentity(KF.measurementNoiseCov, Scalar::all(1e-1));                        //测量噪声方差矩阵R
+    setIdentity(KF.errorCovPost, Scalar::all(1));                                  //后验错误估计协方差矩阵P
+    rng.fill(KF.statePost,RNG::UNIFORM,0,winHeight>winWidth?winWidth:winHeight);   //初始状态值x(0)
+    Mat measurement = Mat::zeros(measureNum, 1, CV_32F);                           //初始测量值x'(0)，因为后面要更新这个值，所以必须先定义
+
+    namedWindow("kalman");
+    //setMouseCallback("kalman",mouseEvent);
+
+    Mat image(winHeight,winWidth,CV_8UC3,Scalar(0));
+
+    while (1)
+    {
+        if (mutex2.try_lock()) {
+            tempPointData = *rawData;
+            mutex2.unlock();
+        }
+        int tempPointData_y = tempPointData % 1000;
+        int tempPointData_x = (tempPointData - tempPointData_y)/1000;
+        if (tempPointData_x  && tempPointData_y){
+            //2.kalman prediction
+            Mat prediction = KF.predict();
+            Point predict_pt = Point(prediction.at<float>(0),prediction.at<float>(1) );   //预测值(x',y')
+
+            //3.update measurement
+            measurement.at<float>(0) = tempPointData_x;
+            measurement.at<float>(1) = tempPointData_y;
+
+            //4.update
+            KF.correct(measurement);
+
+            //draw
+            image.setTo(Scalar(255,255,255,0));
+            circle(image,predict_pt,5,Scalar(0,255,0),3);    //predicted point with green
+            circle(image,cv::Point(tempPointData_x,tempPointData_y),5,Scalar(255,0,0),3); //current position with red
+
+            imshow("kalman", image);
+        }
+
+    }
+}
+
+
