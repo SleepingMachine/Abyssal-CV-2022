@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
     IdentifyStart = true;
     cv::Mat frame(1280, 720, CV_8UC3), gray;
 
-    
+
     //std::thread serial_thread(SerialPort::SendData, &sentPortData);
 
     //std::thread serial_thread(SerialPortTUP::SerialSynchronizeTUP, &sentPortData);

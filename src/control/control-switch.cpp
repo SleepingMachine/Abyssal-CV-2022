@@ -103,6 +103,8 @@ void ControlSwitch::initColorThresholdParameters() {
             IdentifyArmor::vmin_1 = 141;
             IdentifyArmor::vmax_1 = 255;
 
+            //IdentifyArmor::smax_0 = 255;
+
             IdentifyEnergyBuff::hmin_0 = 53;
             IdentifyEnergyBuff::hmax_0 = 221;
             IdentifyEnergyBuff::smin_0 = 128;
