@@ -115,6 +115,10 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
             *sentData = hitPointData;
             //SerialPort::getHitPointData(hitPointx,hitPointy);
         }
+        else{
+            int hitPointData = 0;
+            *sentData = hitPointData;
+        }
 
 
         //cv::imshow("mask", maskHSV);

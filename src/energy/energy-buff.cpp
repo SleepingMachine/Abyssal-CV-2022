@@ -89,6 +89,10 @@ void IdentifyEnergyBuff::EnergyBuffIdentifyStream(cv::Mat importSrc, int *sentDa
         *sentData = hitPointData;
         //SerialPort::getHitPointData(hitPointx,hitPointy);
     }
+    else{
+        int hitPointData = 0;
+        *sentData = hitPointData;
+    }
     DrawReferenceGraphics();
     resourceRelease();
 }
