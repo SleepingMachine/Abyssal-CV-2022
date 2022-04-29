@@ -401,12 +401,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o: \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/armor/KCF/../../../asset/RoboMasterConfig.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/armor/KCF/../armor-identify.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
- /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
- /usr/local/include/opencv4/opencv2/core/core_c.h \
- /usr/local/include/opencv4/opencv2/core/types_c.h \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-buff.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp \
  /usr/include/eigen3/Eigen/Dense /usr/include/eigen3/Eigen/Core \
  /usr/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
  /usr/include/eigen3/Eigen/src/Core/util/Macros.h \
@@ -578,4 +572,10 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o: \
  /usr/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h \
  /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
  /usr/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h \
- /usr/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
+ /usr/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
+ /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
+ /usr/local/include/opencv4/opencv2/core/core_c.h \
+ /usr/local/include/opencv4/opencv2/core/types_c.h \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp

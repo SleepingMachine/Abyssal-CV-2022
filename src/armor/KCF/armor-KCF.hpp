@@ -10,17 +10,27 @@
 
 #include "../../../asset/RoboMasterConfig.hpp"
 #include "../armor-identify.hpp"
+#include <stdio.h>
+#include <atomic>
+
+#include <opencv2/highgui/highgui.hpp>
+#include "opencv2/highgui.hpp"
+#include <opencv2/core/core.hpp>
+#include "opencv2/core/cvdef.h"
+#include <opencv2/imgproc/imgproc.hpp>
+
+#include <eigen3/Eigen/Dense>
 
 class ArmorKCF{
 private:
     ArmorKCF();
     ~ArmorKCF() {}
-    static void trackerInit(cv::RotatedRect targetArmor, cv::RotatedRect targetArmorLightBar_L, cv::RotatedRect targetArmorLightBar_R);
-
-    static cv::Rect trackingRect;
-    static cv::Rect searchingRect;
+    static void kalmanUpd(bool, float, float);
+    static void kalmanPred(bool);
 public:
+    //static int KalmanTracking(int* rawData);
     static bool _targetArmorFind;
+    static bool start;
 };
 
 #endif //ABYSSAL_CV_2022_ARMOR_KCF_HPP

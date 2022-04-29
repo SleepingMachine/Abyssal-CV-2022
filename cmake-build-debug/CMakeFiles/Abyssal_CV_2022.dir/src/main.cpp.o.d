@@ -408,17 +408,6 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/armor/KCF/../../../asset/RoboMasterConfig.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/armor/KCF/../armor-identify.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
- /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
- /usr/local/include/opencv4/opencv2/core/core_c.h \
- /usr/local/include/opencv4/opencv2/core/types_c.h \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-buff.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-making.hpp \
- /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-tool.hpp \
  /usr/include/eigen3/Eigen/Dense /usr/include/eigen3/Eigen/Core \
  /usr/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
  /usr/include/eigen3/Eigen/src/Core/util/Macros.h \
@@ -591,6 +580,17 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o: \
  /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
  /usr/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h \
  /usr/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc_c.h \
+ /usr/local/include/opencv4/opencv2/imgproc/types_c.h \
+ /usr/local/include/opencv4/opencv2/core/core_c.h \
+ /usr/local/include/opencv4/opencv2/core/types_c.h \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-buff.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/include/../src/energy/energy-tools.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/armor/armor-identify.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/video/video-save.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/control/control-switch.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-making.hpp \
+ /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/decision/decision-tool.hpp \
  /home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/src/serial/serial-TUP/serial-port-TUP.hpp \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
  /usr/include/x86_64-linux-gnu/bits/statx.h /usr/include/linux/stat.h \

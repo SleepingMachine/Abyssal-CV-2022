@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     cv::Mat frame(1280, 720, CV_8UC3), gray;
 
 
-    //std::thread serial_thread(SerialPort::SendData, &sentPortData);
+    std::thread serial_thread(SerialPort::SendData, &sentPortData);
 
     //std::thread serial_thread(SerialPortTUP::SerialSynchronizeTUP, &sentPortData);
     //std::thread serial_thread(SerialPort2nd::SerialSynchronize2nd, &sentPortData);
@@ -51,11 +51,11 @@ int main(int argc, char* argv[]) {
         cv::waitKey(5);
     }
     */
-    //serial_thread.join();
+    serial_thread.join();
     camera_thread.join();
     control_thread.join();
     video_thread.join();
-    decision_thread.join();
+    //decision_thread.join();
     CameraStream::UnInitCamera();
 
     return 0;

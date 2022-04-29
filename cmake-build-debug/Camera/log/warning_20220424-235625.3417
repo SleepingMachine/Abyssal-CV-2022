@@ -1,0 +1,16 @@
+Log file created at: 2022/04/24 23:56:25
+Running on machine: abyssal-NUC8-1
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0424 23:56:25.583097  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:eno1-192.168.120.4-Unknown-1500)Heart Fail:1
+W0424 23:56:27.946017  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:eno1-192.168.120.4-Unknown-1500)Heart Fail:2
+W0424 23:56:29.257669  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:3
+W0424 23:56:29.307956  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:4
+W0424 23:56:30.309446  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:5
+W0424 23:56:31.310801  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:6
+W0424 23:56:32.312247  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:7
+W0424 23:56:33.314095  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:8
+W0424 23:56:34.315666  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:9
+W0424 23:56:35.317085  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:10
+W0424 23:56:36.320133  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:11
+W0424 23:56:37.321542  3439 CameraGigeBase.cpp:3399] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)Heart Fail:12
+W0424 23:56:37.321650  3439 CameraGigeBase.cpp:3404] Device:(name:camera sn:050112220187 cam:192.168.120.181-1000-1400 nic:-192.168.120.4-Unknown-0)CommIsFailed!!!
