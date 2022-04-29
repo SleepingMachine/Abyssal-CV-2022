@@ -9,18 +9,21 @@
 
 struct FunctionConfig
 {
-    //RED => false
+    // RED  => false
     // BLUE => true
-    bool _enemyColor                = true;
+    bool _enemyColor                  = true;
 
-    bool _enableEnergyBuffMode      = false;
+    bool _enableEnergyBuffMode        = false;
 
-    bool _enableSaveVideo           = false;
-    bool _enableRoiScaling          = true;
-    bool _enableArmorKCF            = true;
+    bool _enableSaveVideo             = false;
+    bool _enableRoiScaling            = true;
+    bool _enableArmorKCF              = true;
 
-    bool _enableLocalVideoStreaming = true;
-    bool _enableUsbCamera           = false;
+    // 0   => false
+    // 180 => true
+    bool  _imageOrientationCorrection = false;
+    bool _enableLocalVideoStreaming   = true;
+    bool _enableUsbCamera             = false;
 
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";

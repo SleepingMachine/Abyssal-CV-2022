@@ -103,7 +103,9 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
                             g_pRgbBuffer
                     );
                     //imshow("Opencv Demo", matImage);
-
+                    if (ControlSwitch::functionConfig._imageOrientationCorrection){
+                        cv::flip(matImage, matImage, 0);
+                    }
                     if (mutex1.try_lock()) {
                         matImage.copyTo(*pFrame);
                         mutex1.unlock();
@@ -131,6 +133,9 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
                 capture >> frame;    // 读取图像帧至frame
                 if(!frame.empty())	// 判断是否为空
                 {
+                    if (ControlSwitch::functionConfig._imageOrientationCorrection){
+                        cv::flip(frame, frame, 0);
+                    }
                     if (mutex1.try_lock()) {
                         frame.copyTo(*pFrame);
                         mutex1.unlock();
@@ -161,6 +166,11 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
             if (frame.cols != 960 || frame.rows != 640) {
                 cv::resize(frame, frame, cv::Size(960, 640));
             }
+            /*
+            if (ControlSwitch::functionConfig._imageOrientationCorrection){
+                cv::flip(frame, frame, 0);
+            }
+             */
             if (mutex1.try_lock()) {
                 frame.copyTo(*pFrame);
                 mutex1.unlock();
