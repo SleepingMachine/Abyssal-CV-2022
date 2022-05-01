@@ -25,12 +25,12 @@ struct FunctionConfig
     // 0   => false
     // 180 => true
     bool  _imageOrientationCorrection = false;
-    bool _enableLocalVideoStreaming   = false;
+    bool _enableLocalVideoStreaming   = true;
     bool _enableUsbCamera             = false;
 
-    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
-    //std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
+    std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.05.01 23-01-38.avi";
     
     bool _enableDebugMode           = true;
 };
@@ -90,11 +90,11 @@ struct ArmorPara {
     float maxLightBarAspectRatio = 10.0f; //最大长宽比
     float maxTwoLightBarsLengthRatio = 1.8f;
     float maxArmorAspectRatio = 4.5f;
-    float maxArmorErrorAngle = 20.0f;
+    float maxArmorErrorAngle = 50.0f;
     float maxErrorAngle = 15;
     int grayThreshold_PURPLE = 150;
-    int grayThreshold_RED = 100;
-    int separationThreshold_RED = 80;
+    int grayThreshold_RED = 80;
+    int separationThreshold_RED = 50;
     int grayThreshold_BLUE = 160;
     int separationThreshold_BLUE = 80;
     int separationThreshold_GREEN = 10;

@@ -327,9 +327,9 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
         morphologyEx(dstHSV, dstHSV, 1, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::dilate,IdentifyArmor::dilate)));
     }
     else if(ControlSwitch::functionConfig._colorSpace){
-        cv::cvtColor(src, srcRGB, CV_BGR2RGB, 0);
-        cv::split(srcRGB, splitSrc);                                                               //分离色彩通道
-        cv::cvtColor(srcRGB, srcGray, cv::COLOR_BGR2GRAY);                                        //获取灰度图
+        //cv::cvtColor(src, srcRGB, CV_BGR2RGB, 0);
+        cv::split(src, splitSrc);                                                               //分离色彩通道
+        cv::cvtColor(src, srcGray, cv::COLOR_BGR2GRAY);                                        //获取灰度图
         cv::threshold(srcGray, separationSrcData, 240, 255, cv::THRESH_BINARY);
         cv::bitwise_not(separationSrcData, separationSrcData);
         if (!ControlSwitch::functionConfig._enemyColor) {
@@ -347,7 +347,6 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
             //cv::morphologyEx(_maxColor, _maxColor, cv::MORPH_OPEN, Util::structuringElement3());
         }
         else {
-
             cv::threshold(splitSrc[2], purpleSrc, armorPara.grayThreshold_PURPLE, 255, cv::THRESH_BINARY);                 //防止误识别紫色基地
             cv::bitwise_not(purpleSrc, purpleSrc);
             //敌方为蓝色
