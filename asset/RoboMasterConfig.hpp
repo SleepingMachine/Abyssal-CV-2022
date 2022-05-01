@@ -11,23 +11,26 @@ struct FunctionConfig
 {
     // RED  => false
     // BLUE => true
-    bool _enemyColor                  = true;
+    bool _enemyColor                  = false;
+    // HSV => false
+    // RGB => true
+    bool _colorSpace                  = true;
 
     bool _enableEnergyBuffMode        = false;
 
     bool _enableSaveVideo             = false;
     bool _enableRoiScaling            = true;
-    bool _enableArmorKCF              = true;
+    bool _enableArmorKCF              = false;
 
     // 0   => false
     // 180 => true
     bool  _imageOrientationCorrection = false;
-    bool _enableLocalVideoStreaming   = true;
+    bool _enableLocalVideoStreaming   = false;
     bool _enableUsbCamera             = false;
 
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
-    std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
+    //std::string localVideoPath = "/home/sleepingmachine/视频/2022.03.31 18-52-58.avi";
     
     bool _enableDebugMode           = true;
 };

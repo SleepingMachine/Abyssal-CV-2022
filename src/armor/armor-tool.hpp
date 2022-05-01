@@ -10,6 +10,14 @@
 #include "cmath"
 
 class ArmorTool{
+private:
+    static ArmorTool &instance() {
+        static ArmorTool armorTool;
+        return armorTool;
+    }
+    const cv::Mat StructuringElement3 = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(3, 3));
+    const cv::Mat StructuringElement5 = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(5, 5));
+    const cv::Mat StructuringElement7 = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(7, 7));
 public:
     static inline float findExtremumOfSide(cv::RotatedRect &rect, bool flag) {
         if (flag)
@@ -91,6 +99,10 @@ public:
         }
 
         return tan;
+    }
+
+    static inline cv::Mat structuringElement3() {
+        return instance().StructuringElement3;
     }
 
     static float calSkewingAngle(cv::RotatedRect rect1, cv::RotatedRect rect2, cv::Point2f* shortCenter) {

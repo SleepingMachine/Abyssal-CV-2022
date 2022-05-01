@@ -42,9 +42,16 @@ private:
     static int getFrameErrorCounter;
     static cv::Mat src;
     static cv::Mat searchSrc;
+    static cv::Mat srcRGB;
     static cv::Mat srcHSV;
+    static std::vector<cv::Mat> splitSrc;
+    static cv::Mat separationSrc;
+    static cv::Mat separationSrcGreen;
+    static cv::Mat purpleSrc;
+    static cv::Mat srcGray;
     static cv::Mat maskHSV_0;
     static cv::Mat maskHSV_1;
+    static cv::Mat separationSrcData;
     static cv::Mat maskHSV;
     static cv::Mat dstHSV;
 

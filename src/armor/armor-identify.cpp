@@ -55,14 +55,20 @@ cv::Rect2d IdentifyArmor::restoreRect;
 bool ArmorKCF::_targetArmorFind= false;
 bool IdentifyArmor::_cropRoi = false;
 bool IdentifyArmor::_roiScaling = false;
-
+std::vector<cv::Mat> IdentifyArmor::splitSrc;
 
 cv::Mat IdentifyArmor::src(480, 960, CV_8UC3);
 cv::Mat IdentifyArmor::srcHSV(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::srcRGB(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::maskHSV_0(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::maskHSV_1(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::srcGray(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::purpleSrc(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::separationSrcData(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::maskHSV(640, 1280, CV_8UC3);
 cv::Mat IdentifyArmor::dstHSV(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::separationSrc(640, 1280, CV_8UC3);
+cv::Mat IdentifyArmor::separationSrcGreen(640, 1280, CV_8UC3);
 
 cv::Mat IdentifyArmor::searchSrc(640, 1280, CV_8UC3);
 cv::Point IdentifyArmor::cropOriginPoint = cv::Point(0,0);
@@ -276,7 +282,6 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
         cv::imshow("12", searchSrc);
     }
      */
-    cv::cvtColor(src, srcHSV, CV_BGR2HSV, 0);
 /*
     if(ControlSwitch::functionConfig._enemyColor == EnemyColor::ENEMY_BLUE){
         IdentifyArmor::hmin_0 = 53;
@@ -309,15 +314,58 @@ void IdentifyArmor::ImagePreprocess(const cv::Mat &src) {
         IdentifyArmor::vmax_1 = 255;
     }
     */
-    cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_0, IdentifyArmor::smin_0, IdentifyArmor::vmin_0), cv::Scalar(IdentifyArmor::hmax_0, IdentifyArmor::smax_0, IdentifyArmor::vmax_0), maskHSV_0);
-    cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_1, IdentifyArmor::smin_1, IdentifyArmor::vmin_1), cv::Scalar(IdentifyArmor::hmax_1, IdentifyArmor::smax_1, IdentifyArmor::vmax_1), maskHSV_1);
-    //cv::imshow("0", maskHSV_0);
-    //cv::imshow("1", maskHSV_1);
-    maskHSV = maskHSV_0 | maskHSV_1;
-    morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::open,IdentifyArmor::open)));
-    morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::close,IdentifyArmor::close)));
-    morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::erode,IdentifyArmor::erode)));
-    morphologyEx(dstHSV, dstHSV, 1, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::dilate,IdentifyArmor::dilate)));
+    if (!ControlSwitch::functionConfig._colorSpace){
+        cv::cvtColor(src, srcHSV, CV_BGR2HSV, 0);
+        cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_0, IdentifyArmor::smin_0, IdentifyArmor::vmin_0), cv::Scalar(IdentifyArmor::hmax_0, IdentifyArmor::smax_0, IdentifyArmor::vmax_0), maskHSV_0);
+        cv::inRange(srcHSV, cv::Scalar(IdentifyArmor::hmin_1, IdentifyArmor::smin_1, IdentifyArmor::vmin_1), cv::Scalar(IdentifyArmor::hmax_1, IdentifyArmor::smax_1, IdentifyArmor::vmax_1), maskHSV_1);
+        //cv::imshow("0", maskHSV_0);
+        //cv::imshow("1", maskHSV_1);
+        maskHSV = maskHSV_0 | maskHSV_1;
+        morphologyEx(maskHSV, dstHSV, 2, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::open,IdentifyArmor::open)));
+        morphologyEx(dstHSV, dstHSV, 3, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::close,IdentifyArmor::close)));
+        morphologyEx(dstHSV, dstHSV, 0, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::erode,IdentifyArmor::erode)));
+        morphologyEx(dstHSV, dstHSV, 1, getStructuringElement(cv::MORPH_RECT,cv::Size(IdentifyArmor::dilate,IdentifyArmor::dilate)));
+    }
+    else if(ControlSwitch::functionConfig._colorSpace){
+        cv::cvtColor(src, srcRGB, CV_BGR2RGB, 0);
+        cv::split(srcRGB, splitSrc);                                                               //分离色彩通道
+        cv::cvtColor(srcRGB, srcGray, cv::COLOR_BGR2GRAY);                                        //获取灰度图
+        cv::threshold(srcGray, separationSrcData, 240, 255, cv::THRESH_BINARY);
+        cv::bitwise_not(separationSrcData, separationSrcData);
+        if (!ControlSwitch::functionConfig._enemyColor) {
+            //敌方为红色
+            cv::threshold(srcGray, srcGray, armorPara.grayThreshold_RED, 255, cv::THRESH_BINARY);     //灰度二值化
+            cv::subtract(splitSrc[2], splitSrc[0], separationSrc);                                 //红蓝通道相减
+            cv::subtract(splitSrc[2], splitSrc[1], separationSrcGreen);                             //红绿通道相减
+            cv::threshold(separationSrc, separationSrc, armorPara.separationThreshold_RED, 255, cv::THRESH_BINARY);             //红蓝二值化
+            cv::threshold(separationSrcGreen, separationSrcGreen, armorPara.separationThreshold_GREEN, 255, cv::THRESH_BINARY);//红绿二值化
+            cv::dilate(separationSrc, separationSrc, ArmorTool::structuringElement3());
+            cv::dilate(separationSrcGreen, separationSrcGreen, ArmorTool::structuringElement3());                                        //膨胀
+
+            dstHSV = separationSrc & srcGray & separationSrcGreen & separationSrcData;                                                                //逻辑与获得最终二值化图像
+            cv::dilate(dstHSV, dstHSV, ArmorTool::structuringElement3());                                                    //膨胀
+            //cv::morphologyEx(_maxColor, _maxColor, cv::MORPH_OPEN, Util::structuringElement3());
+        }
+        else {
+
+            cv::threshold(splitSrc[2], purpleSrc, armorPara.grayThreshold_PURPLE, 255, cv::THRESH_BINARY);                 //防止误识别紫色基地
+            cv::bitwise_not(purpleSrc, purpleSrc);
+            //敌方为蓝色
+            cv::threshold(srcGray, srcGray, armorPara.grayThreshold_BLUE, 255, cv::THRESH_BINARY);                        //灰度二值化
+            cv::subtract(splitSrc[0], splitSrc[2], separationSrc);
+            cv::subtract(splitSrc[0], splitSrc[1], separationSrcGreen);                                                //红蓝通道相减
+            cv::threshold(separationSrc, separationSrc, armorPara.separationThreshold_BLUE, 255, cv::THRESH_BINARY);
+            cv::threshold(separationSrcGreen, separationSrcGreen, armorPara.separationThreshold_GREEN, 255, cv::THRESH_BINARY);//红蓝二值化
+            cv::dilate(separationSrc, separationSrc, ArmorTool::structuringElement3());
+            cv::dilate(separationSrcGreen, separationSrcGreen, ArmorTool::structuringElement3());           //膨胀
+
+            dstHSV = separationSrc & srcGray & separationSrcGreen & separationSrcData & purpleSrc;                                                                //逻辑与获得最终二值化图像
+            cv::dilate(dstHSV, dstHSV, ArmorTool::structuringElement3());                                                    //膨胀
+            //cv::morphologyEx(_maxColor, _maxColor, cv::MORPH_OPEN, Util::structuringElement3());
+
+        }
+    }
+
 }
 
 /*
