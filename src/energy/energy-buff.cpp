@@ -318,13 +318,19 @@ bool IdentifyEnergyBuff::circleCenterSVM(cv::RotatedRect &inputRect){
 }
 
 void IdentifyEnergyBuff::DrawReferenceGraphics() {
-    if (_findEnergyBuffTarget){
-        rLogoRect.center.x += cropOriginPoint.x;
-        rLogoRect.center.y += cropOriginPoint.y;
-        EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
-        cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
-        //cv::circle(src, cropOriginPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+    if (ControlSwitch::functionConfig._enableDebugMode){
+        if (_findEnergyBuffTarget){
+            rLogoRect.center.x += cropOriginPoint.x;
+            rLogoRect.center.y += cropOriginPoint.y;
+            if (ControlSwitch::functionConfig._enableDebugMode){
+                EnergyBuffTool::drawRotatedRect(src,rLogoRect,cv::Scalar(25,255,25),2, 16);
+            }
+
+            cv::circle(src, rLogoRectCenterPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+            //cv::circle(src, cropOriginPoint, 1, cv::Scalar(51,48,245), 2);  // 画半径为1的圆(画点）
+        }
     }
+
 /*
     for (int i = 0; i < possibleBladeRects.size(); ++i) {
         possibleBladeRects[i].center.x += cropOriginPoint.x;
@@ -340,25 +346,37 @@ void IdentifyEnergyBuff::DrawReferenceGraphics() {
     for (int i = 0; i < bladeRects.size(); ++i) {
         bladeRects[i].center.x += cropOriginPoint.x;
         bladeRects[i].center.y += cropOriginPoint.y;
-        EnergyBuffTool::drawRotatedRect(src,bladeRects[i],cv::Scalar(4,159,72),2, 16);
+        if (ControlSwitch::functionConfig._enableDebugMode){
+            EnergyBuffTool::drawRotatedRect(src,bladeRects[i],cv::Scalar(4,159,72),2, 16);
+        }
+
     }
     for (int i = 0; i < bladeInlineRects.size(); ++i) {
         bladeInlineRects[i].center.x += cropOriginPoint.x;
         bladeInlineRects[i].center.y += cropOriginPoint.y;
-        EnergyBuffTool::drawRotatedRect(src,bladeInlineRects[i],cv::Scalar(100,200,170),2, 16);
+        if (ControlSwitch::functionConfig._enableDebugMode){
+            EnergyBuffTool::drawRotatedRect(src,bladeInlineRects[i],cv::Scalar(100,200,170),2, 16);
+        }
+
     }
     for (int i = 0; i < bladeArmorRects.size(); ++i) {
         bladeArmorRects[i].center.x += cropOriginPoint.x;
         bladeArmorRects[i].center.y += cropOriginPoint.y;
-        EnergyBuffTool::drawRotatedRect(src,bladeArmorRects[i],cv::Scalar(200,20,170),2, 16);
-    }
-    if(hitPoint.x && hitPoint.y){
-        cv::circle(src, cv::Point (hitPoint.x + cropOriginPoint.x, hitPoint.y + cropOriginPoint.y), 15, cv::Scalar(51,48,245), 2);
+        if (ControlSwitch::functionConfig._enableDebugMode){
+            EnergyBuffTool::drawRotatedRect(src,bladeArmorRects[i],cv::Scalar(200,20,170),2, 16);
+        }
+
     }
 
-    cv::imshow("Seach", searchSrc);
-    cv::imshow("Dst", dstHSV);
-    cv::imshow("Energy", src);
+    if (ControlSwitch::functionConfig._enableDebugMode){
+        if(hitPoint.x && hitPoint.y){
+            cv::circle(src, cv::Point (hitPoint.x + cropOriginPoint.x, hitPoint.y + cropOriginPoint.y), 15, cv::Scalar(51,48,245), 2);
+        }
+        cv::imshow("Seach", searchSrc);
+        cv::imshow("Dst", dstHSV);
+        cv::imshow("Energy", src);
+    }
+
 }
 
 void IdentifyEnergyBuff::searchContours_Cantilever(std::vector<cv::RotatedRect> possibleBladeRects) {

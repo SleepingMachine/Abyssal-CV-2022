@@ -11,12 +11,12 @@ struct FunctionConfig
 {
     // RED  => false
     // BLUE => true
-    bool _enemyColor                  = false;
+    bool _enemyColor                  = true;
     // HSV => false
     // RGB => true
     bool _colorSpace                  = true;
 
-    bool _enableEnergyBuffMode        = false;
+    bool _enableEnergyBuffMode        = true;
 
     bool _enableSaveVideo             = false;
     bool _enableRoiScaling            = true;
@@ -28,11 +28,11 @@ struct FunctionConfig
     bool _enableLocalVideoStreaming   = true;
     bool _enableUsbCamera             = false;
 
-    //std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
+    std::string localVideoPath = "/home/sleepingmachine/视频/lbb_fan.mp4";
     //std::string localVideoPath = "/home/sleepingmachine/视频/lbr_fan.mp4";
-    std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.05.01 23-01-38.avi";
+    //std::string localVideoPath = "/home/sleepingmachine/RoboMaster-Code/Abyssal-CV-2022/asset/AutoSaveVideo/2022.05.01 23-01-38.avi";
     
-    bool _enableDebugMode           = true;
+    bool _enableDebugMode             = false;
 };
 
 class FunctionConfigFactory{

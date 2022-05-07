@@ -128,9 +128,9 @@ void IdentifyArmor::ArmorIdentifyStream(cv::Mat importSrc, int* sentData) {
 
 
         //cv::imshow("mask", maskHSV);
-        cv::imshow("Preprocessed Dst", dstHSV);
-        cv::imshow("Src", src);
-        cv::imshow("SeaechSrc", searchSrc);
+        //cv::imshow("Preprocessed Dst", dstHSV);
+        //cv::imshow("Src", src);
+        //cv::imshow("SeaechSrc", searchSrc);
 
         resourceRelease();
 
@@ -699,8 +699,10 @@ void IdentifyArmor::DynamicResolutionResize() {
             _roiScaling = false;
         }
         //std::cout << roi_UL.x <<std::endl;
+        if (ControlSwitch::functionConfig._enableDebugMode){
+            cv::rectangle(src, roi_LR, roi_UL,cv::Scalar(0, 255, 255), 2);
+        }
 
-        cv::rectangle(src, roi_LR, roi_UL,cv::Scalar(0, 255, 255), 2);
         //cv::rectangle(src, cv::Point((lastArmorTarget.x + cropOriginPoint.x),(lastArmorTarget.y + cropOriginPoint.y)),cv::Point((lastArmorTarget.x + cropOriginPoint.x + lastArmorTarget.width),(lastArmorTarget.x + cropOriginPoint.y + lastArmorTarget.height)) ,cv::Scalar(0, 255, 255), 2);
         //src(cv::Rect(0, 0, 100, 100)).copyTo(searchSrc);
     }
@@ -708,16 +710,23 @@ void IdentifyArmor::DynamicResolutionResize() {
 }
 
 void IdentifyArmor::DrawReferenceGraphics() {
-    for(int i = 0; i < armorStructs.size(); i++){
-        ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
-        //cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
-        cv::circle(src, cv::Point(armorStructs[i].hitPoint.x + cropOriginPoint.x, armorStructs[i].hitPoint.y + cropOriginPoint.y), 1, cv::Scalar(113,179,60 ), 5);
-        //std::cout << armorStructs[i].hitPoint.x + cropOriginPoint.x << " " << armorStructs[i].hitPoint.y + cropOriginPoint.y << std::endl;
-        //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
-    }//绘制矩形
-    for (int i = 0; i < filteredLightBars.size(); ++i) {
-        ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
+    if (ControlSwitch::functionConfig._enableDebugMode){
+        for(int i = 0; i < armorStructs.size(); i++){
+            ArmorTool::drawRotatedRect(searchSrc, armorStructs[i].armorRect, cv::Scalar(0, 165, 255), 2, 16);
+            //cv::circle(searchSrc, cv::Point (armorStructs[i].hitPoint.x - cropOriginPoint.x, armorStructs[i].hitPoint.y - cropOriginPoint.y), 1, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+            cv::circle(src, cv::Point(armorStructs[i].hitPoint.x + cropOriginPoint.x, armorStructs[i].hitPoint.y + cropOriginPoint.y), 1, cv::Scalar(113,179,60 ), 5);
+            //std::cout << armorStructs[i].hitPoint.x + cropOriginPoint.x << " " << armorStructs[i].hitPoint.y + cropOriginPoint.y << std::endl;
+            //cv::circle(src, cropOriginPoint, 3, cv::Scalar(0, 165, 255), 4);  // 画半径为1的圆(画点）
+        }//绘制矩形
+        for (int i = 0; i < filteredLightBars.size(); ++i) {
+            ArmorTool::drawRotatedRect(searchSrc, filteredLightBars[i], cv::Scalar(15, 198, 150), 1, 16);
+        }
+
+        cv::imshow("Preprocessed Dst", dstHSV);
+        cv::imshow("Src", src);
+        cv::imshow("SeaechSrc", searchSrc);
     }
+
 }
 
 void IdentifyArmor::resourceRelease() {

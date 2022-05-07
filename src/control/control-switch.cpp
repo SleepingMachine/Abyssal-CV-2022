@@ -23,8 +23,11 @@ std::atomic_bool IdentifyStart;
 
 void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
     cv::Mat temp;
-    IdentifyArmor::CreatTrackbars();
-    IdentifyEnergyBuff::CreatTrackbars();
+    if (functionConfig._enableDebugMode){
+        IdentifyArmor::CreatTrackbars();
+        IdentifyEnergyBuff::CreatTrackbars();
+    }
+
     initColorThresholdParameters();
 
     while(CameraisOpen) {
@@ -53,6 +56,9 @@ void ControlSwitch::SwitchMode(cv::Mat *pFrame, int *sentPortData) {
         }
         if (!functionConfig._enableEnergyBuffMode && src.cols == 960 && src.rows == 640){
             src = src(cv::Rect(0,80,960,480));
+        }
+        if (functionConfig._enableEnergyBuffMode && !(src.cols == 960 && src.rows == 640)){
+            cv::resize(src, src, cv::Size(960,640));
         }
         IdentifyStart = true;
         //std::cout << sendData << std::endl;
