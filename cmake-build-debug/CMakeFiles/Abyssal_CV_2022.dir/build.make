@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/189/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/193/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/189/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/193/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -302,6 +302,7 @@ Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp
 Abyssal_CV_2022: CMakeFiles/Abyssal_CV_2022.dir/build.make
 Abyssal_CV_2022: /usr/local/lib/libopencv_gapi.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_stitching.so.4.5.5
+Abyssal_CV_2022: /usr/local/lib/libopencv_alphamat.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_aruco.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_barcode.so.4.5.5
 Abyssal_CV_2022: /usr/local/lib/libopencv_bgsegm.so.4.5.5

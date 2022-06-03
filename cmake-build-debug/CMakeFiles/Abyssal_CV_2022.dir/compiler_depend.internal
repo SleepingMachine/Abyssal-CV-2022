@@ -68,6 +68,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -224,6 +225,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/KCF/armor-KCF.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -762,6 +764,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -889,6 +892,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/armor/armor-identify.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -1419,6 +1423,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -1537,6 +1542,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/camera/camera-stream.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -2033,6 +2039,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -2189,6 +2196,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/control/control-switch.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -2709,6 +2717,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -2852,6 +2861,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/decision/decision-making.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -3382,6 +3392,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -3509,6 +3520,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/energy/energy-buff.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -4039,6 +4051,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -4157,6 +4170,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/main.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -4689,6 +4703,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-port-2nd.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -4951,6 +4966,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-2nd/serial-synchronize-2nd.cpp.
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -5251,6 +5267,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/CRC/serial-CRC-TUP.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/x86_64-linux-gnu/bits/setjmp.h
@@ -5373,6 +5390,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/unistd.h
@@ -5634,6 +5652,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-port-TUP.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -6053,6 +6072,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/unistd.h
@@ -6314,6 +6334,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-TUP/serial-synchronize-TUP.cpp.
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -6804,6 +6825,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/alloca.h
@@ -6930,6 +6952,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/serial/serial-port.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h
@@ -7486,6 +7509,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h
+ /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h
  /usr/include/x86_64-linux-gnu/bits/setjmp.h
@@ -7616,6 +7640,7 @@ CMakeFiles/Abyssal_CV_2022.dir/src/video/video-save.cpp.o
  /usr/include/c++/11/ext/aligned_buffer.h
  /usr/include/c++/11/bits/hashtable.h
  /usr/include/c++/11/bits/hashtable_policy.h
+ /usr/include/c++/11/bits/enable_special_members.h
  /usr/include/c++/11/bits/node_handle.h
  /usr/include/c++/11/bits/unordered_map.h
  /usr/include/c++/11/bits/erase_if.h

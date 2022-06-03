@@ -87,9 +87,9 @@ void SerialPort::SendData(int* sentData) {
         //串口写数据
         bytes_written = write(fd, SerialPort::testData, sizeof(testData));
         bytes_readten = read(fd, SerialPort::readData, 3);
-        for (int i = 0; i < 4; ++i) {
-            std::cout << (int)readData[i] << std::endl;
-        }
+        //for (int i = 0; i < 4; ++i) {
+        //    std::cout << (int)readData[i] << std::endl;
+        //}
         printf("\n  %d written to ttyUSB0", tempSendData);
         printf("\n  %d Bytes written to ttyUSB0", bytes_written);
         printf("\n +----------------------------------+\n");

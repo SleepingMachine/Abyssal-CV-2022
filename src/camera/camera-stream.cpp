@@ -104,7 +104,7 @@ void CameraStream::StreamRetrieve(cv::Mat* pFrame) {
                     );
                     //imshow("Opencv Demo", matImage);
                     if (ControlSwitch::functionConfig._imageOrientationCorrection){
-                        cv::flip(matImage, matImage, 0);
+                        cv::flip(matImage, matImage, -1);
                     }
                     if (mutex1.try_lock()) {
                         matImage.copyTo(*pFrame);
